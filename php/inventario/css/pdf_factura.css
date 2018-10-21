@@ -1,0 +1,80 @@
+tr    { vertical-align: top; }
+td    { vertical-align: top;}
+
+/************************CABECERA************************/
+.cabecera { 
+	vertical-align: top; 
+	border: none; 
+	background-color: white; 
+	padding: 2mm;
+	border-collapse:collapse; 
+	border-bottom: 1px solid #D5DBDB; 
+}
+/************************CABECERA************************/
+
+/************************TITULO************************/
+.titulo{
+	width: 100%;
+	border-bottom: 1px solid #D5DBDB; 
+}
+/************************TITULO************************/
+
+/************************CUERPO************************/
+.datos{
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #C1CED9;
+}
+.datos th,
+.datos td {
+  text-align: left;
+}
+.datos th {
+  padding: 5px 20px;
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;        
+  font-weight: normal;
+}
+/************************CUERPO************************/
+.totales{
+  width: 50%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  margin-bottom: 18px;
+}
+
+.totales th{
+	text-align: center;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+.totales td{
+	text-align: center;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+/************************credito************************/
+.credito{
+  width: 100%;
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-left: 1px solid black;
+  border-top: 1px solid black;	
+}
+
+.credito th{
+	text-align: center;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+.credito td{
+	text-align: center;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}

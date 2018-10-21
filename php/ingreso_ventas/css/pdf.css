@@ -1,0 +1,33 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.contenedor{
+	display: block;
+	position: fixed;
+	width:100%;
+}
+.info{
+
+	width:100%;
+}
+.info img{
+	vertical-align: middle;
+}
+.info p{
+	float: right;
+}
+.titulo{
+
+	width:100%;
+	vertical-align: top;
+	text-align: center;
+}
+.table{
+	width: 100%;
+	border: 3px solid black;
+}
+table{
+	width: 100%;
+	border: 3px solid black;
+}

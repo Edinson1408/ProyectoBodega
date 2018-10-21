@@ -1,0 +1,47 @@
+body, html{
+	margin: 0;
+	padding: 0;
+}
+.contenedor{
+	width: 70%;
+}
+.cabecera{
+	text-align: center;
+}
+}
+.cal{
+	line-height: 1em;
+}
+.footer{
+	text-align: center;
+}
+.ti{
+	font-weight: bold;
+	line-height: 1em;
+	text-align: center;
+	font-size: 18pt;
+}
+.in{
+	line-height: 1em;
+	text-align: center;
+}
+.in_2{
+	line-height: 1em;
+	text-align: center;
+}
+.to{
+	font-weight: bold;
+	line-height: 1em;
+}
+.d{
+	line-height: 1em;
+}
+p{ 
+	margin:  0;
+}
+.cuerpo{
+	text-align: center;
+}
+table{
+	width: 100%;
+}
