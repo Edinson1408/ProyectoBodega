@@ -75,7 +75,7 @@ document.getElementById(ID).focus();
 	
 	<div class="col l4 m6 s12">
 		<?php
-			$SQL_CLIENTE=mysqli_query($conexion,"SELECT * FROM CLIENTE_1  ORDER BY RUC_DNI DESC ");
+			$SQL_CLIENTE=mysqli_query($conexion,"SELECT * FROM CLIENTE  ORDER BY RUC_DNI DESC ");
 		$ARR_CLI=mysqli_fetch_array($SQL_CLIENTE)
 		?>
 		Cliente: <input list="cliente" id="clie" class="form-control form-control-sm" name="" value="<?php echo $ARR_CLI['RUC_DNI'];?>">

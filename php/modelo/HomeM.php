@@ -23,7 +23,7 @@
 			public function UltimasVentas()
 			{
 				$sqlUV="SELECT A.*,B.NOMBRE_C AS NOMBRE
-				FROM boleta AS A, cliente_1 AS B WHERE A.RUC_CLIENTE=B.RUC_DNI
+				FROM boleta AS A, cliente AS B WHERE A.RUC_CLIENTE=B.RUC_DNI
 				ORDER BY A.FECHA_FACTURA DESC LIMIT 10";
 				return $this->ArmarConsulta($sqlUV);
 			}
