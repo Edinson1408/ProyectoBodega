@@ -37,6 +37,15 @@ class VentasM extends Conexion
         return $this->ArmarConsulta($sql);
   }
 
+  public function AutoCompleteClientes($Numdoc)
+  {
+      /*Consulta al clientes para autocompletar*/
+      $Sql="SELECT * FROM CLIENTE where RUC_DNI like '%".$Numdoc."%'  ORDER BY RUC_DNI DESC";
+      $query=mysqli_query($this->Link,$Sql);
+      return $query;
+      
+  }
+
 }
 
 

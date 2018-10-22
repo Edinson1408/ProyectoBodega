@@ -2,32 +2,7 @@
 //hay que hacer las validaciones de los vacios
 include("../../conexion.php");
 ?>
-
-	<!-- <script type="text/javascript" src='../php/ingreso_ventas/js/verifica_1.js'></script> -->
-		<!-- <style type="text/css">
-		html{
-			padding: 15px;
-		}
-		.btn{
-			margin-top: 18px;
-		}
-		.container{
-			width: 100%;
-			padding: 10px;
-		}
-		#com{
-			font-size: 2em;
-		}
-		.nota{
-			padding-top: 10px;
-			height: 50px;
-			border-bottom: 3px solid #337ab7;
-		}
-		.form-control{
-			border-radius: 0px;
-		}
-	</style> -->
-	<script>
+<script>
 function sf(ID){
 document.getElementById(ID).focus();
 }
@@ -72,25 +47,13 @@ document.getElementById(ID).focus();
 	</div>
 	
 <div class="row">
-	
 	<div class="col l4 m6 s12">
-		<?php
-			$SQL_CLIENTE=mysqli_query($conexion,"SELECT * FROM CLIENTE  ORDER BY RUC_DNI DESC ");
-		$ARR_CLI=mysqli_fetch_array($SQL_CLIENTE)
-		?>
-		Cliente: <input list="cliente" id="clie" class="form-control form-control-sm" name="" value="<?php echo $ARR_CLI['RUC_DNI'];?>">
-							<datalist id="cliente">
-							  <?php
-							  	$SQL_CLIENTE=mysqli_query($conexion,"SELECT * FROM CLIENTE_1");
-							  	while ($ARR_CLI=mysqli_fetch_array($SQL_CLIENTE)) {
-							  		echo "<option value='".$ARR_CLI['RUC_DNI']."'>".$ARR_CLI['NOMBRE_C']."</option>";
-							  	}
-							  ?>
-							</datalist>
+		RUC/DNI: <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" onDblClick=NewCliente();>
+		<div id="LiCliente"></div>
 	</div>
 	<div class="col l4 m6 s12">
 			Nombre Cliente:	
-			<input type="text" name="" class="form-control form-control-sm" disabled="disable">
+			<input type="text" name="" id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" disabled="disable">
 	</div>
 	<div class="col l4 m6 s12">
 	<?php
@@ -112,7 +75,6 @@ document.getElementById(ID).focus();
 
 <div class="row">
 	<div class="col l6 m6 s12">
-	
 		<div class="switch">
 		    <label>
 		      Manual
@@ -129,11 +91,16 @@ document.getElementById(ID).focus();
 	<div>
 </div>
 	
-
-
+<!--Modal NewCliente-->
+<div id="NuevoCLiente" class="modal" style="width: 90%">
+<div class="modal-content" id="ModalNewClient">
+</div>
+</div>
 
 <div id="div_ajax">
 </div>
+
+
 </div>
 <div class="row">
 	<table class="table">
@@ -243,7 +210,19 @@ function agregar_clie(){
 		)
 }
 
-
+/********** Agregar Nuevo cliente
+************/
+NewCliente=()=>{
+	$.ajax({
+				type:"post",
+				url:"controlador/VentasC.php",
+				data:{'peticion':'VistaNewClient'},
+				success:function(datos){
+					$("#ModalNewClient").html(datos);
+				}
+			});
+	$('#NuevoCLiente').modal('open');
+}
 
 
 function ingreso_almacen(){
@@ -266,8 +245,35 @@ function ingreso_almacen(){
 
 		)
 }
-/*****Buscador XD */
+
+$('#LiCliente').hide();
 $(document).ready(function(){
+	//para que siempre este activo las modales
+	$('.modal').modal();
+
+
+	/*Buscador cliente x DNI*/
+	$("#CliDoc").keyup(()=>{
+		let RucDni=$("#CliDoc").val();
+		let Accion='RucCLiente';
+		$.ajax({
+			type:"POST",
+			url:"controlador/VentasC.php",
+			data:{'peticion':Accion,'RucDni':RucDni},
+			beforeSend: function(){
+			$("#CodigoBarras").css("background","#FFF url(https://phppot.com/demo/jquery-ajax-autocomplete-country-example/loaderIcon.gif) no-repeat 100%");
+			},
+			success: function(data)
+			{
+				$("#LiCliente").show();
+				$("#LiCliente").html(data);	
+			}
+			
+		});
+	});
+
+
+
 	$("#CodigoBarras").keyup(function(){
 		$.ajax({
 		type: "POST",
@@ -286,6 +292,14 @@ $(document).ready(function(){
 });
 
 /**buscador de perosnas*/
+SelectDni=(val,id)=>
+{
+		$("#CliDoc").val(id);
+		$("#NombreCLiente").val(val)
+		$("#LiCliente").hide();
+}
+
+
 
 var Conta=0;
 function selectCountry(val,id) {
