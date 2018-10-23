@@ -11,24 +11,8 @@ document.getElementById(ID).focus();
 
 </head>
 <body onload="sf('btn');">
-<?php
-//NUEVO CODIGO DE BOLETA 
-// function gen_id()
-// {
-// include('../../conexion.php');
-// $cod1=mysqli_query($conexion,"SELECT max(NRO_FACTURA+1) AS ID FROM BOLETA WHERE PROCESO='2'");
-// $r2=mysqli_fetch_array($cod1);
-// return $r2['ID'];
-// }
-// $VAR_NUEVA_BOLETA=gen_id();
-?>
-<div class="nota">
-	<i class="fa fa-pencil-square-o" id="com">Agregar nueva venta</i>
-	<a href="salidav2.php" class="btn btn-default" style="float: right;">Nueva venta</a>
-</div>
-
 <div class="form-group">
-	<br><br><br>
+	<br>
 	<div class="row">
 		<div class="col l4 m4 s12">
 			fecha : <input type="date" class="form-control form-control-sm" name="" value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
@@ -48,7 +32,7 @@ document.getElementById(ID).focus();
 	
 <div class="row">
 	<div class="col l4 m6 s12">
-		RUC/DNI: <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" onDblClick=NewCliente();>
+		RUC/DNI: <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
 		<div id="LiCliente"></div>
 	</div>
 	<div class="col l4 m6 s12">
@@ -103,7 +87,7 @@ document.getElementById(ID).focus();
 
 </div>
 <div class="row">
-	<table class="table">
+	<table class="table table-bordered ">
 	<thead>
 		<tr>
 			<td>Codigo</td>
@@ -116,7 +100,14 @@ document.getElementById(ID).focus();
 		
 
 	</tbody>
+	<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td id='Total' style="background-color: black;color: white;" ></td>
+	</tr>
 	</table>
+	
 	
 </div>
 
@@ -302,6 +293,7 @@ SelectDni=(val,id)=>
 
 
 var Conta=0;
+var Total=0;
 function selectCountry(val,id) {
 	Conta=Conta+1;
 	console.log(val)
@@ -321,12 +313,15 @@ function selectCountry(val,id) {
 				if (valida=='NO')
 				{
 					$('#ContenidoGrilla').append(`
-						<tr>
-						<td id='CodProducto${Conta}'>${$Ojb.COD_PRODUCTO}</td>
-						<td>${$Ojb.NOMBRE_PRODUCTO}</td>
-						<td><input type='text' id='Cantidad${Conta}' value='1' name='Cantidad${Conta}'></td>
-						<td>${$Ojb.PRECIO_VENTA}</td>
+						<tr style='line-height:6pt;'>
+						<td  id='CodProducto${Conta}'>${$Ojb.COD_PRODUCTO}</td>
+						<td  >${$Ojb.NOMBRE_PRODUCTO}</td>
+						<td  ><input  class="form-control form-control-sm" type='text' id='Cantidad${Conta}' value='1' name='Cantidad${Conta}'></td>
+						<td >${$Ojb.PRECIO_VENTA}</td>
 						</tr>`);
+					
+						Total=Total+Number.parseFloat($Ojb.PRECIO_VENTA);
+
 				}
 				else{
 					swal('El producto ya fue selecionado');
@@ -335,7 +330,7 @@ function selectCountry(val,id) {
 			{
 				swal('No tiene Stock suficiente');
 			}
-			
+			$("#Total").html('S/.'+Total);
 		}
 	})
 	

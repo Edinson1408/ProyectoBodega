@@ -21,6 +21,7 @@ include('seguridad_navegador.php');
 		<!--jquery local-->
 		<script src="../js/jquery-3.2.1.min.js"></script>
         <script src="../js/ModalComponet.js"></script>
+        <script src="../js/App.js"></script>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>-->
         <!--<script src="../bootstrap/js/bootstrap.js"></script>-->
 
