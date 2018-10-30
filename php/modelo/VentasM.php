@@ -14,7 +14,7 @@ class VentasM extends Conexion
   
   public function MaxIdVenta()
   {
-      $sql="SELECT max(NRO_FACTURA+1) AS ID FROM BOLETA WHERE PROCESO='2'";
+      $sql="SELECT max(NUMCOMPROBANTE+1) AS ID FROM COMPROBANTE_VENTA ";
       $MaxId=mysqli_fetch_object(mysqli_query($this->Link,$sql));
 
        return $MaxId->ID;
@@ -40,7 +40,12 @@ class VentasM extends Conexion
   public function AutoCompleteClientes($Numdoc)
   {
       /*Consulta al clientes para autocompletar*/
-      $Sql="SELECT * FROM CLIENTE where RUC_DNI like '%".$Numdoc."%'  ORDER BY RUC_DNI DESC";
+      //$Sql="SELECT * FROM CLIENTE where RUC_DNI like '%".$Numdoc."%'  ORDER BY RUC_DNI DESC";
+      $Sql="SELECT CL.IDCLIENTE,CL.IDPERSONA,CONCAT(PE.NOMBRES,' ',PE.APELLIDOS,' ') as NOMBRE_C,PE.NUMDOC as RUC_DNI
+      FROM 
+      CLIENTE  CL 
+      INNER JOIN PERSONA PE 
+      ON CL.IDPERSONA=PE.IDPERSONA";
       $query=mysqli_query($this->Link,$Sql);
       return $query;
       

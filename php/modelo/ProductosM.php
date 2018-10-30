@@ -57,8 +57,10 @@
 		public function AutoCompletadoProducto($buscador)
 		{
 			$link=$this->Conectarse();
-			$Sql="SELECT p.*,a.CANTIDAD FROM producto P, almacen a where a.COD_PRODUCTO=p.COD_PRODUCTO AND 
-			P.NOMBRE_PRODUCTO like '%".$buscador."%'  limit 3";
+			$Sql="SELECT PRO.*,AL.CANTIDAD FROM producto PRO, almacen AL where AL.CODPRODUCTO=PRO.CODPRODUCTO AND 
+			PRO.NOMPRODUCTO  like '%".$buscador."%'  limit 3";
+
+
 			$query=mysqli_query($link,$Sql);
 			// while ($res=mysqli_fetch_array($query))
 			// 	{$arr[]=$res;}
@@ -70,7 +72,7 @@
 		public function AddGrilla($CodProducto)
 		{
 			$link=$this->Conectarse();
-			$Sql="SELECT p.*,a.CANTIDAD FROM producto p, almacen a WHERE a.COD_PRODUCTO=p.COD_PRODUCTO AND p.COD_PRODUCTO='$CodProducto' ";
+			 $Sql="SELECT p.*,a.CANTIDAD FROM producto p, almacen a WHERE a.CODPRODUCTO=p.CODPRODUCTO AND p.CODPRODUCTO='$CodProducto' ";
 			$query=mysqli_query($link,$Sql);
 			$res=mysqli_fetch_array($query);
 			echo json_encode($res);

@@ -7,10 +7,17 @@ function sf(ID){
 document.getElementById(ID).focus();
 }
 </script>
+<style>
+.sinborde {
+    border: 0;
+  }
+  
+  </style>
 </head>
 
 </head>
 <body onload="sf('btn');">
+<form  method='POST' id='GuardarVenta'>
 <div class="form-group">
 	<br>
 	<div class="row">
@@ -41,16 +48,18 @@ document.getElementById(ID).focus();
 	</div>
 	<div class="col l4 m6 s12">
 	<?php
-	$SQL_PAGO=mysqli_query($conexion,"SELECT * FROM ESTADO  ORDER BY ID_ESTADO ASC ");
-	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)
+	/*$SQL_PAGO=mysqli_query($conexion,"SELECT * FROM ESTADO  ORDER BY ID_ESTADO ASC ");
+	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)*/
 	?>
 	Pago:<select class="form-control input-sm" id="pago" >
-					<option value="<?php echo $ARR_CLI['ID_ESTADO'];?>"><?php echo $ARR_CLI['NOMBRE_ESTADO'];?></option>
+			<option value="1">Pendiente</option>
+			<option value="2">Cancelado</option>
+					<!--<option value="<?php echo $ARR_CLI['ID_ESTADO'];?>"><?php echo $ARR_CLI['NOMBRE_ESTADO'];?></option>-->
 					<?php
-					$sql_estado=mysqli_query($conexion,"SELECT * FROM estado");
+					/*$sql_estado=mysqli_query($conexion,"SELECT * FROM estado");
 					while ($r=mysqli_fetch_array($sql_estado)) {
 						echo "<option value='".$r['ID_ESTADO']."'>".$r['NOMBRE_ESTADO']."</option>";
-					}
+					}*/
 					?>
 					</select>
 	</div>
@@ -111,8 +120,19 @@ document.getElementById(ID).focus();
 	
 </div>
 
+<a class="btn btn-default" onclick='Guardar();'>Guardar</a>
+
+</form>
 
 <script>
+
+
+Guardar=()=>
+{
+	console.log($('#GuardarVenta').serialize());
+}
+
+
 
 //identificamos si esta en manual o automatico
 function Automatico(a)
@@ -251,9 +271,6 @@ $(document).ready(function(){
 			type:"POST",
 			url:"controlador/VentasC.php",
 			data:{'peticion':Accion,'RucDni':RucDni},
-			beforeSend: function(){
-			$("#CodigoBarras").css("background","#FFF url(https://phppot.com/demo/jquery-ajax-autocomplete-country-example/loaderIcon.gif) no-repeat 100%");
-			},
 			success: function(data)
 			{
 				$("#LiCliente").show();
@@ -285,6 +302,8 @@ $(document).ready(function(){
 /**buscador de perosnas*/
 SelectDni=(val,id)=>
 {
+		console.log(val);
+		console.log(id);
 		$("#CliDoc").val(id);
 		$("#NombreCLiente").val(val)
 		$("#LiCliente").hide();
@@ -309,18 +328,18 @@ function selectCountry(val,id) {
 			$stock=$Ojb.CANTIDAD;
 			if($stock>0)
 			{
-				var valida=ValidaProRepetido($Ojb.COD_PRODUCTO);
+				var valida=ValidaProRepetido($Ojb.CODPRODUCTO);
 				if (valida=='NO')
 				{
 					$('#ContenidoGrilla').append(`
 						<tr style='line-height:6pt;'>
-						<td  id='CodProducto${Conta}'>${$Ojb.COD_PRODUCTO}</td>
-						<td  >${$Ojb.NOMBRE_PRODUCTO}</td>
+						<td ><input class='sinborde' id='CodProducto${Conta}' name='CodProducto${Conta}' value='${$Ojb.CODPRODUCTO}'> </td>
+						<td  >${$Ojb.NOMPRODUCTO}</td>
 						<td  ><input  class="form-control form-control-sm" type='text' id='Cantidad${Conta}' value='1' name='Cantidad${Conta}'></td>
-						<td >${$Ojb.PRECIO_VENTA}</td>
+						<td >${$Ojb.PRECIOVENTA}</td>
 						</tr>`);
 					
-						Total=Total+Number.parseFloat($Ojb.PRECIO_VENTA);
+						Total=Total+Number.parseFloat($Ojb.PRECIOVENTA);
 
 				}
 				else{
@@ -346,7 +365,7 @@ function ValidaProRepetido($CodProducto)
 {
 	for(let $i=1;$i<50;$i++)
 	{
-		var Cod=$('#CodProducto'+$i).html();
+		var Cod=$('#CodProducto'+$i).val();
 		if (Cod==$CodProducto)
 		{ return 'SI'}
 		else { return 'NO' }

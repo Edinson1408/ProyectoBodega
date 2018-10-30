@@ -5,14 +5,16 @@ $user=$_POST['user'];
 $con=$_POST['cont'];
 //SESSIONES
 $_SESSION['user']=$_POST['user'];
-$consulta=mysqli_query($conexion,"SELECT * from usuario WHERE user='$user' and con_user= '$con' ");
+$con=MD5($con);
+
+$consulta=mysqli_query($conexion,"SELECT * from usuario WHERE NOMUSER='$user' and CONTRASENA= '$con' ");
 $f=mysqli_fetch_array($consulta);
-$id=$f['categoria'];
+$id=$f['IDCATEGORIA'];
 echo $nombre=$f['nom_user'];
-$TURNO=$f['ID_TURNO'];
-$_SESSION['TURNO']=$TURNO;
-$_SESSION['categoria']=$id;
-$_SESSION['nom_user']=$nombre;
+$TURNO=$f['IDTURNO'];
+$_SESSION['IDTURNO']=$TURNO;
+$_SESSION['IDCATEGORIA']=$id;
+$_SESSION['NOMUSER']=$nombre;
 
 switch ($id) {
 	case '1':

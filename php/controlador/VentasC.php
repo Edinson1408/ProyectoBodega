@@ -74,8 +74,7 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
   $cantidadXd=intval($country['CANTIDAD']);
   $color=($cantidadXd>0)? '':'background-color: #e67f7fd9';
 ?>
-         
-        <li style="text-decoration: none;cursor: pointer;list-style:none; <?php echo  $color?>" onClick="selectCountry('<?php echo $country["NOMBRE_PRODUCTO"]; ?>','<?php echo $country["COD_PRODUCTO"]; ?>');"><?php echo utf8_encode($country["NOMBRE_PRODUCTO"]); ?></li>
+       <li style="text-decoration: none;cursor: pointer;list-style:none; <?php echo  $color?>" onClick="selectCountry('<?php echo $country["NOMPRODUCTO"]; ?>','<?php echo $country["CODPRODUCTO"]; ?>');"><?php echo utf8_encode($country["NOMPRODUCTO"]); ?></li>
         <?php
         }
     }
