@@ -90,7 +90,7 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
       echo '<ul id="country-list" style="background-color:#eeeeee;text-decoration: none;list-style:none" >';
       while ($country=mysqli_fetch_array($Consulta)) {
         ?>
-        <li style="text-decoration: none;cursor: pointer;list-style:none;" onClick="SelectDni('<?php echo $country["NOMBRE_C"]; ?>','<?php echo $country["RUC_DNI"]; ?>');">
+        <li style="text-decoration: none;cursor: pointer;list-style:none;" onClick="SelectDni('<?php echo $country["NOMBRE_C"]; ?>','<?php echo $country["RUC_DNI"];?>','<?php echo $country["IDPERSONA"];?>');">
         <?php echo utf8_encode($country["RUC_DNI"]); ?>
         </li>
         <?php
@@ -102,6 +102,16 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
     case 'VistaNewClient':
           require '../Vista/NuevoCliente.php';
     break;
+    
+    case 'GuardarVenta':
+        //modelo ingreso cabecera 
+             
+       $UltimoId=$ObjReporteV->InsertaComprobantev($_POST);//regresara su id generado
+       //insertando el detalle XD
+       $ObjReporteV->InsertaDetalle($UltimoId,$_POST); 
+    break;
+
+
 
   default:
     echo 'no se encontradron peticiones';

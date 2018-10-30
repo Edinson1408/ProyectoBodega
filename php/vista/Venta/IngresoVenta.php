@@ -19,20 +19,21 @@ document.getElementById(ID).focus();
 <body onload="sf('btn');">
 <form  method='POST' id='GuardarVenta'>
 <div class="form-group">
-	<br>
+	
 	<div class="row">
 		<div class="col l4 m4 s12">
-			fecha : <input type="date" class="form-control form-control-sm" name="" value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
+			fecha : <input type="date" class="form-control form-control-sm" name="FecComprobante" id='FecComprobante' value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
 		</div>
 		<div class="col l4 m4 s12">
 			Tipo Documento:	
-			<select class="form-control form-control-sm" id="doc" disabled>
+			<select class="form-control form-control-sm" id="TipoDoc" name='TipoDoc' >
 			<option>BOLETA</option>
 			</select>
 		</div>
 
 		<div class="col l4 m4 s12">
-			Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">
+			<!--Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">-->
+			Nro Documento: <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' value="<?php echo $MaxId; ?>">
 		</div>
 		
 	</div>
@@ -44,14 +45,14 @@ document.getElementById(ID).focus();
 	</div>
 	<div class="col l4 m6 s12">
 			Nombre Cliente:	
-			<input type="text" name="" id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" disabled="disable">
+			<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" disabled="disable">
 	</div>
 	<div class="col l4 m6 s12">
 	<?php
 	/*$SQL_PAGO=mysqli_query($conexion,"SELECT * FROM ESTADO  ORDER BY ID_ESTADO ASC ");
 	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)*/
 	?>
-	Pago:<select class="form-control input-sm" id="pago" >
+	Pago:<select class="form-control input-sm" id="Estado" name='Estado' >
 			<option value="1">Pendiente</option>
 			<option value="2">Cancelado</option>
 					<!--<option value="<?php echo $ARR_CLI['ID_ESTADO'];?>"><?php echo $ARR_CLI['NOMBRE_ESTADO'];?></option>-->
@@ -83,7 +84,8 @@ document.getElementById(ID).focus();
 		<div id="suggesstion-box"></div>
 	<div>
 </div>
-	
+	<!--hideen-->
+	<input type='hidden' name='IdPersona' id='IdPersona'>
 <!--Modal NewCliente-->
 <div id="NuevoCLiente" class="modal" style="width: 90%">
 <div class="modal-content" id="ModalNewClient">
@@ -103,6 +105,7 @@ document.getElementById(ID).focus();
 			<td>Nombre</td>
 			<td>Cantidad</td>
 			<td>Precio</td>
+			<td>Importe</td>
 		</tr>
 	</thead>
 	<tbody id='ContenidoGrilla'>
@@ -113,7 +116,23 @@ document.getElementById(ID).focus();
 	<td></td>
 	<td></td>
 	<td></td>
-	<td id='Total' style="background-color: black;color: white;" ></td>
+	<td>Sub Tal</td>
+	<td  style="background-color: black;color: white;" >S./ <input type='text' id='SubTotal' name='SubTotal' class="sinborde" style="background-color: black;" readonly></td>
+	</tr>
+	<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>Igv</td>
+	<td  style="background-color: black;color: white;" >S./ <input type='text' id='Igv' name='Igv' class="sinborde" style="background-color: black;" readonly></td>
+	</tr>
+
+	<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>Total</td>
+	<td  style="background-color: black;color: white;" >S./ <input type='text' id='Total' name='Total' class="sinborde" style="background-color: black;" readonly></td>
 	</tr>
 	</table>
 	
@@ -129,6 +148,16 @@ document.getElementById(ID).focus();
 
 Guardar=()=>
 {
+	
+	$.ajax({
+		url:'controlador/VentasC.php',
+		type:'POST',
+		data :$('#GuardarVenta').serialize()+'&peticion=GuardarVenta',
+		success:function(respuesta)
+		{
+			console.log(respuesta)
+		}
+	})
 	console.log($('#GuardarVenta').serialize());
 }
 
@@ -300,12 +329,14 @@ $(document).ready(function(){
 });
 
 /**buscador de perosnas*/
-SelectDni=(val,id)=>
+SelectDni=(val,id,IdPersona)=>
 {
 		console.log(val);
 		console.log(id);
+		console.log(IdPersona);
 		$("#CliDoc").val(id);
 		$("#NombreCLiente").val(val)
+		$("#IdPersona").val(IdPersona)
 		$("#LiCliente").hide();
 }
 
@@ -333,10 +364,16 @@ function selectCountry(val,id) {
 				{
 					$('#ContenidoGrilla').append(`
 						<tr style='line-height:6pt;'>
-						<td ><input class='sinborde' id='CodProducto${Conta}' name='CodProducto${Conta}' value='${$Ojb.CODPRODUCTO}'> </td>
-						<td  >${$Ojb.NOMPRODUCTO}</td>
-						<td  ><input  class="form-control form-control-sm" type='text' id='Cantidad${Conta}' value='1' name='Cantidad${Conta}'></td>
-						<td >${$Ojb.PRECIOVENTA}</td>
+						<td> 
+							<input class='sinborde' id='CodProducto${Conta}' name='CodProducto${Conta}' value='${$Ojb.CODPRODUCTO}'> 
+						</td>
+						<td> ${$Ojb.NOMPRODUCTO}</td>
+						<td> 
+							<input  class="form-control form-control-sm" type='text' id='Cantidad${Conta}' value='1' name='Cantidad${Conta}'>
+						</td>
+						<td> 
+						<input  class="form-control form-control-sm" type='text' id='PrecioVenta${Conta}' name='PrecioVenta${Conta}' value='${$Ojb.PRECIOVENTA}' >
+						</td>
 						</tr>`);
 					
 						Total=Total+Number.parseFloat($Ojb.PRECIOVENTA);
@@ -349,7 +386,7 @@ function selectCountry(val,id) {
 			{
 				swal('No tiene Stock suficiente');
 			}
-			$("#Total").html('S/.'+Total);
+			$("#Total").val(Total);
 		}
 	})
 	

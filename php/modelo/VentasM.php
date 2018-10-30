@@ -51,6 +51,78 @@ class VentasM extends Conexion
       
   }
 
+    public function InsertaComprobantev($_ARR)
+    {
+
+      // CliDoc=88888888&
+        //IdPersona , SubTotal , Igv , Total
+        //CodigoBarras=c&CodProducto1=PRO001&Cantidad1=1  
+        
+        $Sql="INSERT INTO comprobante_venta
+            (IDEMPRESA,
+            IDESTADO,
+            TIPODOC,
+            NUMCOMPROBANTE,
+            SERIECOMPROBANTE,
+            IDCLIENTE,
+            NONCLIENTE,
+            FECHACOMPROBANTE,
+            SUBTOTAL,
+            IGV,
+            TOTAL,
+            IDUSUARIO
+            )
+            VALUES (
+              '1',
+              '".$_ARR['Estado']."',
+              '".$_ARR['TipoDoc']."',
+              '".$_ARR['NumCompro']."',
+              '".$_ARR['Serie']."',
+              '".$_ARR['IdPersona']."',
+              '',
+              '".$_ARR['FecComprobante']."',
+              '".$_ARR['SubTotal']."',
+              '".$_ARR['Igv']."',
+              '".$_ARR['Total']."',
+              '1'
+                  )";
+          //mysqli_query($this->Link,$Sql);
+            //obtener el ultimo id 
+            //return mysqli_insert_id($this->Link);
+            echo $Sql;
+    }
+    public function InsertaDetalle($UltimoId,$_ARR)
+    {
+      //por mientras valera 1
+      $UltimoId=1;
+        //CodigoBarras=c&CodProducto1=PRO001&Cantidad1=1  
+          for ($i=1; $i <=50 ; $i++) { 
+            if(isset($_ARR['CodProducto'.$i])){
+              $Sql="INSERT INTO comprobante_venta_detalle
+              (IDCOMPROBANTE,
+              CODPRODUCTO,
+              IDEMPRESA,
+              IDESTADO,
+              CANTIDAD,
+              PRECIOVENTA,
+              IMPORTE,
+              ) VALUES (
+                '".$UltimoId."',
+                '".$_ARR['CodProducto'.$i]."',
+                '1',
+                '1',
+                '".$_ARR['Cantidad'.$i]."',
+                '".$_ARR['PrecioVenta'.$i]."',
+
+              )";
+              echo $Sql;
+              //mysqli_query($this->Link,$Sql);  
+            }
+          }
+
+      
+    }
+
 }
 
 

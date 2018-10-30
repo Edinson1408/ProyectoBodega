@@ -5,15 +5,15 @@ $user=$_POST['user'];
 $con=$_POST['cont'];
 //SESSIONES
 $_SESSION['user']=$_POST['user'];
-$con=MD5($con);
-
-$consulta=mysqli_query($conexion,"SELECT * from usuario WHERE NOMUSER='$user' and CONTRASENA= '$con' ");
+$cone=MD5($_POST['cont']);
+echo "SELECT * from usuario WHERE NOMUSER='$user' and CONTRASENA= '$cone' ";
+$consulta=mysqli_query($conexion,"SELECT * from usuario WHERE NOMUSER='$user' and CONTRASENA= '$cone' ");
 $f=mysqli_fetch_array($consulta);
-$id=$f['IDCATEGORIA'];
-echo $nombre=$f['nom_user'];
+echo $id=$f['IDCATEGORIA'];
+echo $nombre=$f['NOMUSER'];
 $TURNO=$f['IDTURNO'];
 $_SESSION['IDTURNO']=$TURNO;
-$_SESSION['IDCATEGORIA']=$id;
+$_SESSION['categoria']=$id;
 $_SESSION['NOMUSER']=$nombre;
 
 switch ($id) {
@@ -30,7 +30,8 @@ switch ($id) {
 		break;
 
 	default:
-		header("location:index.php?v1=1");
+	header("location:php/plataforma.php");
+		//header("location:index.php?v1=1");
 		break;
 }
 
