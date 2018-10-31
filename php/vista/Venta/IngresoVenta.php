@@ -369,10 +369,13 @@ function selectCountry(val,id) {
 						</td>
 						<td> ${$Ojb.NOMPRODUCTO}</td>
 						<td> 
-							<input  class="form-control form-control-sm" type='text' id='Cantidad${Conta}' value='1' name='Cantidad${Conta}'>
+							<input  class="form-control form-control-sm " type='text' id='Cantidad${Conta}' data_id='${Conta}'' name='Cantidad${Conta}' value='1' onchange="ValidaStock(this)">
 						</td>
 						<td> 
-						<input  class="form-control form-control-sm" type='text' id='PrecioVenta${Conta}' name='PrecioVenta${Conta}' value='${$Ojb.PRECIOVENTA}' >
+						<input  class="sinborde" type='text' id='PrecioVenta${Conta}' name='PrecioVenta${Conta}' value='${$Ojb.PRECIOVENTA}' readonly>
+						</td>
+						<td> 
+							<input  class="sinborde" type='text' id='Importe${Conta}' name='Importe${Conta}' value='${$Ojb.PRECIOVENTA}' readonly>
 						</td>
 						</tr>`);
 					
@@ -411,9 +414,45 @@ function ValidaProRepetido($CodProducto)
 	}
 }
 
-function ValidaStock($CodProducto)
+ ValidaStock =(a)=>
 {
+	//cod producto
+	let id=$(a).attr("data_id");
+	let CodProducto=$('#CodProducto'+id).val();
+	let cantidad=$(a).val();
+	console.log(CodProducto);
+	$.ajax({
+		url:'controlador/VentasC.php',
+		type:'POST',
+		data:{'peticion':'ValidaStock','CodProducto':CodProducto},
+		success:function(respuesta)
+		{			
+			console.log('CANTIDAD STOCK '+respuesta); 
+			if(cantidad>respuesta)
+			{
+				swal('No cuenta con el stock suficiente ');
+				$('#Cantidad'+id).val(respuesta);
+				$(a).val(respuesta)
+				CalcularImporte(a);
+			}else
+			{
+				CalcularImporte(a);
+			}
+		}
 
+	});
+	
+}
+
+CalcularImporte=(a)=>
+{
+	let id=$(a).attr("data_id");
+	let Cantidad=Number.parseFloat($(a).val());
+	let preciov=Number.parseFloat($('#PrecioVenta'+id).val());
+	$('#Importe'+id).val(preciov*Cantidad);
+	console.log($(a).attr("data_id"));
+	console.log($(a).val());
+	console.log(preciov);
 }
 
 </script>

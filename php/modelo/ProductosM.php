@@ -72,10 +72,20 @@
 		public function AddGrilla($CodProducto)
 		{
 			$link=$this->Conectarse();
-			 $Sql="SELECT p.*,a.CANTIDAD FROM producto p, almacen a WHERE a.CODPRODUCTO=p.CODPRODUCTO AND p.CODPRODUCTO='$CodProducto' ";
+			$Sql="SELECT p.*,a.CANTIDAD FROM producto p, almacen a WHERE a.CODPRODUCTO=p.CODPRODUCTO AND p.CODPRODUCTO='$CodProducto' ";
 			$query=mysqli_query($link,$Sql);
 			$res=mysqli_fetch_array($query);
 			echo json_encode($res);
+
+		}
+
+		public function ValidaStockP($CodProducto)
+		{
+			$link=$this->Conectarse();
+			$Sql="SELECT CANTIDAD FROM almacen where CODPRODUCTO='$CodProducto' ";
+			$query=mysqli_query($link,$Sql);
+			$res=mysqli_fetch_array($query);
+			return $res['CANTIDAD'];
 
 		}
 

@@ -99,6 +99,10 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
 
     break;
   
+    case 'ValidaStock':
+       echo  $ObjProducto->ValidaStockP($_POST["CodProducto"]);
+    break;
+
     case 'VistaNewClient':
           require '../Vista/NuevoCliente.php';
     break;
