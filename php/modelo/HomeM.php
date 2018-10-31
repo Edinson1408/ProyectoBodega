@@ -5,26 +5,26 @@
 			public function Cajas()
       {
 				$link=$this->Conectarse();
-				$sql="SELECT COUNT(COD_PRODUCTO) as cantidad FROM ALMACEN";
+				$sql="SELECT COUNT(CODPRODUCTO) as cantidad FROM almacen";
 				$res=mysqli_query($link,$sql);
 				$ProductoT=mysqli_fetch_object($res);
 				//ventas
-  			$sql_venta=mysqli_query($link,"SELECT COUNT(NRO_FACTURA) AS VENTAS FROM boleta");
+  			$sql_venta=mysqli_query($link,"SELECT COUNT(*) AS VENTAS FROM comprobante_venta");
 				$VentaT=mysqli_fetch_object($sql_venta);
 				//Compras
-				$sql_compras=mysqli_query($link,"SELECT COUNT(NRO_FACTURA) AS COMPRAS FROM FACTURA WHERE PROCESO='1'");
+				$sql_compras=mysqli_query($link,"SELECT COUNT(*) AS COMPRAS FROM comprobante_compra ");
 				$ComprasT=mysqli_fetch_object($sql_compras);
 				//prooveedores
-				$sql_proveedores=mysqli_query($link,"SELECT COUNT(RUC_CLIENTE) AS TOTAL FROM proveedores ");
+				$sql_proveedores=mysqli_query($link,"SELECT COUNT(*) AS TOTAL FROM proveedores ");
 				$ProveedoresT=mysqli_fetch_object($sql_proveedores);
 				return  array('ProductoT' =>  $ProductoT->cantidad,'VentasT'=>$VentaT->VENTAS,'ComprasT'=>$ComprasT->COMPRAS,'ProveedoresT'=>$ProveedoresT->TOTAL);
       }
 
 			public function UltimasVentas()
 			{
-				$sqlUV="SELECT A.*,B.NOMBRE_C AS NOMBRE
-				FROM boleta AS A, cliente AS B WHERE A.RUC_CLIENTE=B.RUC_DNI
-				ORDER BY A.FECHA_FACTURA DESC LIMIT 10";
+				$sqlUV="SELECT A.*,A.NOMCLIENTE AS NOMBRE
+				FROM comprobante_venta AS A
+				ORDER BY A.FECHACOMPROBANTE  DESC LIMIT 10";
 				return $this->ArmarConsulta($sqlUV);
 			}
 
@@ -35,7 +35,7 @@
 		                                WHERE P.COD_PRODUCTO=D.COD_PRODUCTO AND D.NRO_FACTURA=B.NRO_FACTURA AND B.FECHA_FACTURA='$dia'
 		                                GROUP BY P.NOMBRE_PRODUCTO ORDER BY TOTAL DESC LIMIT 15";
 
-							return $this->ArmarConsulta($sql_ventasD);
+							//return $this->ArmarConsulta($sql_ventasD);
 			}
 
 			public function PreviewComprobante($CodComprobante)

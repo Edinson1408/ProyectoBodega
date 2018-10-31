@@ -7,7 +7,7 @@ $objProducto = new Productos();
 switch ($_POST['peticion']) {
 
 	case 'lista':
-		$productos=$objProducto->ListarProducto();
+		//$productos=$objProducto->ListarProducto();
 		require '../vista/ProductosLista.php';
 		break;
 

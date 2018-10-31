@@ -153,11 +153,12 @@ a{
 
 <div class="panel panel-default" id="panel1">
    <div class="titulo" style="margin-left: 10px">
-   <h4>Reportes Generales 2017</h4>
+   <h4>Reportes Generales <?php echo date('Y')?></h4>
  <div class="row">
    <div class="col l8 s12"> <!--hi Highcharts-->
        <div id="container"></div>
    </div><!--hi Highcharts-->
+   <!--esto es para los almacenes-->
    <div class="col l4 s12">
        <div class="info-box bg-purple"><!--Inicio del modaro stock de productos-->
          <span class="info-box-icon"><i class="fa fa-tags"></i></span>
@@ -176,6 +177,7 @@ a{
            </span>
          </div>
        </div><!--Fin del modaro stock de productos-->
+
        <div class="info-box bg-green"> <!--Inicio del verde Ventas -->
          <span class="info-box-icon"><i class="fa fa-money"></i></span>
          <div class="info-box-content">
@@ -251,11 +253,11 @@ a{
          <?php
          foreach ($ultimasV as $VentasU ) {
                echo "<tr>";
-                   echo "<td>".$VentasU['NRO_FACTURA']."</td>";
+                   echo "<td>".$VentasU['NUMCOMPROBANTE']."</td>";
                    echo "<td>".$VentasU['NOMBRE']."</td>";
-                   echo "<td>".$VentasU['FECHA_FACTURA']."</td>";
+                   echo "<td>".$VentasU['FECHACOMPROBANTE']."</td>";
                    echo "<td>".$VentasU['TOTAL']."</td>";
-                   echo "<td><button onClick='verDetalle(".$VentasU['NRO_FACTURA'].")'class='btn btn-default btn-xs' title='Detalle Factura'><i class ='icon ion-md-brush'></i></button></td>";
+                   echo "<td><button onClick='verDetalle(".$VentasU['NUMCOMPROBANTE'].")'class='btn btn-default btn-xs' title='Detalle Factura'><i class ='icon ion-md-brush'></i></button></td>";
                echo "</tr>";
          }
          ?>
@@ -350,7 +352,7 @@ var chart = Highcharts.chart('container', {
        date_default_timezone_set('America/Bogota');
        $ano=date('Y');
            for ($m=1; $m <=12 ; $m++) {
-               $sql_mes=mysqli_query($conexion,"SELECT COUNT(NRO_FACTURA) AS TOTAL FROM BOLETA WHERE MONTH(FECHA_FACTURA)='$m' AND YEAR(FECHA_FACTURA)='$ano'");
+               $sql_mes=mysqli_query($conexion,"SELECT COUNT(NUMCOMPROBANTE) AS TOTAL FROM comprobante_venta WHERE MONTH(FECHACOMPROBANTE)='$m' AND YEAR(FECHACOMPROBANTE)='$ano'");
                while ($rt=mysqli_fetch_array($sql_mes)) {
                  ?>
            <?php echo $rt['TOTAL'].",";?>

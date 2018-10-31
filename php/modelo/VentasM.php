@@ -65,7 +65,7 @@ class VentasM extends Conexion
             NUMCOMPROBANTE,
             SERIECOMPROBANTE,
             IDCLIENTE,
-            NONCLIENTE,
+            NOMCLIENTE,
             FECHACOMPROBANTE,
             SUBTOTAL,
             IGV,
@@ -79,22 +79,22 @@ class VentasM extends Conexion
               '".$_ARR['NumCompro']."',
               '".$_ARR['Serie']."',
               '".$_ARR['IdPersona']."',
-              '',
+              '".$_ARR['NombreCLiente']."',
               '".$_ARR['FecComprobante']."',
               '".$_ARR['SubTotal']."',
               '".$_ARR['Igv']."',
               '".$_ARR['Total']."',
               '1'
                   )";
-          //mysqli_query($this->Link,$Sql);
+          mysqli_query($this->Link,$Sql);
             //obtener el ultimo id 
-            //return mysqli_insert_id($this->Link);
-            echo $Sql;
+          return mysqli_insert_id($this->Link);
+            //echo $Sql;
     }
     public function InsertaDetalle($UltimoId,$_ARR)
     {
       //por mientras valera 1
-      $UltimoId=1;
+      //$UltimoId=1;
         //CodigoBarras=c&CodProducto1=PRO001&Cantidad1=1  
           for ($i=1; $i <=50 ; $i++) { 
             if(isset($_ARR['CodProducto'.$i])){
@@ -105,7 +105,7 @@ class VentasM extends Conexion
               IDESTADO,
               CANTIDAD,
               PRECIOVENTA,
-              IMPORTE,
+              IMPORTE
               ) VALUES (
                 '".$UltimoId."',
                 '".$_ARR['CodProducto'.$i]."',
@@ -113,14 +113,25 @@ class VentasM extends Conexion
                 '1',
                 '".$_ARR['Cantidad'.$i]."',
                 '".$_ARR['PrecioVenta'.$i]."',
-
-              )";
-              echo $Sql;
-              //mysqli_query($this->Link,$Sql);  
+                '".$_ARR['Importe'.$i]."'
+                )";
+              //echo $Sql;
+              mysqli_query($this->Link,$Sql);
+              //disminuye almacen 
+              $this->ActualizaAlmacen($_ARR['CodProducto'.$i],$_ARR['Cantidad'.$i]);
             }
           }
 
       
+    }
+
+    public function ActualizaAlmacen($CodProducto,$Cantidad)
+    {
+        $Sql="UPDATE almacen SET
+              CANTIDAD=CANTIDAD-$Cantidad
+              WHERE CODPRODUCTO='$CodProducto'";
+        mysqli_query($this->Link,$Sql);
+        
     }
 
 }

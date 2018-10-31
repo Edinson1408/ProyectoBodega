@@ -7,7 +7,7 @@
 		public function ListarProducto()
 		{
 			$sql="SELECT a.*, b.CLASE_PRODUCTO AS NOMBRE FROM producto as a, clasificacion_producto as b WHERE a.CLASE_PRODUCTO=b.COD_CLASIFICACION Order by a.Nombre_producto  limit 10";
-			return $this->ArmarConsulta($sql);
+			//return $this->ArmarConsulta($sql);
 
 		}
 
@@ -21,7 +21,7 @@
 		public function EliminarProducto($codigo)
 		{
 			$link=$this->Conectarse();
-			$sql="DELETE FROM producto where COD_PRODUCTO='$codigo'";
+			$sql="DELETE FROM producto where CODPRODUCTO='$codigo'";
 			$res=mysqli_query($link,$sql);
 
 		}
@@ -30,10 +30,10 @@
 		{
 			$link=$this->Conectarse();
 			$sql="UPDATE producto SET
-					NOMBRE_PRODUCTO='$nomP',
-					PRECIO_UNITARIO='$puP',
-					PRECIO_VENTA='$pvP',
-					CLASE_PRODUCTO='$tiP'
+					NOMPRODUCTO='$nomP',
+					PRECIOVENTA='$puP',
+					PRECIOCOMPRA='$pvP',
+					CODCLASIFICACION='$tiP'
 					WHERE COD_PRODUCTO='$codP' ;";
 			mysqli_query($link,$sql);
 			//return $sql;

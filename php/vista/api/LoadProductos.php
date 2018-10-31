@@ -21,7 +21,10 @@ class LazyLoad
     endif;
 
   
-      $sql="SELECT a.*, b.CLASE_PRODUCTO AS NOMBRE FROM producto as a, clasificacion_producto as b WHERE a.CLASE_PRODUCTO=b.COD_CLASIFICACION Order by a.Nombre_producto  ASc limit {$_REQUEST['start']},15";
+      $sql="SELECT a.*, b.NOMCLASIFICACION AS NOMBRE 
+      FROM PRODUCTO as a, clasificacion_producto as b 
+      WHERE a.CODCLASIFICACION=b.CODCLASIFICACION Order by a.NOMPRODUCTO  ASC
+      limit {$_REQUEST['start']},15";
 
     $request=mysqli_query($this->link,$sql);
 
@@ -33,15 +36,14 @@ class LazyLoad
         $row->Nombre=utf8_encode($row->Nombre);
         /*$row->NameDB=utf8_encode($row->NameDB);
         $row->CodOrg=utf8_encode($row->CodOrg);
-        /*$row->Direccion=utf8_encode($row->Direccion);*/
-                  
+        /*$row->Direccion=utf8_encode($row->Direccion);*/    
         echo "<tr>
           <td>".$ListaProdu['NOMBRE']."</td>
-          <td>".$ListaProdu['NOMBRE_PRODUCTO']."</td>
+          <td>".$ListaProdu['NOMPRODUCTO']."</td>
           
-          <td><a title='Editar' onclick=(editar('".$ListaProdu['COD_PRODUCTO']."')) style='cursor:pointer;'> 
+          <td><a title='Editar' onclick=(editar('".$ListaProdu['CODPRODUCTO']."')) style='cursor:pointer;'> 
           <i class='material-icons'>edit</i></a></td> 
-          <td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$ListaProdu['COD_PRODUCTO']."'))><i class='material-icons'>delete</i></a></td>
+          <td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$ListaProdu['CODPRODUCTO']."'))><i class='material-icons'>delete</i></a></td>
           </tr>";
     ?>
 

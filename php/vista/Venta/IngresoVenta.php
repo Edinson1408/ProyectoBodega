@@ -18,6 +18,7 @@ document.getElementById(ID).focus();
 </head>
 <body onload="sf('btn');">
 <form  method='POST' id='GuardarVenta'>
+<input type='hidden' value='001' name='Serie' id='Serie'>
 <div class="form-group">
 	
 	<div class="row">
@@ -27,7 +28,8 @@ document.getElementById(ID).focus();
 		<div class="col l4 m4 s12">
 			Tipo Documento:	
 			<select class="form-control form-control-sm" id="TipoDoc" name='TipoDoc' >
-			<option>BOLETA</option>
+			<option value='1'>Factura</option>
+			<option value='2'>BOLETA</option>
 			</select>
 		</div>
 
@@ -45,7 +47,7 @@ document.getElementById(ID).focus();
 	</div>
 	<div class="col l4 m6 s12">
 			Nombre Cliente:	
-			<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" disabled="disable">
+			<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
 	</div>
 	<div class="col l4 m6 s12">
 	<?php
