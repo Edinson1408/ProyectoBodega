@@ -9,7 +9,7 @@
 				$res=mysqli_query($link,$sql);
 				$ProductoT=mysqli_fetch_object($res);
 				//ventas
-  			$sql_venta=mysqli_query($link,"SELECT COUNT(*) AS VENTAS FROM comprobante_venta");
+  				$sql_venta=mysqli_query($link,"SELECT COUNT(*) AS VENTAS FROM comprobante_venta");
 				$VentaT=mysqli_fetch_object($sql_venta);
 				//Compras
 				$sql_compras=mysqli_query($link,"SELECT COUNT(*) AS COMPRAS FROM comprobante_compra ");
@@ -17,6 +17,7 @@
 				//prooveedores
 				$sql_proveedores=mysqli_query($link,"SELECT COUNT(*) AS TOTAL FROM proveedores ");
 				$ProveedoresT=mysqli_fetch_object($sql_proveedores);
+				
 				return  array('ProductoT' =>  $ProductoT->cantidad,'VentasT'=>$VentaT->VENTAS,'ComprasT'=>$ComprasT->COMPRAS,'ProveedoresT'=>$ProveedoresT->TOTAL);
       }
 

@@ -22,6 +22,10 @@ include('seguridad_navegador.php');
 		<script src="../js/jquery-3.2.1.min.js"></script>
         <script src="../js/ModalComponet.js"></script>
         <script src="../js/App.js"></script>
+        <script src="../js/App.js"></script>
+        <script src="../js/modal-dialog.tag"  type="riot/tag"></script>
+        <script src="../js/riot.js"></script>
+        
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>-->
         <!--<script src="../bootstrap/js/bootstrap.js"></script>-->
 
@@ -73,6 +77,58 @@ include('seguridad_navegador.php');
     <!-- fin materialize-->
 </head>
 <body>
+<modal-dialog custom-dialog id="modal_dialogo_es" full-screen-on-small style="--content-padding:0;display: none;--width: 60%"  >
+                                     <div class="md-toolbar" style="background-color:#263238" fixed-top>
+                                       <div class="md-layout">
+                                       <div class="md-layout md-flex-60 md-vertical-align-center">
+                                        <h3 class="flex-truncate">Configuración del Reportes</h3>
+                                        </div>
+                                       <div class="md-layout md-flex-40 md-align-end md-vertical-align-center">
+                                         <button  type="button" class="md-button md-icon-button md-dense ripple" onclick="close_();">
+                                          <div class="md-button-content">
+                                            <i class="material-icons white-text">close</i>
+                                           </div>
+                                          </button>
+                                         </div>
+                                           </div>
+                                       </div>
+                                    <div fixed-main id="content_">
+
+                                        <div id="DetaComp" class="cDetaComp " style="">
+                                              <!--<div class="cierra" onclick="jQuery('#DetaComp').hide();"> X </div>
+                                              <div class="ctitulo" onmouseover="MueveVentana('DetaComp','HeadPoputDetaComp')" ><spam id="titulo">Configuración del Reporte</spam></div>-->
+
+                                                  
+                                                        <div class="md-toolbar" style="background-color:#089777;">
+                                                        <center>                                                           
+                                                          <tr>
+                                                              <td rowspan="2" align="" class="out"><strong> Nivel de Cuenta &nbsp;&nbsp;&nbsp;</strong></td>
+                                                              <td bgcolor="#EEEEEE">
+                                                                <select id="NivelCuenta" name="NivelCuenta" onchange="alerta_niveles_pat()">
+                                                                <option value="1"> 1</option>
+                                                                <option value="2"> 2</option>
+                                                                <option value="3"> 3</option>
+                                                                <option value="4"> 4</option>
+                                                                <option value="5"> 5</option>
+                                                                <option value="6"> 6</option>
+                                                                <option value="7"> 7</option>
+                                                                </select>
+                                                              </td>
+                                                            </tr>
+                                                        </center>
+
+                                                        </div>
+                                                  
+
+                                                      <form id="Fconfig" name="Fconfig">
+                                                      <div id="AsientoComp" class="panel"></div>
+                                                  
+                                                      </form>
+                                          </div>
+
+
+                                    </div>
+                               </modal-dialog>
 <!-- NAV LATERAL -->
     <section class="NavLateral full-width">
         <div class="NavLateral-FontMenu full-width ShowHideMenu"></div>
