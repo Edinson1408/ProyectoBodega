@@ -6,8 +6,8 @@ $con=$_POST['cont'];
 //SESSIONES
 $_SESSION['user']=$_POST['user'];
 $cone=MD5($_POST['cont']);
-echo "SELECT * from usuario WHERE NOMUSER='$user' and CONTRASENA= '$cone' ";
-$consulta=mysqli_query($conexion,"SELECT * from usuario WHERE NOMUSER='$user' and CONTRASENA= '$cone' ");
+echo "SELECT * from usuario WHERE NOMUSER='$user' and CONUSUARIO= '$cone' ";
+$consulta=mysqli_query($conexion,"SELECT * from usuario WHERE NOMUSER='$user' and CONUSUARIO= '$cone' ");
 $f=mysqli_fetch_array($consulta);
 echo $id=$f['IDCATEGORIA'];
 echo $nombre=$f['NOMUSER'];

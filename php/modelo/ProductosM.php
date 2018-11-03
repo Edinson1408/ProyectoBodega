@@ -14,7 +14,9 @@
 		public function MostrarProducto($codP)
 
 		{
-				$sql="SELECT a.*, b.CLASE_PRODUCTO as NOMBRE_TIPO,b.COD_CLASIFICACION  FROM producto as a, clasificacion_producto as b WHERE a.CLASE_PRODUCTO=b.COD_CLASIFICACION  and a.COD_PRODUCTO='$codP'";
+				$sql="SELECT a.*, b.NOMCLASIFICACION as NOMBRE_TIPO,b.CODCLASIFICACION  
+					FROM producto as a, clasificacion_producto as b WHERE 
+					a.CODCLASIFICACION=b.CODCLASIFICACION  and a.CODPRODUCTO='$codP'";
 				return $this->ArmarConsulta($sql);
 		}
 
@@ -26,15 +28,15 @@
 
 		}
 
-		public function EditarProducto($nomP,$puP,$pvP,$tiP,$codP)
+		public function EditarProducto($nomP,$PcP,$pvP,$tiP,$codP)
 		{
 			$link=$this->Conectarse();
-			$sql="UPDATE producto SET
+			 $sql="UPDATE producto SET
 					NOMPRODUCTO='$nomP',
-					PRECIOVENTA='$puP',
-					PRECIOCOMPRA='$pvP',
+					PRECIOVENTA='$pvP',
+					PRECIOCOMPRA='$PcP',
 					CODCLASIFICACION='$tiP'
-					WHERE COD_PRODUCTO='$codP' ;";
+					WHERE CODPRODUCTO='$codP' ;";
 			mysqli_query($link,$sql);
 			//return $sql;
 
@@ -43,7 +45,14 @@
 		public function InsertarProducto($codP,$nomP,$pvP,$puP,$tiP)
 		{
 			$link=$this->Conectarse();
-			$sql="INSERT INTO producto VALUES ('$codP','$nomP','$pvP','$puP','$tiP')";
+			$sql="INSERT INTO producto
+			(CODPRODUCTO,
+			NOMPRODUCTO,
+			PRECIOVENTA,
+			PRECIOCOMPRA,
+			CODCLASIFICACION
+			)VALUES 
+			('$codP','$nomP','$pvP','$puP','$tiP')";
 			mysqli_query($link,$sql);
 
 		}

@@ -17,7 +17,7 @@
  <div class="row">
 	 <div class="col l6 s12">
 	 	<div class="form-group">
-	 		<input class="form-control" type="number" name="PrecioUnitario" id="PrecioUnitario" placeholder="Precio Unitario"  value="<?php echo $PU;?>">
+	 		<input class="form-control" type="number" name="PrecioCompra" id="PrecioCompra" placeholder="Precio Compra"  value="<?php echo $Pc;?>">
 	 	</div>
 	 </div>
 	 <div class="col l6 s12">
@@ -42,7 +42,7 @@
  				<?php
  						foreach ($TipoProducto as $TipoPro)
 						{
-								echo "<option value='".$TipoPro['COD_CLASIFICACION']."'>".$TipoPro['CLASE_PRODUCTO']."</option>";
+								echo "<option value='".$TipoPro['CODCLASIFICACION']."'>".$TipoPro['NOMCLASIFICACION']."</option>";
 						}
 
  				?>
@@ -61,7 +61,7 @@
     	{
     		console.log($('#CodProducto').val());
     		console.log($('#NomProducto').val());
-    		console.log($('#PrecioUnitario').val());
+    		console.log($('#PrecioCompra').val());
     		console.log($('#PrecioVenta').val());
     		console.log($('#TipoProducto').val());
     		console.log($('#CampoOculto').val());
@@ -70,7 +70,7 @@
     		var CampoOculto=$('#CampoOculto').val();
     		var CodProducto=$('#CodProducto').val();
     		var NomProducto=$('#NomProducto').val()
-    		var PrecioUnitario=$('#PrecioUnitario').val();
+    		var PrecioCompra=$('#PrecioCompra').val();
     		var PrecioVenta=$('#PrecioVenta').val();
     		var TipoProducto=$('#TipoProducto').val();
 
@@ -82,7 +82,7 @@
     		$.ajax({
     			url:'controlador/ProductoC.php',
     			method:'POST',
-    			data:{CampoOculto:CampoOculto,peticion:peticion,CodProducto:CodProducto,NomProducto:NomProducto,PrecioUnitario:PrecioUnitario,PrecioVenta:PrecioVenta,TipoProducto:TipoProducto},
+    			data:{CampoOculto:CampoOculto,peticion:peticion,CodProducto:CodProducto,NomProducto:NomProducto,PrecioCompra:PrecioCompra,PrecioVenta:PrecioVenta,TipoProducto:TipoProducto},
     			success:function(respuesta)
     			{
     				console.log(respuesta);

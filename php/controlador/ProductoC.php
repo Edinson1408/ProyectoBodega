@@ -14,6 +14,7 @@ switch ($_POST['peticion']) {
 
 
 	case 'eliminar':
+
 		//funcion eliminar
 		$objProducto->EliminarProducto($_POST['codigo']);
 		//Listamos nuevamente XD
@@ -26,12 +27,12 @@ switch ($_POST['peticion']) {
 		 $request=$objProducto->MostrarProducto($_POST['codigo']);
 			foreach ($request as $Producto)
 			{
-				$NomProducto=$Producto['NOMBRE_PRODUCTO'];
-				$PU=$Producto['PRECIO_UNITARIO'];
-				$PV=$Producto['PRECIO_VENTA'];
-				$CodProducto=$Producto['COD_PRODUCTO'];
+				$NomProducto=$Producto['NOMPRODUCTO'];
+				$Pc=$Producto['PRECIOCOMPRA'];
+				$PV=$Producto['PRECIOVENTA'];
+				$CodProducto=$Producto['CODPRODUCTO'];
 				$NomTipo=$Producto['NOMBRE_TIPO'];
-				$CodmTipo=$Producto['COD_CLASIFICACION'];
+				$CodmTipo=$Producto['CODCLASIFICACION'];
 
 
 			}
@@ -66,14 +67,14 @@ switch ($_POST['peticion']) {
 	case 'insertar':
 	$codP=$_POST['CodProducto'];
 	$nomP=$_POST['NomProducto'];
-	$puP=$_POST['PrecioUnitario'];
+	$PcP=$_POST['PrecioCompra'];
 	$pvP=$_POST['PrecioVenta'];
 	$tiP=$_POST['TipoProducto'];
 
 		if ($_POST['CampoOculto']==1) {
-			$objProducto->InsertarProducto($codP,$nomP,$pvP,$puP,$tiP);
+			$objProducto->InsertarProducto($codP,$nomP,$pvP,$PcP,$tiP);
 		}elseif ($_POST['CampoOculto']==2) {
-			echo $objProducto->EditarProducto($nomP,$puP,$pvP,$tiP,$codP);
+			echo $objProducto->EditarProducto($nomP,$PcP,$pvP,$tiP,$codP);
 		}
 
 		//echo 'aca se inserta';

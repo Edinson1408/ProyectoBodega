@@ -40,6 +40,8 @@ class LazyLoad
         echo "<tr>
           <td>".$ListaProdu['NOMBRE']."</td>
           <td>".$ListaProdu['NOMPRODUCTO']."</td>
+          <td>".$ListaProdu['PRECIOVENTA']."</td>
+          <td>".$ListaProdu['PRECIOCOMPRA']."</td>
           
           <td><a title='Editar' onclick=(editar('".$ListaProdu['CODPRODUCTO']."')) style='cursor:pointer;'> 
           <i class='material-icons'>edit</i></a></td> 

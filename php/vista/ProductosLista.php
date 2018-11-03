@@ -52,10 +52,13 @@ th { background:#eee; }
 <div class="table table-sm table-striped table-hover table-bordered tableFixHead" id="contenedor">
   <table>
     <thead>
-      <tr><th>Tipo</th>
-						<th>Producto</th>
-
-						<th colspan='4'>Acciones</th></tr>
+      <tr>
+      	<th>Tipo</th>
+		<th>Producto</th>
+		<th>PRECIO V.</th>
+		<th >PRECIO C.</th>
+		<th colspan='4'>Acciones</th>
+	</tr>
     </thead>
     <tbody id="contenedor1">
 
