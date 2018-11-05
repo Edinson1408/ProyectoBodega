@@ -1,122 +1,104 @@
 <modal-dialog>
     <style scope>
+       modal-dialog .materialboxed:hover:not(.active) {
+            opacity: .8;
+            }
         modal-dialog .modal {
             display: none;
             position: fixed;
             left: 0;
-            top: var(--margin-top, 10%);
             right: 0;
-            background-color: var(--background, #fafafa);
+            background-color: #fafafa;
             padding: 0;
-            width: var(--width, 55%);
+            max-height: 70%;
+            width: 55%;
             margin: auto;
-            will-change: top, opacity;
-            -webkit-box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
-            box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
-            opacity: 1;
-            transform: scaleX(1);
-        }
-
-        modal-dialog:not([custom-dialog]) .modal {
-            max-height: var(--max-height, 70%);
-            overflow-y: var(--overflow-y, auto);
-
-        }
-
-        @media only screen and (max-width: 992px) {
-            modal-dialog .modal {
-                width: 100%;
-                top: 0;
-            }
-
-            modal-dialog[full-screen-on-small] .modal {
-                max-height: 100%;
-                height: 100%;
-            }
-        }
-
-        modal-dialog .modal .modal-content {
-            padding: var(--content-padding, 24px);
-        }
-
-        modal-dialog .modal-overlay {
-            position: fixed;
-            z-index: 999;
-            top: -25%;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            height: 125%;
-            width: 100%;
-            background: #000;
-            display: none;
-            will-change: opacity;
-            opacity: 0.5;
-        }
-
-        modal-dialog[bottom-sheet] .modal {
-            top: auto;
-            bottom: 0;
-            margin: 0;
-            width: 100%;
-            max-height: 45%;
-            border-radius: 0;
-            will-change: bottom, opacity;
-        }
-
-        modal-dialog .animate-zoom {
-            animation: animatezoom 0.6s
-        }
-
-        @keyframes animatezoom {
-            from {
-                transform: scale(0)
-            }
-            to {
-                transform: scale(1)
-            }
-        }
-
-        modal-dialog .animate-fading {
-            animation: fading 0.6s
-        }
-
-        @keyframes fading {
-            0% {
-                opacity: 0.8
-            }
-            50% {
-                opacity: 0.5
-            }
-            100% {
-                opacity: 0
-            }
-        }
-
-        modal-dialog .modal-content [fixed-bottom],
-        modal-dialog .modal-content [fixed-top] {
-            position: absolute;
-            right: 0;
-            left: 0;
-            --overflow-y: hidden;
-            --max-height: auto;
-
-        }
-
-        modal-dialog .modal-content [fixed-top] {
-            top: 0;
-        }
-
-        modal-dialog .modal-content [fixed-bottom] {
-            bottom: 0;
-        }
-
-        modal-dialog .modal-content [fixed-main] {
-            margin-top: var(--fixed-main-top, 48px);
-            margin-bottom: var(--fixed-main-bottom, 64px);
-            height: var(--fixed-dialog-height, 400px);
             overflow-y: auto;
+            border-radius: 2px;
+            will-change: top, .8;
         }
+
+       modal-dialog .z-depth-4, .modal {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+
+    @media only screen and (max-width: 992px) {
+        modal-dialog .modal {
+        width: 80%;
+    }
+    }
+
+ modal-dialog .modal h1, .modal h2, .modal h3, .modal h4 {
+  margin-top: 0;
+}
+
+ modal-dialog .modal .modal-content {
+  padding: 24px;
+}
+
+ modal-dialog .modal .modal-close {
+  cursor: pointer;
+}
+
+ modal-dialog .modal .modal-footer {
+  border-radius: 0 0 2px 2px;
+  background-color: #fafafa;
+  padding: 4px 6px;
+  height: 56px;
+  width: 100%;
+}
+
+ modal-dialog .modal .modal-footer .btn, .modal .modal-footer .btn-large, .modal .modal-footer .btn-flat {
+  float: right;
+  margin: 6px 0;
+}
+
+ modal-dialog .modal-overlay {
+  position: fixed;
+  z-index: 999;
+  top: -100px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 125%;
+  width: 100%;
+  background: #000;
+  display: none;
+  will-change: .8;
+}
+modal-dialog .modal.modal-fixed-footer {
+  padding: 0;
+  height: 70%;
+}
+
+modal-dialog .modal.modal-fixed-footer .modal-content {
+  position: absolute;
+  height: calc(100% - 56px);
+  max-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+modal-dialog .modal.modal-fixed-footer .modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 0;
+}
+
+modal-dialog .modal.bottom-sheet {
+  top: auto;
+  bottom: -100%;
+  margin: 0;
+  width: 100%;
+  max-height: 45%;
+  border-radius: 0;
+  will-change: bottom, .8;
+}
+
+modal-dialog .z-depth-4, .modal {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+}
+       
 
     </style>
     <div ref="dialog" class="modal">

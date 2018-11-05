@@ -78,57 +78,96 @@ include('seguridad_navegador.php');
 </head>
 <body>
 <modal-dialog custom-dialog id="modal_dialogo_es" full-screen-on-small style="--content-padding:0;display: none;--width: 60%"  >
-                                     <div class="md-toolbar" style="background-color:#263238" fixed-top>
-                                       <div class="md-layout">
-                                       <div class="md-layout md-flex-60 md-vertical-align-center">
-                                        <h3 class="flex-truncate">Configuración del Reportes</h3>
-                                        </div>
-                                       <div class="md-layout md-flex-40 md-align-end md-vertical-align-center">
-                                         <button  type="button" class="md-button md-icon-button md-dense ripple" onclick="close_();">
-                                          <div class="md-button-content">
-                                            <i class="material-icons white-text">close</i>
-                                           </div>
-                                          </button>
-                                         </div>
-                                           </div>
-                                       </div>
-                                    <div fixed-main id="content_">
+    <div class="md-toolbar" style="background-color:#263238" fixed-top>
+    <div class="md-layout">
+    <div class="md-layout md-flex-60 md-vertical-align-center">
+     <h3 class="flex-truncate">Configuración del Reportes</h3>
+    </div>
+    <div class="md-layout md-flex-40 md-align-end md-vertical-align-center">
+    <button  type="button" class="md-button md-icon-button md-dense ripple" onclick="close_();">
+     <div class="md-button-content"><i class="material-icons white-text">close</i></div>
+    </button>
+    </div>
+    </div>
+     </div>
+            <div fixed-main id="content_">
+            <h4>Nuevo Cliente</h4>
 
-                                        <div id="DetaComp" class="cDetaComp " style="">
-                                              <!--<div class="cierra" onclick="jQuery('#DetaComp').hide();"> X </div>
-                                              <div class="ctitulo" onmouseover="MueveVentana('DetaComp','HeadPoputDetaComp')" ><spam id="titulo">Configuración del Reporte</spam></div>-->
+<form id='form_account' method="POST">
+<div class="row">
 
-                                                  
-                                                        <div class="md-toolbar" style="background-color:#089777;">
-                                                        <center>                                                           
-                                                          <tr>
-                                                              <td rowspan="2" align="" class="out"><strong> Nivel de Cuenta &nbsp;&nbsp;&nbsp;</strong></td>
-                                                              <td bgcolor="#EEEEEE">
-                                                                <select id="NivelCuenta" name="NivelCuenta" onchange="alerta_niveles_pat()">
-                                                                <option value="1"> 1</option>
-                                                                <option value="2"> 2</option>
-                                                                <option value="3"> 3</option>
-                                                                <option value="4"> 4</option>
-                                                                <option value="5"> 5</option>
-                                                                <option value="6"> 6</option>
-                                                                <option value="7"> 7</option>
-                                                                </select>
-                                                              </td>
-                                                            </tr>
-                                                        </center>
+   <div class="col l6 s12">
+        <div class="form-group">
+           <div class="input-group">
+           <select name="TipoDos" id="TipoDoc" class="form-control" onchange="SelecRucDni();">
+               <option value="RUC">RUC</option>
+               <option value="DNI">DNI</option>
+           </select>
+           </div>
+       </div>
+    </div>
 
-                                                        </div>
-                                                  
+    <div class="col l6 s12"  id="ContRuc">
+        <div class="form-group">
+           <div class="input-group">
+           <input type="text" class="form-control" id="RUCDNI" type="text" name="RUCDNI" placeholder="RUC"
+           maxlength="11" value='' required>
+           <div class="input-group-append">
+             <span class="input-group-text" onclick='ValidaRuc();'><a id="btn-validar-ruc"><i class="icon ion-md-search"></i></a></span>
+           </div>
+           </div>
+       </div>
+    </div>
 
-                                                      <form id="Fconfig" name="Fconfig">
-                                                      <div id="AsientoComp" class="panel"></div>
-                                                  
-                                                      </form>
-                                          </div>
+   <div class="col l6 s12" style="display:none;" id="ContDni">
+        <div class="form-group">
+           <div class="input-group">
+           <input type="text" class="form-control" id="DNI" type="text" name="DNI" placeholder="DNI"
+           maxlength="11" value='' required>
+           </div>
+       </div>
+    </div>
+</div>
+
+<div class="row">
+   
+    <div class="col l6 s12">
+        <div class="form-group">
+            <input type="text"  class="form-control" placeholder="Nombre" name="RazonSocial" id="RazonSocial"  >
+        </div>
+    </div>
+
+   <div class="col l6 s12">
+       <div class="form-group">
+           <input type="text" class="form-control" placeholder="Dirección" id='direccion' name="direccion">
+       </div>
+   </div>
 
 
-                                    </div>
-                               </modal-dialog>
+</div>
+
+
+<div class="row">
+   <div class="col s12 l6">
+       <div class="form-group">
+           <input type="text" class="form-control" placeholder="Telefono" name="telefono" id="telefono" >
+       </div>
+   </div>
+   <div class="col s12 l6">
+       <div class="form-group">
+           <input type="email" class="form-control" placeholder="Correo" name="correo" id="correo" >
+       </div>
+   </div>
+</div>
+
+
+<a style="float: right;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+<a style="float: right;position: absolute;" href="#!" class="modal-action  waves-effect waves-green btn-flat" id="create_account">Guardar</a>
+
+
+</form>
+            </div>
+    </modal-dialog>
 <!-- NAV LATERAL -->
     <section class="NavLateral full-width">
         <div class="NavLateral-FontMenu full-width ShowHideMenu"></div>
@@ -169,10 +208,10 @@ include('seguridad_navegador.php');
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="ingreso_compras/sele_mes.php" target="tiframe" class="waves-effect waves-light">Historial de compras</a></li>-->
                              
-                             <li><a  class="waves-effect waves-light" onclick="enrutar_menu('ComprasC.php','HistorialCompras')" >Historial de compras</a></li>
-
+                            <li><a  class="waves-effect waves-light" onclick="enrutar_menu('ComprasC.php','HistorialCompras')" >Historial de compras</a></li>
                             <li class="NavLateralDivider"></li>
-                            <li><a href="ingreso_compras/ingresov1.php" target="tiframe" class="waves-effect waves-light">Nuevo Ingreso</a></li>
+                            <li><a onclick="enrutar_menu('ComprasC.php','IngresoCompras')"  target="tiframe" class="waves-effect waves-light" >Nuevo Ingreso</a></li>
+                            <!--<li><a href="ingreso_compras/ingresov1.php" target="tiframe" class="waves-effect waves-light" >Nuevo Ingreso</a></li>-->
 
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="ingreso_compras/mantenimiento/index.php" target="tiframe" class="waves-effect waves-light">Mantenimiento</a></li>-->

@@ -43,9 +43,9 @@ class VentasM extends Conexion
       //$Sql="SELECT * FROM CLIENTE where RUC_DNI like '%".$Numdoc."%'  ORDER BY RUC_DNI DESC";
       $Sql="SELECT CL.IDCLIENTE,CL.IDPERSONA,CONCAT(PE.NOMBRES,' ',PE.APELLIDOS,' ') as NOMBRE_C,PE.NUMDOC as RUC_DNI
       FROM 
-      CLIENTE  CL 
-      INNER JOIN PERSONA PE 
-      ON CL.IDPERSONA=PE.IDPERSONA";
+      CLIENTE  CL ,PERSONA PE
+       where CL.IDPERSONA=PE.IDPERSONA and 
+        PE.NUMDOC  like  '%".$Numdoc."%' ";
       $query=mysqli_query($this->Link,$Sql);
       return $query;
       
