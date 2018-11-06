@@ -87,7 +87,7 @@ $nro=$_POST['codigo'];
 					</tr>
 					<?php
 						foreach ($DetCom as $Detalle ) {
-							echo '<tr><td>'.$Detalle['CANTIDAD'].'</td><td>'.$Detalle['NOMBRE_PRODUCTO'].'</td><td style="margin-left: 65px;">'.$Detalle['PRECIO_VENTA'].'</td></tr>';
+							echo '<tr><td>'.$Detalle['CANTIDAD'].'</td><td>'.$Detalle['NOMPRODUCTO'].'</td><td style="margin-left: 65px;">'.$Detalle['PRECIOVENTA'].'</td></tr>';
 						}
 					echo "</TABLE>************************************************<Br>";
 					echo "<div class='cal'>";

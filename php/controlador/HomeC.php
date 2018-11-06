@@ -18,12 +18,12 @@ switch ($_POST['peticion']) {
       $CodComprobante=$_POST['codigo'];
       //datos principales del comprobante
       $ComprobantesDatos=$ObjHome->PreviewComprobante($CodComprobante);
-      $NroCompro=$ComprobantesDatos->NRO_FACTURA;
-      $NomClie=utf8_decode($ComprobantesDatos->CLIENTE);
-      $DniRucCli=$ComprobantesDatos->RUC_CLIENTE;
-      $FCompro=$ComprobantesDatos->FECHA_FACTURA;
-      $HCompro=$ComprobantesDatos->HORA_FACTURA;
-      $SubCompro=$ComprobantesDatos->SUB_TOTAL;
+      $NroCompro=$ComprobantesDatos->NUMCOMPROBANTE;
+      $NomClie=utf8_decode($ComprobantesDatos->NOMCLIENTE);
+      $DniRucCli=$ComprobantesDatos->NUMDOC;
+      $FCompro=$ComprobantesDatos->FECHACOMPROBANTE;
+      $HCompro='';
+      $SubCompro=$ComprobantesDatos->SUBTOTAL;
       $IgvCompro=$ComprobantesDatos->IGV;
       $TotCompro=$ComprobantesDatos->TOTAL;
 

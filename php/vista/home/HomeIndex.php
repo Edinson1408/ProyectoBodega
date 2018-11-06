@@ -257,7 +257,7 @@ a{
                    echo "<td>".$VentasU['NOMBRE']."</td>";
                    echo "<td>".$VentasU['FECHACOMPROBANTE']."</td>";
                    echo "<td>".$VentasU['TOTAL']."</td>";
-                   echo "<td><button onClick='verDetalle(".$VentasU['NUMCOMPROBANTE'].")'class='btn btn-default btn-xs' title='Detalle Factura'><i class ='icon ion-md-brush'></i></button></td>";
+                   echo "<td><button onClick='verDetalle(".$VentasU['IDCOMPROBANTE'].")'class='btn btn-default btn-xs' title='Detalle Factura'><i class ='icon ion-md-brush'></i></button></td>";
                echo "</tr>";
          }
          ?>
@@ -299,7 +299,7 @@ a{
 
    foreach ($ProMasVen as $MasVendidos ) {
        echo "<tr>";
-           echo "<td style='line-height:5pt;'>".$MasVendidos['NOMBRE_PRODUCTO']."</td>";
+           echo "<td style='line-height:5pt;'>".$MasVendidos['NOMPRODUCTO']."</td>";
            echo "<td style='line-height:5pt;'>".$MasVendidos['TOTAL']."</td>";
        echo "</tr>";
    }

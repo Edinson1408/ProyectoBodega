@@ -31,19 +31,24 @@
 
 			public function ProductoMasVendidos($dia)
 			{
-			 	$sql_ventasD="SELECT P.*, SUM(D.CANTIDAD_PRODUCTO) AS TOTAL, B.FECHA_FACTURA
-		                                FROM PRODUCTO AS P, DETALLE_BOLETA AS D, BOLETA AS B
-		                                WHERE P.COD_PRODUCTO=D.COD_PRODUCTO AND D.NRO_FACTURA=B.NRO_FACTURA AND B.FECHA_FACTURA='$dia'
-		                                GROUP BY P.NOMBRE_PRODUCTO ORDER BY TOTAL DESC LIMIT 15";
+			 	$sql_ventasD="SELECT P.*, SUM(D.CANTIDAD) AS TOTAL, B.FECHACOMPROBANTE
+		                                FROM PRODUCTO AS P, comprobante_venta_detalle AS D, comprobante_venta AS B
+		                                WHERE P.CODPRODUCTO=D.CODPRODUCTO AND D.IDCOMPROBANTE=B.IDCOMPROBANTE AND B.FECHACOMPROBANTE='$dia'
+		                                GROUP BY P.NOMPRODUCTO ORDER BY TOTAL DESC LIMIT 15";
 
-							//return $this->ArmarConsulta($sql_ventasD);
+
+
+							return $this->ArmarConsulta($sql_ventasD);
 			}
 
 			public function PreviewComprobante($CodComprobante)
 			{
 					$link=$this->Conectarse();
-					$sql="SELECT A.*, B.NOMBRE_C AS CLIENTE FROM BOLETA AS A, CLIENTE_1 AS B
-						WHERE A.RUC_CLIENTE=B.RUC_DNI AND NRO_FACTURA='$CodComprobante'";
+					 $sql="SELECT A.*, P.NUMDOC , A.NOMCLIENTE 
+					FROM comprobante_venta AS A , persona as P
+						WHERE  A.IDCLIENTE=P.IDPERSONA AND
+						A.IDCOMPROBANTE='$CodComprobante'";
+					
 					$res=mysqli_query($link,$sql);
 					return mysqli_fetch_object($res);
 			}
@@ -51,12 +56,12 @@
 			public function PreviewComprobanteDe($CodComprobante)
 			{
 
-						$sql="SELECT SUM(DB.CANTIDAD_PRODUCTO) AS CANTIDAD,
-									SUM(DB.IMPORTE) AS IMPO, DB.COD_PRODUCTO,NOMBRE_PRODUCTO,PRECIO_VENTA
-									FROM DETALLE_BOLETA DB, PRODUCTO PR
-									WHERE DB.NRO_FACTURA='$CodComprobante'
-									AND DB.COD_PRODUCTO=PR.COD_PRODUCTO
-									GROUP BY DB.COD_PRODUCTO";
+						$sql="SELECT SUM(DB.CANTIDAD) AS CANTIDAD,
+									SUM(DB.IMPORTE) AS IMPO, DB.CODPRODUCTO,PR.NOMPRODUCTO,PR.PRECIOVENTA
+									FROM comprobante_venta_detalle DB, PRODUCTO PR
+									WHERE DB.IDCOMPROBANTE='$CodComprobante'
+									AND DB.CODPRODUCTO=PR.CODPRODUCTO
+									GROUP BY DB.CODPRODUCTO";
 						return $this->ArmarConsulta($sql);
 			}
 
