@@ -1,5 +1,6 @@
 <?php
 include('../../conexion.php');
+session_start();
 ?>
 
 
@@ -141,6 +142,7 @@ a{
 }
 </style>
 <div class="container">
+<h1><?php echo $_SESSION['IdUsuario']?></h1>
  <!--<div class="row">
    <div class="col l6">
    </div>

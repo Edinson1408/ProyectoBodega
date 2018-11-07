@@ -24,56 +24,28 @@
 			<th>RUC-DNI</th>
 			<th>Proveedor</th>
 			<th class='hidden-sm-down'>N°Ejecutivo</th>
-			<th class='hidden-sm-down'>Nombre_Ejecutivo</th>
 			<th class="hidden-sm-down">Dirección</th>
-			<th class='hidden-sm-down' >Telefono</th>
 			<th class='hidden-sm-down'>Correo</th>
 			<th colspan="4">Acciones</th>
 		</tr>
+		<TBody id='TablaProveedores'> 
 		<?php
-		///include('../../seguridad1.php');
-			//include('../../../conexion.php');
-			/*error_reporting(0);
-			$buscar=$_POST['buscar'];
-			if (isset($_POST['enviar'])) {
-			$sql_pro=mysql_query("SELECT * FROM cliente where NOMBRE_CLIENTE '$buscar'",$conexion);
-			while ($r=mysql_fetch_array($sql_pro)) {
-				echo "<tr>";
-					echo "<td>".$r['RUC_CLIENTE']."</td>";
-					echo "<td>".$r['NOMBRE_CLIENTE']."</td>";
-					echo "<td>".$r['NUM_EJE']."</td>";
-					echo "<td>".$r['NOM_EJE']."</td>";
-					echo "<td>".$r['DIRECCION_CLIENTE']."</td>";
-					echo "<td>".$r['TELEFONO_CLIENTE']."</td>";
-					echo "<td>".$r['CORREO_CLIENTE']."</td>";
-			?>
-			  <td><a href="modificar.php?id=<?php echo $r['RUC_CLIENTE'];?>" class="btn btn-default btn-xs" title="Editar Proveedor"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a></td>
-			  <td><a href="eliminar.php?id=<?php echo $r['RUC_CLIENTE'];?>" class="btn btn-default btn-xs" title="Eliminar Proveedor"><i class="glyphicon glyphicon-remove-circle" aria-hidden="true"></i></a></td>
-			<?php
-			  echo "</tr>";
-			}
-			}*/
-			//if (!isset($_POST['enviar'])) {
-			//$sql_pro=mysql_query("SELECT * FROM cliente order by NOMBRE_CLIENTE ASC",$conexion);
-			//while ($r=mysql_fetch_array($sql_pro)) {
 			foreach ($Proveedores as $r)
 			{
 				echo "<tr>";
-					echo "<td>".$r['RUC_CLIENTE']."</td>";
-					echo "<td >".$r['NOMBRE_CLIENTE']."</td>";
-					echo "<td class='hidden-sm-down'> ".$r['NUM_EJE']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['NOM_EJE']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['DIRECCION_CLIENTE']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['TELEFONO_CLIENTE']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['CORREO_CLIENTE']."</td>";
-					echo "<td><a title='Editar' onclick=(editar('".$r['RUC_CLIENTE']."')) style='cursor:pointer;'>
+					echo "<td>".$r['NUMDOC']."</td>";
+					echo "<td >".$r['RAZONSOCIAL']."</td>";
+					echo "<td class='hidden-sm-down'> ".$r['TELEFONO']."</td>";
+					echo "<td class='hidden-sm-down'>".$r['DIRFISCAL']."</td>";
+					echo "<td class='hidden-sm-down'>".$r['CORREO']."</td>";
+					echo "<td><a title='Editar' onclick=(editar('".$r['IDPERSONA']."')) style='cursor:pointer;'>
 					<i class='material-icons'>edit</i></a></td>
-					<td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$r['RUC_CLIENTE']."'))><i class='material-icons'>delete</i></a></td>";
+					<td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$r['IDPERSONA']."'))><i class='material-icons'>delete</i></a></td>";
 
 			  echo "</tr>";
 			}
-			//}
 		?>
+		</TBody>
 	</table>
 </div>
 

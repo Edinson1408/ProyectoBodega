@@ -1,6 +1,6 @@
 <h4><?php echo $tituloModal;?></h4>
 
- <form id='form_account' method="POST">
+ <form id='form_provedores' method="POST">
  <div class="row">
 
 
@@ -26,7 +26,7 @@
      </div>
  </div>
 
- <div class="row">
+ <!--<div class="row">
 	 <div class="col l6 s12">
 	 	<div class="form-group">
 	 		<input class="form-control" type="number" name="NEjecutivo" id="NEjecutivo" placeholder="N° Ejecutivo"  value="<?php echo $NEjecutivo;?>">
@@ -37,7 +37,7 @@
 	 		<input type="text"  class="form-control" placeholder="Nombre Ejecutivo" name="RazonSocial" id="RazonSocial"  value="<?php echo $RazonSocial;?>">
 	 	</div>
 	 </div>
- </div>
+ </div>-->
 
  <div class="row">
     <div class="col s12 l12">
@@ -60,36 +60,26 @@
     </div>
  </div>
  <input type="text" name="CampoOculto" id="CampoOculto" value="<?php echo $oculto;?>" style='visibility: hidden;'>
-
+ </form>
  <a style="float: right;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
- <a style="float: right;position: absolute;" href="#!" class="modal-action  waves-effect waves-green btn-flat" id="create_account">Guardar</a>
+ <a style="float: right;position: absolute;" href="#!" class="modal-action  waves-effect waves-green btn-flat" id="create_account" onclick='GuardarProveedor();'>Guardar</a>
 
 
-</form>
+
 
 
 
     <script type="text/javascript">
-    $(document).ready(function() {
-    $('#create_account').click(function(){
-        console.log($('#RUCDNI').val());
-        console.log($('#Nomproveedor').val());
-        console.log($('#NEjecutivo').val());
-        console.log($('#RazonSocial').val());
-        console.log($('#direccion').val());
-        console.log($('#telefono').val());
-        console.log($('#correo').val());
-        console.log($('#CampoOculto').val());
-        var dataString = $('#form_account').serialize();
-
+   
+        GuardarProveedor=()=>{ 
+        var dataString = $('#form_provedores').serialize();
+            
         peticion='insertar';
-        console.log('Datos serializados: '+dataString+'&peticion='+peticion);
-
-
+        console.log('Datos serializados: '+dataString+'&peticion='+peticion+'&Idpersona=<?php echo $IdPersona; ?>');
         $.ajax({
           url:'controlador/ProveedorC.php',
           method:'POST',
-          data:dataString+'&peticion='+peticion,
+          data:dataString+'&peticion='+peticion+'&Idpersona=<?php echo $IdPersona; ?>',
           success:function(respuesta)
           {
             console.log(respuesta);
@@ -98,11 +88,11 @@
           }
         });
 
-    });
+     }
 
 
 
-});
+
 
 
     	/*function Guardar_Proveedor()
@@ -151,7 +141,7 @@
     			data:{peticion:peticion},
     			success:function(respuesta)
     			{
-    				 $("#contenido").html(respuesta);
+    				 $("#contenidobody").html(respuesta);
     			}
     		});
     	}
@@ -159,7 +149,7 @@
 /*ws para el proveedor */
 
 $("#btn-validar-ruc").click(function(){
-
+            console.log('no funca la sunat');
            //$('.modal-msj').css({display:'block'});
 
            var url = "http://192.155.92.99/WebServices/ObtieneIPLocal/ws_ip.php";

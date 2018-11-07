@@ -11,6 +11,8 @@ $consulta=mysqli_query($conexion,"SELECT * from usuario WHERE NOMUSER='$user' an
 $f=mysqli_fetch_array($consulta);
 echo $id=$f['IDCATEGORIA'];
 echo $nombre=$f['NOMUSER'];
+///sessiones
+$_SESSION['IdUsuario']=$f['IDUSUARIO'];
 $TURNO=$f['IDTURNO'];
 $_SESSION['IDTURNO']=$TURNO;
 $_SESSION['categoria']=$id;

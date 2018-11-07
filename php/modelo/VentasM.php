@@ -53,7 +53,7 @@ class VentasM extends Conexion
 
     public function InsertaComprobantev($_ARR)
     {
-
+        session_start();
       // CliDoc=88888888&
         //IdPersona , SubTotal , Igv , Total
         //CodigoBarras=c&CodProducto1=PRO001&Cantidad1=1  
@@ -84,7 +84,7 @@ class VentasM extends Conexion
               '".$_ARR['SubTotal']."',
               '".$_ARR['Igv']."',
               '".$_ARR['Total']."',
-              '1'
+              '".$_SESSION['IdUsuario']."'
                   )";
           mysqli_query($this->Link,$Sql);
             //obtener el ultimo id 

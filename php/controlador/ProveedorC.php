@@ -29,15 +29,14 @@ switch ($_POST['peticion']) {
 	case 'editar':
 		$tituloModal='Editar Proveedores';
 		$request=$ObjProveedor->MostrarProveedor($_POST['codigo']);
+		$IdPersona=$_POST['codigo'];
 		 foreach ($request as $Proveedor)
 		 {
-			 $Ruc=$Proveedor['RUC_CLIENTE'];
-			 $NomPro=$Proveedor['NOMBRE_CLIENTE'];
-			 $NEjecutivo=$Proveedor['NUM_EJE'];
-			 $RazonSocial=$Proveedor['NOM_EJE'];
-			 $Dir=$Proveedor['DIRECCION_CLIENTE'];
-			 $Telefono=$Proveedor['TELEFONO_CLIENTE'];
-			 $Correo=$Proveedor['CORREO_CLIENTE'];
+			 $Ruc=$Proveedor['NUMDOC'];
+			 $NomPro=$Proveedor['RAZONSOCIAL'];
+			 $Dir=$Proveedor['DIRFISCAL'];
+			 $Telefono=$Proveedor['TELEFONO'];
+			 $Correo=$Proveedor['CORREO'];
 
 
 		 }
@@ -50,8 +49,6 @@ switch ($_POST['peticion']) {
 
 				$ruc=$_POST['RUCDNI'];
 				$nombre=$_POST['Nomproveedor'];
-				$numero=$_POST['NEjecutivo'];
-				$razon=$_POST['RazonSocial'];
 				$Direccion=$_POST['direccion'];
 				$telefono=$_POST['telefono'];
 				$correo=$_POST['correo'];
@@ -61,6 +58,7 @@ switch ($_POST['peticion']) {
 					$ObjProveedor->InsertarProveedor($ruc,$nombre,$numero,$razon,$Direccion,$telefono,$correo);
 			}elseif ($_POST['CampoOculto']==2) {
 				// actualizar
+				$ObjProveedor->UpdateProveedor($_POST);
 			}
 
 
