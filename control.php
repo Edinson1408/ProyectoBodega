@@ -3,7 +3,7 @@ include('conexion.php');
 session_start();
 $user=$_POST['user'];
 $con=$_POST['cont'];
-//SESSIONES
+//SESSIONES abrirs sessiones que usaremos entodo el documento
 $_SESSION['user']=$_POST['user'];
 $cone=MD5($_POST['cont']);
 echo "SELECT * from usuario WHERE NOMUSER='$user' and CONUSUARIO= '$cone' ";
