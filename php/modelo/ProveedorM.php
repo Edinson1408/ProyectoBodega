@@ -22,10 +22,40 @@
 			return $this->ArmarConsulta($sql);
 		}
 
-		public function InsertarProveedor($ruc,$nombre,$numero,$razon,$Direccion,$telefono,$correo)
+		public function InsertaPersona ($link,$_Arr){
+			
+			 $Sql="INSERT INTO persona (NOMBRES,IDTIPODOC,NUMDOC,TELEFONO,CORREO,DIRECCION)  VALUES 
+			(
+				'".$_Arr['Nomproveedor']."',
+				'4',
+				'".$_Arr['RUCDNI']."',
+				'".$_Arr['telefono']."',
+				'".$_Arr['correo']."',
+				'".$_Arr['direccion']."'
+				)";
+			mysqli_query($link,$Sql);
+			return mysqli_insert_id($link);
+		}
+
+		public function InsertarProveedor($_Arr)
 		{
 			$link=$this->Conectarse();
-			$sql="INSERT INTO  proveedores VALUES ('$ruc','$nombre','$numero','$razon','$Direccion',$telefono,'$correo')";
+			$ultimoId=$this->InsertaPersona($link,$_Arr);
+
+			$sql="INSERT INTO  proveedores
+			(IDPERSONA,
+				RAZONSOCIAL,
+				DIRFISCAL,
+				ESTADO)
+			  VALUES 
+			 (
+				'".$ultimoId."',
+				 '".$_Arr['Nomproveedor']."',
+				 '".$_Arr['direccion']."',
+				 '1'
+			 )";
+			
+			
 			$res=mysqli_query($link,$sql);
 		}
 
@@ -50,6 +80,15 @@
 			mysqli_query($link,$PersonaUpdate);
 			mysqli_query($link,$ProveedorUpdate);
 
+		}
+
+
+		public function EliminarPersona($IdPersona)
+		{
+			echo $Sql="DELETE FROM persona where IDPERSONA='".intval($IdPersona)."'";
+			$link=$this->Conectarse();
+			mysqli_query($link,$Sql);
+		
 		}
 
 	}

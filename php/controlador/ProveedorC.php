@@ -18,7 +18,7 @@ switch ($_POST['peticion']) {
 		$Dir='';
 		$Telefono='';
 		$Correo='';
-
+		$IdPersona='';
 		$oculto='1';
 		$tituloModal='Agregar Proveedor';
 		require '../vista/ProveedorCM.php';
@@ -55,14 +55,19 @@ switch ($_POST['peticion']) {
 			if($_POST['CampoOculto']==1)
 			{
 				//insertar
-					$ObjProveedor->InsertarProveedor($ruc,$nombre,$numero,$razon,$Direccion,$telefono,$correo);
+					$ObjProveedor->InsertarProveedor($_POST);
 			}elseif ($_POST['CampoOculto']==2) {
 				// actualizar
 				$ObjProveedor->UpdateProveedor($_POST);
 			}
 
 
+	case 'eliminar':
+			
+			$ObjProveedor->EliminarPersona($_POST['codigo']);
 
+
+	break;
 
 
 		break;

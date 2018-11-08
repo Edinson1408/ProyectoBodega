@@ -114,12 +114,13 @@
 			  if (willDelete) {
 
 			  	$.ajax({
-						url:"controlador/ProductoC.php",
+						url:"controlador/ProveedorC.php",
 						method:"POST",
 						data:{peticion:peticion,codigo:$codigo},
 						success: function(resultado)
 						{
-							$("#contenido").html(resultado);
+							Actualiza();
+							//$("#contenido").html(resultado);
 							swal("El archivo Se elimino Correctamente", {
 							      icon: "success",
 							    });
@@ -133,6 +134,19 @@
 
 	}
 
+	function Actualiza()
+    	{
+    		peticion='lista';
+    		$.ajax({
+    			url:'controlador/ProveedorC.php',
+    			method:'POST',
+    			data:{peticion:peticion},
+    			success:function(respuesta)
+    			{
+    				 $("#contenidobody").html(respuesta);
+    			}
+    		});
+    	}
 
   $(document).ready(function(){
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
