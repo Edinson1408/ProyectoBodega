@@ -15,13 +15,13 @@ include('../../conexion.php');
     <title></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="almacenes/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="almacenes/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
+    <link href="almacenes/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -67,9 +67,10 @@ include('../../conexion.php');
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
-                                         <?php   $con=mysql_query("SELECT count(COD_ALMACEN) AS TOTAL FROM almacen WHERE COD_CLASIFICACION='2'",$conexion);
-                                          $f=mysql_fetch_array($con);
-                                 echo $f['TOTAL']
+                                         <?php   
+                                         //$con=mysqli_query("SELECT count(CODPRODUCTO) AS TOTAL FROM almacen WHERE CODCLASIFICACION='BEBI'",$conexion);
+                                          //$f=mysqli_fetch_array($con);
+                                          //  echo $f['TOTAL']
         
                                                 ?>
 
@@ -96,9 +97,10 @@ include('../../conexion.php');
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
-                                         <?php   $con=mysql_query("SELECT count(COD_ALMACEN) AS TOTAL FROM almacen WHERE COD_CLASIFICACION='1'",$conexion);
-                                          $f=mysql_fetch_array($con);
-                                 echo $f['TOTAL']
+                                         <?php   
+                                         ///$con=mysql_query("SELECT count(COD_ALMACEN) AS TOTAL FROM almacen WHERE COD_CLASIFICACION='1'",$conexion);
+                                         // $f=mysql_fetch_array($con);
+                                 //echo $f['TOTAL']
         
                                                 ?>
 
@@ -125,9 +127,10 @@ include('../../conexion.php');
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">
-                                         <?php   $con=mysql_query("SELECT count(COD_ALMACEN) AS TOTAL FROM almacen WHERE COD_CLASIFICACION='3'",$conexion);
-                                          $f=mysql_fetch_array($con);
-                                 echo $f['TOTAL']
+                                         <?php   
+                                         //$con=mysql_query("SELECT count(COD_ALMACEN) AS TOTAL FROM almacen WHERE COD_CLASIFICACION='3'",$conexion);
+                                         // $f=mysql_fetch_array($con);
+                                        //echo $f['TOTAL']
         
                                                 ?>
 

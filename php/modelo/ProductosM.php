@@ -54,7 +54,13 @@
 			)VALUES 
 			('$codP','$nomP','$pvP','$puP','$tiP')";
 			mysqli_query($link,$sql);
-
+			//Insertando tambien al almacen
+			$SqlAlmacen="INSERT INTO almacen (CODPRODUCTO,CODCLASIFICACION,CANTIDAD)
+			VALUES (
+				'$codP',
+				'$tiP',
+				'0')";
+			mysqli_query($link,$SqlAlmacen);
 		}
 
 		public function TipoProducto()

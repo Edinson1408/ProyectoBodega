@@ -277,7 +277,10 @@ include('seguridad_navegador.php');
                             <li class="NavLateralDivider"></li>-->
 														<li><a  class="waves-effect waves-light" onclick="enrutar_menu('ClienteC.php')">Cliente</a></li>
                             <li class="NavLateralDivider"></li>
-                            <li><a href="mantenimiento/usuario/usuario.php" target="tiframe" class="waves-effect waves-light">Usuario</a></li>
+                            <!--<li><a href="mantenimiento/usuario/usuario.php" target="tiframe" class="waves-effect waves-light">Usuario</a></li>-->
+                            <li>
+                            <a onclick="enrutar_menu('UsuarioC.php')" target="tiframe" class="waves-effect waves-light">Usuario</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="NavLateralDivider"></li>

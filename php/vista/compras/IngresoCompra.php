@@ -152,7 +152,7 @@ Guardar=()=>
 {
 	
 	$.ajax({
-		url:'controlador/VentasC.php',
+		url:'controlador/ComprasC.php',
 		type:'POST',
 		data :$('#GuardarVenta').serialize()+'&peticion=GuardarVenta',
 		success:function(respuesta)
@@ -359,8 +359,7 @@ function selectCountry(val,id) {
 			console.log(respuesta);
 			$Ojb=JSON.parse(respuesta);
 			$stock=$Ojb.CANTIDAD;
-			if($stock>0)
-			{
+		
 				var valida=ValidaProRepetido($Ojb.CODPRODUCTO);
 				if (valida=='NO')
 				{
@@ -387,10 +386,7 @@ function selectCountry(val,id) {
 				else{
 					swal('El producto ya fue selecionado');
 				}
-			}else 
-			{
-				swal('No tiene Stock suficiente');
-			}
+			
 			$("#Total").val(Total);
 		}
 	})
@@ -430,16 +426,16 @@ function ValidaProRepetido($CodProducto)
 		success:function(respuesta)
 		{			
 			console.log('CANTIDAD STOCK '+respuesta); 
-			if(cantidad>respuesta)
+			/*if(cantidad>respuesta)
 			{
 				swal('No cuenta con el stock suficiente ');
 				$('#Cantidad'+id).val(respuesta);
 				$(a).val(respuesta)
 				CalcularImporte(a);
 			}else
-			{
+			{*/
 				CalcularImporte(a);
-			}
+			//}
 		}
 
 	});

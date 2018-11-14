@@ -87,7 +87,7 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
     case 'RucCLiente':
     if(!empty($_POST["RucDni"])) {
       $Consulta=$ObjReporteV->AutoCompleteClientes($_POST["RucDni"]);
-      echo '<ul id="country-list" style="background-color:#eeeeee;text-decoration: none;list-style:none" >';
+      echo '<ul id="country-list" style="background-color:#eeeeee;text-decoration: none;list-style:none;position: absolute;z-index: 1;width: 30%;">';
       while ($country=mysqli_fetch_array($Consulta)) {
         ?>
         <li style="text-decoration: none;cursor: pointer;list-style:none;" onClick="SelectDni('<?php echo $country["NOMBRE_C"]; ?>','<?php echo $country["RUC_DNI"];?>','<?php echo $country["IDPERSONA"];?>');">

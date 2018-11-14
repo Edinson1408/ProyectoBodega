@@ -47,6 +47,82 @@ public $Link;
       
   }
 
+  public function InsertaComprobanteC($_ARR)
+  {
+    session_start();
+      $Sql="INSERT INTO comprobante_compra
+          (IDEMPRESA,
+          IDESTADO,
+          TIPODOC,
+          NUMCOMPROBANTE,
+          SERIECOMPROBANTE,
+          IDCLIENTE,
+          NOMCLIENTE,
+          FECHACOMPROBANTE,
+          SUBTOTAL,
+          IGV,
+          TOTAL,
+          IDUSUARIO
+          )
+          VALUES (
+            '1',
+            '".$_ARR['Estado']."',
+            '".$_ARR['TipoDoc']."',
+            '".$_ARR['NumCompro']."',
+            '".$_ARR['Serie']."',
+            '".$_ARR['IdPersona']."',
+            '".$_ARR['NombreCLiente']."',
+            '".$_ARR['FecComprobante']."',
+            '".$_ARR['SubTotal']."',
+            '".$_ARR['Igv']."',
+            '".$_ARR['Total']."',
+            '".$_SESSION['IdUsuario']."'
+                )";
+        mysqli_query($this->Link,$Sql);
+          //obtener el ultimo id 
+        return mysqli_insert_id($this->Link);
+          //echo $Sql;
+  }
+
+  public function InsertaDetalle($UltimoId,$_ARR)
+  {
+    for ($i=1; $i <=50 ; $i++) { 
+      if(isset($_ARR['CodProducto'.$i])){
+        $Sql="INSERT INTO comprobante_compra_detalle
+        (IDCOMPROBANTE,
+        CODPRODUCTO,
+        IDEMPRESA,
+        IDESTADO,
+        CANTIDAD,
+        PRECIOVENTA,
+        IMPORTE
+        ) VALUES (
+          '".$UltimoId."',
+          '".$_ARR['CodProducto'.$i]."',
+          '1',
+          '1',
+          '".$_ARR['Cantidad'.$i]."',
+          '".$_ARR['PrecioVenta'.$i]."',
+          '".$_ARR['Importe'.$i]."'
+          )";
+        //echo $Sql;
+        mysqli_query($this->Link,$Sql);
+        //disminuye almacen 
+        $this->ActualizaAlmacen($_ARR['CodProducto'.$i],$_ARR['Cantidad'.$i]);
+      }
+    }
+
+  }
+
+  public function ActualizaAlmacen($CodProducto,$Cantidad)
+    {
+        $Sql="UPDATE almacen SET
+              CANTIDAD=CANTIDAD+$Cantidad
+              WHERE CODPRODUCTO='$CodProducto'";
+        mysqli_query($this->Link,$Sql);
+        
+    }
+
 }
 
 ?>
