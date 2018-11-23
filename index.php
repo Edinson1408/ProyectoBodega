@@ -45,7 +45,7 @@
             }
              ?>
         <div class="divider" style="margin: 20px 0;"></div>
-        <a href="http://www.costaneths.com">© 2017 CostaNetHS</a>
+        <a href="http://www.EnSuRed.com">© 2018 EnSURed</a>
 	</div> 
     </div>
 	<script src='js/sweetalert.min.js'></script>

@@ -119,6 +119,7 @@ class VentasM extends Conexion
               mysqli_query($this->Link,$Sql);
               //disminuye almacen 
               $this->ActualizaAlmacen($_ARR['CodProducto'.$i],$_ARR['Cantidad'.$i]);
+              $this->MovimientoAlmacen($_ARR['CodProducto'.$i],'',$UltimoId,$_ARR['FecComprobante'],$_ARR['Cantidad'.$i]);
             }
           }
 
@@ -132,6 +133,28 @@ class VentasM extends Conexion
               WHERE CODPRODUCTO='$CodProducto'";
         mysqli_query($this->Link,$Sql);
         
+    }
+
+    public function MovimientoAlmacen($CodProducto,$CodClasificacion,$IdComprobante,$Fecha,$Cantidad)
+    {
+        $Sql="INSERT INTO movimiento_almacen (
+            IDMIALMACEN,
+            CODPRODUCTO,
+            CODCLASIFICACION,
+            IDCOMPROBANTE,
+            FECHACOMPROBANTE,
+            CANTIDAD,
+            PROCESO
+            ) VALUES
+            ('1',
+            '$CodProducto',
+            '$CodClasificacion',
+            '$IdComprobante',
+            '$Fecha',
+            '$Cantidad',
+            '1' )";
+
+      mysqli_query($this->Link,$Sql);
     }
 
 }

@@ -66,6 +66,7 @@ while ($ARR_PRODU=mysql_fetch_array($SQL_PRODUCTO))
 
 	$ARR1=mysql_fetch_array($SQL_ALACEN1);
 	$ARR2=mysql_fetch_array($SQL_ALACEN2);
+	//saldria el stock total
 	$SALDO_A=$ARR1['CANTIDAD']-$ARR2['CANTIDAD'];
 	/*echo "Producto: ".$VAR_PRODUCTO."<br>";
 	echo "Saldo".$SALDO_A."<br>";*/
