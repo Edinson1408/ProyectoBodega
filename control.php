@@ -3,6 +3,9 @@ include('conexion.php');
 session_start();
 $user=$_POST['user'];
 $con=$_POST['cont'];
+
+
+
 //SESSIONES abrirs sessiones que usaremos entodo el documento
 $_SESSION['user']=$_POST['user'];
 $cone=MD5($_POST['cont']);
@@ -32,8 +35,18 @@ switch ($id) {
 		break;
 
 	default:
-	header("location:php/plataforma.php");
-		//header("location:index.php?v1=1");
+	///header("location:php/plataforma.php");
+	//$user=$_POST['user'];
+//$con=$_POST['cont'];
+	if (!isset($_POST['user']))
+	{
+		header("location:php/404/error.php");
+	}
+	else {
+		header("location:index.php?v1=1");
+	}
+
+		
 		break;
 }
 
