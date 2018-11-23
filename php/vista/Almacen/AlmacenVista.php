@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include('../../conexion.php');
+//include('../../conexion.php');
 
 ?>
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title></title>
-
-    <!-- Bootstrap Core CSS -->
+  <!-- Bootstrap Core CSS -->
     <link href="almacenes/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -54,8 +45,46 @@ include('../../conexion.php');
                     </div>
                 </div>
 
+            <div class="row">
+                <?php
+                    while($r=mysqli_fetch_array($DatosStock))
+                    {
+                        
+                 ?>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <!--Icono-->
+                                        <h2><i class="glyphicon glyphicon-book"></i> </h2>   
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">
+                                            <?=$r['CANTIDAD']?>
+                                        </div>
+                                        <div><?=$r['NOMCLASIFICACION']?></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="productos/galleta.php" target="tiframe">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Ver Detalles</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
 
-                <div class="row">
+                <?php
+                   }
+                ?>
+            </div>
+    </div>
+
+
+                <!-- <div class="row">
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
@@ -147,7 +176,8 @@ include('../../conexion.php');
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
+    
             <!-- /.container-fluid -->
 
 

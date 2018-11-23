@@ -1,4 +1,4 @@
 # ProyectoBodega
-Proyecto realizado en php , para boga que implementa un punto de venta , control de almacenes 
+Proyecto realizado en php , para bodega que implementa un punto de venta , control de almacenes 
 -ECFG
 -JIGA
