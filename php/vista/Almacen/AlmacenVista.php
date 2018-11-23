@@ -67,7 +67,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="productos/galleta.php" target="tiframe">
+                            <!--<a href="productos/galleta.php" target="tiframe">-->
+                            <a onclick="VerDetalleAl('<?=$r['0']?>','<?=$r['NOMCLASIFICACION']?>')">
                                 <div class="panel-footer">
                                     <span class="pull-left">Ver Detalles</span>
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -194,5 +195,26 @@
     <script src="js/plugins/morris/morris-data.js"></script>
 
 </body>
+
+<script>
+VerDetalleAl=(CodClasificacion,NomClasificacion)=>
+{
+    let peticion='DetalleAlmacen';
+
+     $.ajax({
+                url:"controlador/AlmacenC.php",
+                method:"POST",
+                data:{peticion:peticion,CodClasificacion:CodClasificacion,NomClasificacion:NomClasificacion},
+                success: function(resultado){
+                    $("#contenidobody").html(resultado);
+
+                }
+            });
+
+   
+    //console.log(ss);
+    
+}
+</script>
 
 </html>
