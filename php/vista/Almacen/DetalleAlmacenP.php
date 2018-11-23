@@ -1,28 +1,6 @@
-<head>
-
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="hc/code/highcharts-more.js"></script>
-    <script src="hc/code/highcharts.js"></script>
-    <script src="hc/code/modules/exporting.js"></script>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="../css/sb-admin.css" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="../css/plugins/morris.css" rel="stylesheet">
-
+<head>   
     <!-- Custom Fonts -->
-    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <style type="text/css">
         body{
             margin-top: 0px;
@@ -34,7 +12,7 @@
             }
     </style>
 </head>
-<body>
+
 <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -51,16 +29,15 @@
 		<th>Stock</th>
         </tr>
 	<?php
-	include('../../conexion.php');
-	$sql=mysqli_query($conexion,"SELECT CP.*,Al.CANTIDAD,AL.CODPRODUCTO, PRO.NOMPRODUCTO FROM clasificacion_producto CP, almacen AL, producto  PRO
-    WHERE  CP.CODCLASIFICACION=al.CODCLASIFICACION
-    AND    AL.CODPRODUCTO=PRO.CODPRODUCTO
-    AND CP.CODCLASIFICACION='$CodClasificacion' ");
-	while ($f=mysqli_fetch_array($sql)) {
+	//include('../../conexion.php');
+	
+	while ($f=mysqli_fetch_array($DatosDetalle)) {
 		echo "<tr>";
 			echo "<td width=20>".$f['CODPRODUCTO']."</td>";
 			echo "<td width=20>".$f['NOMPRODUCTO']."</td>";
-			echo "<td width=20>".$f['CANTIDAD']."</td>";
+            echo "<td width=20>".$f['CANTIDAD']."</td>";
+            echo "<td width=20>
+            <i title='ver movimientos' class='material-icons'>visibility</i></td>";
 		echo "</tr>";
 	}
 	?>
@@ -82,7 +59,7 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'Stock, 2017 Galletas'
+        text: 'Stock, 2017 <?=$NomClasificacion?>'
     },
     tooltip: {
         pointFormat: '{series.name} {point.percentage:.1f}% '
@@ -101,7 +78,7 @@ Highcharts.chart('container', {
         }
     },
     series: [{
-        name: 'Galletas',
+        name: '<?=$NomClasificacion?>',
         colorByPoint: true,
         data: [
         <?php
@@ -122,18 +99,3 @@ Highcharts.chart('container', {
 </script>
 </div>
 </div>
-
-    <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <script src="../js/plugins/morris/raphael.min.js"></script>
-    <script src="../js/plugins/morris/morris.min.js"></script>
-    <script src="../js/plugins/morris/morris-data.js"></script>
-
-</body>
-
-</html>

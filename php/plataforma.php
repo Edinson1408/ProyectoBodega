@@ -295,7 +295,9 @@ include('seguridad_navegador.php');
 
 
                         <li class="NavLateralDivider"></li>
-                            <li><a href="almacenes/lista_productos.php" target="tiframe"  class="waves-effect waves-light">Productos</a></li>
+                            <!-- <li><a href="almacenes/lista_productos.php" target="tiframe"  
+                            class="waves-effect waves-light">Productos</a></li> -->
+                            <li><a  onclick="enrutar_menu('AlmacenC.php','ProductoAlmacen')" class="waves-effect waves-light">Productos</a></li>
                         </ul>
                     </li>
                     <li class="NavLateralDivider"></li>

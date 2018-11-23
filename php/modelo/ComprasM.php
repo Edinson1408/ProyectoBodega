@@ -15,7 +15,7 @@ public $Link;
   
   public function MantenientoLista()
   {
-  	$Query=mysqli_query($this->Link,"SELECT * FROM factura");
+  	$Query=mysqli_query($this->Link,"SELECT * FROM comprobante_compra");
 		while ($tbl=mysqli_fetch_array($Query)) 
 		{
 			$Arr_tbl[]=$tbl;	
