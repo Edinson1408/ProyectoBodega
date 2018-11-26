@@ -137,7 +137,7 @@ class VentasM extends Conexion
 
     public function MovimientoAlmacen($CodProducto,$CodClasificacion,$IdComprobante,$Fecha,$Cantidad)
     {
-        $Sql="INSERT INTO movimiento_almacen (
+         $Sql="INSERT INTO movimiento_almacen (
             IDMIALMACEN,
             CODPRODUCTO,
             CODCLASIFICACION,

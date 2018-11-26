@@ -31,6 +31,25 @@ public $Conexion;
           AND CP.CODCLASIFICACION='$CodClasificacion' ";
           return mysqli_query($this->Conexion,$Sql);
   }
+  public function MovimientosP($CodProducto)
+  {
+    $Sql="SELECT  sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso 
+              from movimiento_almacen 
+              where codproducto='$CodProducto'  
+            group by  fechacomprobante, proceso";
+      return mysqli_query($this->Conexion,$Sql);
+
+
+      // $SqlIngreso="SELECT  sum(Cantidad), fechacomprobante,idcomprobante,codproducto,proceso from movimiento_almacen 
+      //       where codproducto='$CodProducto'  
+      //     group by  fechacomprobante";
+
+      // $SqlSalida="SELECT  sum(Cantidad), fechacomprobante,idcomprobante,codproducto from movimiento_almacen 
+      //     where codproducto='$CodProducto'  and proceso='1'
+      // group by  fechacomprobante";
+
+
+  }
 }
 
 

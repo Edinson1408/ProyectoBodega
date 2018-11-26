@@ -50,14 +50,14 @@ public $Link;
   public function InsertaComprobanteC($_ARR)
   {
     session_start();
-      $Sql="INSERT INTO comprobante_compra
+     $Sql="INSERT INTO comprobante_compra
           (IDEMPRESA,
           IDESTADO,
           TIPODOC,
           NUMCOMPROBANTE,
           SERIECOMPROBANTE,
-          IDCLIENTE,
-          NOMCLIENTE,
+          IDPROVEEDOR,
+          NOMPROVEEDOR,
           FECHACOMPROBANTE,
           SUBTOTAL,
           IGV,
@@ -88,7 +88,7 @@ public $Link;
   {
     for ($i=1; $i <=50 ; $i++) { 
       if(isset($_ARR['CodProducto'.$i])){
-        $Sql="INSERT INTO comprobante_compra_detalle
+         $Sql="INSERT INTO comprobante_compra_detalle
         (IDCOMPROBANTE,
         CODPRODUCTO,
         IDEMPRESA,
@@ -109,6 +109,7 @@ public $Link;
         mysqli_query($this->Link,$Sql);
         //disminuye almacen 
         $this->ActualizaAlmacen($_ARR['CodProducto'.$i],$_ARR['Cantidad'.$i]);
+        $this->MovimientoAlmacen($_ARR['CodProducto'.$i],'',$UltimoId,$_ARR['FecComprobante'],$_ARR['Cantidad'.$i]);
       }
     }
 
@@ -121,6 +122,27 @@ public $Link;
               WHERE CODPRODUCTO='$CodProducto'";
         mysqli_query($this->Link,$Sql);
         
+    }
+    public function MovimientoAlmacen($CodProducto,$CodClasificacion,$IdComprobante,$Fecha,$Cantidad)
+    {
+           $Sql="INSERT INTO movimiento_almacen (
+            IDMIALMACEN,
+            CODPRODUCTO,
+            CODCLASIFICACION,
+            IDCOMPROBANTE,
+            FECHACOMPROBANTE,
+            CANTIDAD,
+            PROCESO
+            ) VALUES
+            ('1',
+            '$CodProducto',
+            '$CodClasificacion',
+            '$IdComprobante',
+            '$Fecha',
+            '$Cantidad',
+            '2' )";
+
+      mysqli_query($this->Link,$Sql);
     }
 
 }

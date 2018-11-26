@@ -35,7 +35,12 @@ th { background:#eee; }
 <div class="contenedor_lista">
 <div class="nota">
 	<i class="fa fa-pencil-square-o" id="com">Productos</i>
-	<button onclick="Agregar();" style="float: right;" class="btn btn-primary">AgregarProducto</button>
+	<button onclick="Agregar();" style="float: right;" class="btn btn-primary">
+	AgregarProducto
+	</button>
+	<button onclick="AgregarTipoProducto();" style="float: right;" class="btn btn-primary">
+	Agregar Clasificacion
+	</button>
 	<div class="input-field col s6">
 		<!--<input type="text" name="caja_busquedad" id="caja_busquedad" placeholder="Buscar">-->
           	<div class="form-group">
@@ -80,6 +85,25 @@ th { background:#eee; }
 <!--<script src="jquery-3.2.1.min.js"></script>-->
 <!--<script src="main.js"></script>-->
 <script type="text/javascript">
+
+AgregarTipoProducto=()=>
+{
+	let peticion='AgregarTipoP';
+	console.log('Agrrgar tipo de producto');
+	$.ajax({
+			url:"controlador/ProductoC.php",
+			method:"POST",
+			data : {peticion:peticion},
+			success:function(resultado){
+				$('#ModalProducto').html(resultado);
+				$('#modal1').modal('open');
+			}
+
+		});
+
+}
+
+
 
 $('.tableFixHead').on('scroll', function() {
   $('thead', this).css('transform', 'translateY('+ this.scrollTop +'px)');

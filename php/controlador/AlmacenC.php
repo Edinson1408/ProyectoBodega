@@ -19,6 +19,12 @@ switch ($_POST['peticion']) {
 	case 'ProductoAlmacen':
 		require '../vista/Almacen/ProductoAlmacen.php';
 		break;
+	case 'VerMovimientos':
+	$CodProducto=$_POST['CodProducto'];
+		$res=$ObjAlmacen->MovimientosP($CodProducto);
+		require '../vista/Almacen/MovimientoProducto.php';
+	
+		break;
 	default:
 		# code...
 		break;

@@ -1,9 +1,13 @@
 <?php
 
-
-	class Productos extends Conexion
+class Productos extends Conexion
 	{
-
+		public $Conexion;
+		
+		function __construct()
+		{
+			$this->Conexion=$this->Conectarse();
+		} 
 		public function ListarProducto()
 		{
 			$sql="SELECT a.*, b.CLASE_PRODUCTO AS NOMBRE FROM producto as a, clasificacion_producto as b WHERE a.CLASE_PRODUCTO=b.COD_CLASIFICACION Order by a.Nombre_producto  limit 10";
@@ -102,6 +106,19 @@
 			$res=mysqli_fetch_array($query);
 			return $res['CANTIDAD'];
 
+		}
+
+		public function AgregarTipoProducto($CODCLASIFICACION,$NOMCLASIFICACION,$ICONO,$COLOR)
+		{
+			$Sql="INSERT INTO clasificacion_producto
+				VALUES 
+				(
+					'$CODCLASIFICACION',
+					'$NOMCLASIFICACION',
+					'$ICONO',
+					'$COLOR'
+				)";
+				mysqli_query($this->Conexion,$Sql);
 		}
 
 	}

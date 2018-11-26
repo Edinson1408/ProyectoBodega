@@ -1,18 +1,3 @@
-<head>   
-    <!-- Custom Fonts -->
-<link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <style type="text/css">
-        body{
-            margin-top: 0px;
-            background:transparent;
-        }
-            .table{
-                width: 100%;
-                margin: auto;
-            }
-    </style>
-</head>
-
 <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -21,37 +6,74 @@
                         </h1></center>
                     </div>
                 </div>
-<div class="col-md-5">   
-<table class="table table-bordered" >
-	<tr>
-		<th>Codigo</th>
-		<th>Producto</th>
-		<th>Stock</th>
-        </tr>
-	<?php
-	//include('../../conexion.php');
-	
-	while ($f=mysqli_fetch_array($DatosDetalle)) {
-		echo "<tr>";
-			echo "<td width=20>".$f['CODPRODUCTO']."</td>";
-			echo "<td width=20>".$f['NOMPRODUCTO']."</td>";
-            echo "<td width=20>".$f['CANTIDAD']."</td>";
-            echo "<td width=20>
-            <i title='ver movimientos' class='material-icons'>visibility</i></td>";
-		echo "</tr>";
-	}
-	?>
-	
-</table>
+    <div class="col-md-5">   
+        <table class="table table-bordered" >
+            <tr>
+                <th>Codigo</th>
+                <th>Producto</th>
+                <th>Stock</th>
+                </tr>
+            <?php
+            //include('../../conexion.php');
+            
+            while ($f=mysqli_fetch_array($DatosDetalle)) {
+                echo "<tr>";
+                    echo "<td width=20>".$f['CODPRODUCTO']."</td>";
+                    echo "<td width=20>".$f['NOMPRODUCTO']."</td>";
+                    echo "<td width=20>".$f['CANTIDAD']."</td>";
+                    echo "<td width=20 onclick=VerMovimientos('".$f['CODPRODUCTO']."')>
+                    <i style='cursor:pointer' title='ver movimientos' class='material-icons'>visibility</i></td>";
+                echo "</tr>";
+            }
+            ?>
+            
+        </table>
+    </div>
+
+
+
+    <div class="col-md-7">
+    <div id="containers" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+    </div>
+
+
+    
 </div>
-<div class="col-md-7">
-<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<!--modal editar Agregar-->
+
+<div id="ModalMovimientos" class="modal" style="width: 90%">
+        <div class="modal-content" id="ModalMovimientosPro">
+        </div>
+    </div>
+
+
+<script >
+  $(document).ready(function(){
+    
+    $('.modal').modal();
+  });
+VerMovimientos=(CodProducto)=>{
+    console.log(CodProducto);
+
+let peticion='VerMovimientos';
+
+    $.ajax({
+            url:"controlador/AlmacenC.php",
+            method:"POST",
+            data:{peticion:peticion,CodProducto:CodProducto},
+            success: function(resultado){
+                $("#ModalMovimientosPro").html(resultado);
+
+            }
+        });
 
 
 
-        <script type="text/javascript">
+    $('#ModalMovimientos').modal('open');
+   
+}
 
-Highcharts.chart('container', {
+Highcharts.chart('containers', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -97,5 +119,4 @@ Highcharts.chart('container', {
     }]
 });
 </script>
-</div>
-</div>
+

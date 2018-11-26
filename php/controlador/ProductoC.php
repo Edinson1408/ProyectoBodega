@@ -79,8 +79,17 @@ switch ($_POST['peticion']) {
 
 		//echo 'aca se inserta';
 		break;
-
-
+	case 'AgregarTipoP':
+		$tituloModal='Clasificación Producto';
+		require '../vista/Productos/FormTipoProducto.php';
+		break;
+	case 'InsertarTipo':
+	$CODCLASIFICACION=$_POST['CodTipo'];
+	$NOMCLASIFICACION=$_POST['NomTipo'];
+	$ICONO=$_POST['Icono'];
+	$COLOR=$_POST['color'];
+	$objProducto->AgregarTipoProducto($CODCLASIFICACION,$NOMCLASIFICACION,$ICONO,$COLOR);
+		break;
 	default:
 		echo "no se encontraron peticiones";
 		break;

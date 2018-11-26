@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php
-//include('../../conexion.php');
 
-?>
 <head>
   <!-- Bootstrap Core CSS -->
-    <link href="almacenes/css/bootstrap.min.css" rel="stylesheet">
+    <link href="almacenes/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="almacenes/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link href="almacenes/css/plugins/morris.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <style type="text/css">
-        body{
-            margin-top: 0px;
-            background:transparent;
-        }
-    </style>
 </head>
 
 <body>
