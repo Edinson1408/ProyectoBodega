@@ -7,23 +7,28 @@
     </tr>
    
      <?php 
-     $saldo=0;
+     $saldos=0;
         while($r=mysqli_fetch_array($res))
         {
-            echo "<tr>";
-            echo "<td>".$r['fechacomprobante']."</td>";
+            
+            
             if ($r['proceso']==2)
             {
-                
+                echo "<tr>";
+                echo "<td>".$r['fechacomprobante']."</td>";
                 echo "<td>".$r['cantidads']."</td>";
                 echo "<td></td>";
-                echo "<td>".$r['cantidads']."</td>";
+                echo "<td>".$saldos=abs($saldos)+abs($r['cantidads'])."</td>";
+                echo "</tr>";
             }else{
+                echo "<tr>";
+                echo "<td>".$r['fechacomprobante']."</td>";
                 echo "<td></td>";
                 echo "<td>".$r['cantidads']."</td>";
-                echo "<td>".$saldo=$saldo-$r['cantidads']."</td>";
+                echo "<td>".$saldos=abs($saldos)-abs($r['cantidads'])."</td>";
+                echo "</tr>";
             }
-            echo "</tr>";
+            
         }
      ?>       
     

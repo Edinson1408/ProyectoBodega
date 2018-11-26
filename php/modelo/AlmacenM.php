@@ -36,9 +36,13 @@ public $Conexion;
     $Sql="SELECT  sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso 
               from movimiento_almacen 
               where codproducto='$CodProducto'  
-            group by  fechacomprobante, proceso";
+            group by  fechacomprobante, proceso DESC";
       return mysqli_query($this->Conexion,$Sql);
-
+/*
+SELECT sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso from movimiento_almacen 
+where codproducto='prod001' group by fechacomprobante,
+IDCOMPROBANTE,PROCESO ORDER by FECHACOMPROBANTE, PROCESO DESC 
+*/
 
       // $SqlIngreso="SELECT  sum(Cantidad), fechacomprobante,idcomprobante,codproducto,proceso from movimiento_almacen 
       //       where codproducto='$CodProducto'  
