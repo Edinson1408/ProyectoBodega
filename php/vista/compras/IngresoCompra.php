@@ -386,8 +386,14 @@ function selectCountry(val,id) {
 				else{
 					swal('El producto ya fue selecionado');
 				}
-			
-			$("#Total").val(Total);
+
+			let SubTotal=$("#SubTotal").val(Total);
+			let Igv=0.18;
+			$("#Igv").val(Igv);
+			// let totalF=SubTotal+(SubTotal*Igv);
+			let totalF=Total+(Total*Igv);
+			$("#Total").val(totalF);
+			//$("#Total").val(Total);
 		}
 	})
 	
@@ -451,6 +457,30 @@ CalcularImporte=(a)=>
 	console.log($(a).attr("data_id"));
 	console.log($(a).val());
 	console.log(preciov);
+	CalcularTotales();
 }
 
+CalcularTotales=()=>
+{
+	var calculador=0;
+	for(let $i=1;$i<50;$i++)
+	{
+		
+		var Importe=$('#Importe'+$i).val();
+		
+		if(Importe=='' || Importe==undefined)
+		{$i=51}
+		else {
+
+			calculador=calculador+(Number.parseFloat(Importe));
+		}
+		
+	}
+	console.log(`==============================================`);
+	console.log(calculador);
+	$("#SubTotal").val(calculador);
+	let Igv=0.18;
+	let totalF=calculador+(calculador*Igv);
+	$("#Total").val(totalF);
+}
 </script>
