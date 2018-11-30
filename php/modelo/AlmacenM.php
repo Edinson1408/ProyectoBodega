@@ -33,7 +33,7 @@ public $Conexion;
   }
   public function MovimientosP($CodProducto)
   {
-    $Sql="SELECT  sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso 
+    echo $Sql="SELECT  sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso 
               from movimiento_almacen 
               where codproducto='$CodProducto'  
             group by  fechacomprobante, proceso DESC";

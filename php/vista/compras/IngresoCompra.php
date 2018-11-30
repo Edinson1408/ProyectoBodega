@@ -158,6 +158,8 @@ Guardar=()=>
 		success:function(respuesta)
 		{
 			console.log(respuesta)
+			enrutar_menu('ComprasC.php','IngresoCompras');
+			
 		}
 	})
 	console.log($('#GuardarVenta').serialize());

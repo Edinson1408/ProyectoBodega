@@ -158,6 +158,7 @@ Guardar=()=>
 		success:function(respuesta)
 		{
 			console.log(respuesta)
+			enrutar_menu('VentasC.php','IngresoVenta');
 		}
 	})
 	console.log($('#GuardarVenta').serialize());
@@ -437,7 +438,7 @@ function ValidaProRepetido($CodProducto)
 		success:function(respuesta)
 		{			
 			console.log('CANTIDAD STOCK '+respuesta); 
-			if(cantidad>respuesta)
+			if(parseInt(cantidad)>parseInt(respuesta))
 			{
 				swal('No cuenta con el stock suficiente ');
 				$('#Cantidad'+id).val(respuesta);
