@@ -7,8 +7,8 @@
             <div class="form-group">
      		    <select class="form-control" name='TipoDoc' Onchange='SelecTipoDoc(this);'>
                     <option value='0'>Tipo de documento</option>
-                    <option value='4'>RUC</option>
-                    <option value='3'>DNI</option>
+                    <option value='4' <?= ($TipoDoc=='4')?"selected='seleted'":"" ;?> >RUC</option>
+                    <option value='3' <?= ($TipoDoc=='3')?"selected='seleted'":"" ;?> >DNI</option>
                 </select>
 			</div>
      </div>
@@ -18,7 +18,7 @@
  	    <div class="form-group">
             <div class="input-group">
                 <input type="text" class="form-control" id="RUCDNIP" type="text" name="RUCDNI" placeholder="RUC / DNI"
-                    maxlength="11" <?php echo ($Ruc=='')?'':'readonly'; ?> value='<?php echo $Ruc;?>' required>
+                    maxlength="11" <?php echo ($NumDoc=='')?'':'readonly'; ?> value='<?php echo $NumDoc;?>' required>
             <div class="input-group-append" onclick='validaRucP();' id='BotonValidaRuc'>
               <span class="input-group-text" ><a id="btn-validar-ruc"><i class="icon ion-md-search"></i></a></span>
             </div>
@@ -30,28 +30,28 @@
 
 
  <div class="row">
- <div class="col l12 s12" id='NomRazonSocial'>
+    
+    <!--DEPENDE DE SI ES RUC O DNI MOSTRA LA RAZON SOCIAL O  NOMBRE O APELLIDOS-->
+    <div class="col l12 s12" id='NomRazonSocial'>
      		<div class="form-group">
      		 <input class="form-control input-lg" id="NomproveedorP" name="Nomproveedor" type="text" placeholder="Razon Social" value="<?php echo $NomPro;?>">
 			</div>
-     </div>
-
+    </div>
 
     <div class='col l6 s6' style='display:none' id='NombreCLiente'>
         <div class="form-group">
-            <input class="form-control" type="text" name='NombreCliente' id='NomCliente' placeholder='Nombres'>
+            <input class="form-control" type="text" name='NomCliente' id='NomCliente' placeholder='Nombres' value="<?php echo $NomPro;?>">
         </div>
     </div>
     <div class='col l6 s6' style='display:none' id='ApellidoCliente'>
         <div class="form-group">
-            <input class="form-control" type="text" name='ApellidoCliente' id='ApeCliente' placeholder='Apellidos'>
+            <input class="form-control" type="text" name='ApeCliente' id='ApeCliente' placeholder='Apellidos' value="<?php echo $Apellido;?>">
         </div>
     </div>
 
     
  </div>
 
- 
  <div class='row'>
     <div class="col s12 l12">
         <div class="form-group">
@@ -66,12 +66,30 @@
             <input type="text" class="form-control" placeholder="Telefono" name="telefono" id="telefono" value="<?php echo $Telefono;?>">
         </div>
     </div>
+    
+ </div>
+ <div>
+    <div class="col s12 l6">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Celular" name="Celular" id="Celular" value="<?php echo $Celular;?>">
+        </div>
+    </div>
+ </div>
+
+<div class='row'>
     <div class="col s12 l6">
         <div class="form-group">
             <input type="email" class="form-control" placeholder="Correo" name="correo" id="correo" value="<?php echo $Correo;?>">
         </div>
     </div>
- </div>
+    <div class="col s12 l6">
+        <div class="form-group">
+            <input type="date" class="form-control" placeholder="F.Nacimiento" name="FNacimiento" id="FNacimiento" value="<?php echo $FNacimiento;?>">
+        </div>
+    </div>
+</div>
+
+
  <input type="text" name="CampoOculto" id="CampoOculto" value="<?php echo $oculto;?>" style='visibility: hidden;'>
  </form>
  <a style="float: right;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
@@ -84,6 +102,19 @@
 <script type="text/javascript">
 
 /* muentra el ruc o nombre segun corresponda*/
+cambiaradni=()=>
+{
+        $('#NombreCLiente').css({'display':'block'})
+        $('#ApellidoCliente').css({'display':'block'})
+        $('#NomRazonSocial').css({'display':'none'})
+        $('#BotonValidaRuc').css({'display':'none'})
+}
+<?php 
+  if ($TipoDoc=='3')
+  {
+      //echo 'cambiaradni();';
+  }
+?>
 SelecTipoDoc=(e)=>
 {
     let TipoDoc=$(e).val();
@@ -112,14 +143,15 @@ SelecTipoDoc=(e)=>
         peticion='insertar';
         console.log('Datos serializados: '+dataString+'&peticion='+peticion+'&Idpersona=<?php echo $IdPersona; ?>');
         $.ajax({
-          url:'controlador/ProveedorC.php',
+          url:'controlador/ClienteC.php',
           method:'POST',
           data:dataString+'&peticion='+peticion+'&Idpersona=<?php echo $IdPersona; ?>',
           success:function(respuesta)
           {
-            //console.log(respuesta);
+           console.log(respuesta);
             $('#modal1').modal('close');
-            Actualiza();
+            //Actualiza();
+                enrutar_menu('ClienteC.php','lista');
           }
         });
 

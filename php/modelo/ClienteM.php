@@ -4,30 +4,38 @@
 
 		public function ListaProveedor()
 		{
-			$sql="SELECT PER.IDPERSONA,PER.NUMDOC,PER.TELEFONO,PER.CORREO,PRO.RAZONSOCIAL,PRO.DIRFISCAL,PRO.ESTADO FROM 
-					persona  PER , proveedores  PRO
-					WHERE PER.IDPERSONA=PRO.IDPERSONA";
+			$sql="SELECT PER.IDPERSONA,PER.NUMDOC,PER.TELEFONO,CONCAT(PER.NOMBRES,' ',PER.APELLIDOS) AS RAZONSOCIAL ,PER.CORREO,
+			CL.CELULAR,CL.FENACIMIENTO,CL.CIUDAD  FROM 
+					persona  PER , cliente  CL
+					WHERE PER.IDPERSONA=CL.IDPERSONA";
 
 			return $this->ArmarConsulta($sql);
 
 		}
 
-		public function MostrarProveedor($codP)
+		public function MostrarCliente($codP)
 
 		{
-			/*$sql="SELECT * FROM Proveedores where RUC_CLIENTE='$codP'";*/
-			$sql="SELECT PER.IDPERSONA,PER.NUMDOC,PER.TELEFONO,PER.CORREO,PRO.RAZONSOCIAL,PRO.DIRFISCAL,PRO.ESTADO FROM 
-			persona  PER , proveedores  PRO
-			WHERE PER.IDPERSONA=PRO.IDPERSONA and PRO.IDPERSONA='$codP'";
-			return $this->ArmarConsulta($sql);
+			$link=$this->Conectarse();
+			$Sql="SELECT PER.IDPERSONA,PER.IDTIPODOC,PER.NUMDOC,PER.TELEFONO,PER.CORREO,PER.NOMBRES,PER.APELLIDOS,PER.DIRECCION,
+			CL.CELULAR,CL.FENACIMIENTO,CL.CIUDAD FROM 
+			persona  PER , cliente  CL
+			WHERE PER.IDPERSONA=CL.IDPERSONA and CL.IDPERSONA='$codP'";
+			$res=mysqli_query($link,$Sql);
+			$r=mysqli_fetch_object($res);
+			return $r;
 		}
 
 		public function InsertaPersona ($link,$_Arr){
 			
-			 $Sql="INSERT INTO persona (NOMBRES,IDTIPODOC,NUMDOC,TELEFONO,CORREO,DIRECCION)  VALUES 
+	
+			$Nombre=($_Arr['Nomproveedor']=='')?$_Arr['NomCliente']:$_Arr['Nomproveedor'];
+	
+			 $Sql="INSERT INTO persona (NOMBRES,APELLIDOS,IDTIPODOC,NUMDOC,TELEFONO,CORREO,DIRECCION)  VALUES 
 			(
-				'".$_Arr['Nomproveedor']."',
-				'4',
+				'".$Nombre."',
+				'".$_Arr['ApeCliente']."',
+				'".$_Arr['TipoDoc']."',
 				'".$_Arr['RUCDNI']."',
 				'".$_Arr['telefono']."',
 				'".$_Arr['correo']."',
@@ -37,29 +45,27 @@
 			return mysqli_insert_id($link);
 		}
 
-		public function InsertarProveedor($_Arr)
+		public function InsertarCliente($_Arr)
 		{
 			$link=$this->Conectarse();
 			$ultimoId=$this->InsertaPersona($link,$_Arr);
 
-			$sql="INSERT INTO  proveedores
+			$sql="INSERT INTO  cliente
 			(IDPERSONA,
-				RAZONSOCIAL,
-				DIRFISCAL,
-				ESTADO)
+				CELULAR,
+				FENACIMIENTO,
+				CIUDAD)
 			  VALUES 
 			 (
 				'".$ultimoId."',
-				 '".$_Arr['Nomproveedor']."',
-				 '".$_Arr['direccion']."',
-				 '1'
+				 '".$_Arr['Celular']."',
+				 '".$_Arr['FNacimiento']."',
+				 ' '
 			 )";
-			
-			
 			$res=mysqli_query($link,$sql);
 		}
 
-		public function UpdateProveedor($_Arr){
+		public function UpdateCliente($_Arr){
 			print_r($_Arr);
 		
 

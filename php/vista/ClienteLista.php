@@ -18,7 +18,8 @@
 		<tr>
 			<th>RUC-DNI</th>
 			<th>Proveedor</th>
-			<th class='hidden-sm-down'>N°Ejecutivo</th>
+			<th class='hidden-sm-down'>Telefono</th>
+			<th class='hidden-sm-down'>Celular</th>
 			<th class="hidden-sm-down">Dirección</th>
 			<th class='hidden-sm-down'>Correo</th>
 			<th colspan="4">Acciones</th>
@@ -31,9 +32,9 @@
 					echo "<td>".$r['NUMDOC']."</td>";
 					echo "<td >".$r['RAZONSOCIAL']."</td>";
 					echo "<td class='hidden-sm-down'> ".$r['TELEFONO']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['DIRFISCAL']."</td>";
+					echo "<td class='hidden-sm-down'>".$r['CELULAR']."</td>";
 					echo "<td class='hidden-sm-down'>".$r['CORREO']."</td>";
-					echo "<td><a title='Editar' onclick=(editar('".$r['IDPERSONA']."')) style='cursor:pointer;'>
+					echo "<td><a title='Editar' onclick=(EditarCliente('".$r['IDPERSONA']."')) style='cursor:pointer;'>
 					<i class='material-icons'>edit</i></a></td>
 					<td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$r['IDPERSONA']."'))><i class='material-icons'>delete</i></a></td>";
 
@@ -76,12 +77,12 @@
 		});
 	}
 
-	function editar($codigo)
+	function EditarCliente($codigo)
 	{
 		var peticion='editar';
 		console.log('editar '+$codigo);
 		$.ajax({
-			url:'controlador/ProveedorC.php',
+			url:'controlador/ClienteC.php',
 			method:"POST",
 			data:{peticion:peticion,codigo:$codigo},
 			success:function(resultado)
