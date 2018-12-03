@@ -33,10 +33,13 @@ public $Conexion;
   }
   public function MovimientosP($CodProducto)
   {
-    echo $Sql="SELECT  sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso 
-              from movimiento_almacen 
-              where codproducto='$CodProducto'  
-            group by  fechacomprobante, proceso DESC";
+    // echo $Sql="SELECT  sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso 
+    //           from movimiento_almacen 
+    //           where codproducto='$CodProducto'  
+    //         group by  fechacomprobante, proceso DESC";
+    $Sql="SELECT sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso from movimiento_almacen 
+    where codproducto='$CodProducto' group by fechacomprobante,
+    IDCOMPROBANTE,PROCESO ORDER by FECHACOMPROBANTE, PROCESO DESC";
       return mysqli_query($this->Conexion,$Sql);
 /*
 SELECT sum(Cantidad) as cantidads, fechacomprobante,idcomprobante,codproducto,proceso from movimiento_almacen 

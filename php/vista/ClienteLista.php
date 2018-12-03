@@ -8,15 +8,10 @@
 
 <div class="contenedor_lista">
 <div class="nota">
-	<i class="fa fa-pencil-square-o" id="com">Proveedores</i>
+	<i class="fa fa-pencil-square-o" id="com">Cliente</i>
 	<button onclick="Agregar();" style="float: right;" class="btn btn-primary">Agregar Cliente</button>
 	<form action="proveedor.php" method="POST">
-	<!--div class="input-group">
-    <input type="text" name="buscar" class="form-control" style="float: right; right:10px; width: 30%;  bottom: 28px;">
-    <span class="input-group-btn">
-    <input type="submit" name="enviar" class="btn btn-default" style="bottom: 28px; right:10px;" value="Buscar">
-    </span>
-    </div-->
+	
     </form>
 </div>
 	<table class="table table-sm table-striped table-hover table-bordered">
@@ -68,9 +63,9 @@
 	function Agregar()
 	{
 		var peticion='agregar';
-		console.log('Agregar ProveedorC');
+		console.log('Agregar ClienteC');
 		$.ajax({
-			url:"controlador/ProveedorC.php",
+			url:"controlador/ClienteC.php",
 			method:"POST",
 			data : {peticion:peticion},
 			success:function(resultado){
