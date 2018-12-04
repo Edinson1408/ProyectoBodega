@@ -38,8 +38,18 @@ switch ($_POST['peticion']) {
     $oculto='2';
     require '../vista/UsuarioCM.php';
     break;
-  case 'insertar':
-   
+  case 'Insertar':
+echo 'Insertado data';
+      if($_POST['CampoOculto']==1)
+      {
+        //insertar
+        $ObjUsuario->InsertarUsuario($_POST);
+      }elseif ($_POST['CampoOculto']==2) {
+        // actualizar
+        $ObjUsuario->UpdateUsuario($_POST);
+      }
+
+    
     break;
   default:
 

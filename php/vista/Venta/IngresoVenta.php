@@ -55,8 +55,8 @@ document.getElementById(ID).focus();
 	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)*/
 	?>
 	Pago:<select class="form-control input-sm" id="Estado" name='Estado' >
-			<option value="1">Pendiente</option>
-			<option value="2">Cancelado</option>
+			<option value="1">Cancelado</option>
+			<option value="2">Pendiente</option>
 					<!--<option value="<?php echo $ARR_CLI['ID_ESTADO'];?>"><?php echo $ARR_CLI['NOMBRE_ESTADO'];?></option>-->
 					<?php
 					/*$sql_estado=mysqli_query($conexion,"SELECT * FROM estado");

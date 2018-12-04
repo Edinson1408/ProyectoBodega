@@ -1,11 +1,11 @@
 <h4><?php echo $tituloModal;?></h4>
 
- <form id='form_provedores' method="POST">
+ <form id='form_usuario' method="POST">
  <div class="row">
  
     <div class="col l6 s12">
             <div class="form-group">
-     		    <select class="form-control" name='TipoDoc' Onchange='SelecTipoDoc(this);'>
+     		    <select class="form-control" name='IdCategoria' Onchange='SelecTipoDoc(this);'>
                     <option value='0'>Tipo de Usuario</option>
                     <option value='1' <?= ($Nivel=='1')?"selected='seleted'":"" ;?> >Admin</option>
                     <option value='2' <?= ($Nivel=='2')?"selected='seleted'":"" ;?> >Usuario</option>
@@ -57,12 +57,13 @@
 
     <div class="col s12 l6">
         <div class="form-group">
-            <select class="form-control" name="Turno" >
+            <select class="form-control" name="IdTurno" >
+            
                 <option value="0">Seleccione Turno</option>
-                <option value="1">Mañana</option>
-                <option value="2">Tarde</option>
-                <option value="3">Noche</option>
-                <option value="4">Sin Turno</option>
+                <option value="1" <?= ($IdTurno=='1')?"selected='seleted'":"" ;?>>Mañana</option>
+                <option value="2" <?= ($IdTurno=='2')?"selected='seleted'":"" ;?>>Tarde</option>
+                <option value="3" <?= ($IdTurno=='3')?"selected='seleted'":"" ;?>>Noche</option>
+                <option value="4" <?= ($IdTurno=='4')?"selected='seleted'":"" ;?>>Sin Turno</option>
             </select>
         </div>
     </div>
@@ -73,12 +74,12 @@
 <div class='row'>
     <div class="col s12 l6">
         <div class="form-group">
-            <input type="email" class="form-control" placeholder="Nombre de Usuario" name="UserName" id="UserName" value="<?php echo $UserName;?>">
+            <input type="text" class="form-control" placeholder="Nombre de Usuario" name="UserName" id="UserName" value="<?php echo $UserName;?>">
         </div>
     </div>
     <div class="col s12 l6">
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Contraseña" name="Pass" id="Pass" >
+            <input type="password" class="form-control" placeholder="Contraseña" name="Pass"  >
         </div>
     </div>
 </div>
@@ -87,7 +88,7 @@
  <input type="text" name="CampoOculto" id="CampoOculto" value="<?php echo $oculto;?>" style='visibility: hidden;'>
  </form>
  <a style="float: right;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
- <a style="float: right;position: absolute;" href="#!" class="modal-action  waves-effect waves-green btn-flat" id="create_account" onclick='GuardarProveedor();'>Guardar</a>
+ <a style="float: right;position: absolute;" href="#!" class="modal-action  waves-effect waves-green btn-flat" id="create_account" onclick='GuardarUsuario();'>Guardar</a>
 
 
 
@@ -95,10 +96,9 @@
 
 <script type="text/javascript">
 
-GuardarProveedor=()=>{ 
-        var dataString = $('#form_provedores').serialize();
-            
-        peticion='insertar';
+GuardarUsuario=()=>{ 
+        var dataString = $('#form_usuario').serialize();
+        peticion='Insertar';
         console.log('Datos serializados: '+dataString+'&peticion='+peticion+'&Idpersona=<?php echo $IdPersona; ?>');
         $.ajax({
           url:'controlador/UsuarioC.php',
@@ -107,9 +107,10 @@ GuardarProveedor=()=>{
           success:function(respuesta)
           {
            console.log(respuesta);
+
             $('#modal1').modal('close');
             //Actualiza();
-                enrutar_menu('ClienteC.php','lista');
+            enrutar_menu('UsuarioC.php','lista');
           }
         });
 

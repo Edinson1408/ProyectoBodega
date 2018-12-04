@@ -234,10 +234,12 @@ include('seguridad_navegador.php');
                     </li>
                     <li class="NavLateralDivider"></li>
                     <li>
-                        <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Pagos</a>
+                        <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Cobranza</a>
                         <ul class="full-width">
                             <li class="NavLateralDivider"></li>
-                            <li><a href="pago_venta/cuentas_cobrar.php" target="tiframe" class="waves-effect waves-light">Saldos por cobrar</a></li>
+                            <li><a onclick="enrutar_menu('CuentasXCobrarC.php','')" class="waves-effect waves-light">Cuentas por cobrar</a></li>
+                            <!--<li><a href="pago_venta/cuentas_cobrar.php" target="tiframe" class="waves-effect waves-light">Cuentas por cobrar</a></li>-->
+                            
                             <!--li class="NavLateralDivider"></li>
                             <li><a href="#" target="tiframe"  class="waves-effect waves-light">Saldos a pagar</a></li-->
                         </ul>

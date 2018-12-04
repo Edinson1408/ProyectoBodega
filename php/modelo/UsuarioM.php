@@ -32,25 +32,76 @@ public $Conexion;
 
   }
 
-	public function InsertaPersona ($link,$_Arr){
-			
-	
-			$Nombre=($_Arr['Nomproveedor']=='')?$_Arr['NomCliente']:$_Arr['Nomproveedor'];
-	
-			 $Sql="INSERT INTO persona (NOMBRES,APELLIDOS,IDTIPODOC,NUMDOC,TELEFONO,CORREO,DIRECCION)  VALUES 
+	public function InsertaPersona($_Arr){
+    $Sql="INSERT INTO persona (NOMBRES,APELLIDOS,IDTIPODOC,NUMDOC,TELEFONO,CORREO,DIRECCION)  VALUES 
 			(
-				'".$Nombre."',
+				'".$_Arr['NomCliente']."',
 				'".$_Arr['ApeCliente']."',
-				'".$_Arr['TipoDoc']."',
+				'3',
 				'".$_Arr['RUCDNI']."',
 				'".$_Arr['telefono']."',
-				'".$_Arr['correo']."',
+				'',
 				'".$_Arr['direccion']."'
 				)";
-			mysqli_query($link,$Sql);
-			return mysqli_insert_id($link);
+			mysqli_query($this->Conexion,$Sql);
+			return mysqli_insert_id($this->Conexion);
+    }
+    public function InsertarUsuario($_Arr)
+		{
+			$ultimoId=$this->InsertaPersona($_Arr);
+      $sql="INSERT INTO  usuario
+        (IDPERSONA,
+          IDTURNO,
+          IDCATEGORIA,
+          NOMUSER,
+          CONUSUARIO)
+          VALUES 
+          (
+            '".$ultimoId."',
+            '".$_Arr['IdTurno']."',
+            '".$_Arr['IdCategoria']."',
+            '".$_Arr['UserName']."',
+            md5('".$_Arr['Pass']."')
+          )";
+			$res=mysqli_query($this->Conexion,$sql);
     }
     
+    public function UpdateUsuario($_Arr){
+			$PersonaUpdate="UPDATE persona SET
+			NOMBRES='".$_Arr['NomCliente']."',
+      APELLIDOS='".$_Arr['ApeCliente']."',
+      NUMDOC='".$_Arr['RUCDNI']."',
+			TELEFONO='".$_Arr['telefono']."',
+			DIRECCION='".$_Arr['direccion']."'
+      WHERE IDPERSONA='".$_Arr['Idpersona']."';";
+
+      if($_Arr['Pass']=='')
+      {
+          $UsuarioUpdate="UPDATE usuario SET
+          IDTURNO='".$_Arr['IdTurno']."',
+          IDCATEGORIA='".$_Arr['IdCategoria']."',
+          NOMUSER='".$_Arr['UserName']."'
+          WHERE 
+          IDPERSONA='".$_Arr['Idpersona']."';";
+      }
+      else
+      {
+          $UsuarioUpdate="UPDATE usuario SET
+          IDTURNO='".$_Arr['IdTurno']."',
+          IDCATEGORIA='".$_Arr['IdCategoria']."',
+          NOMUSER='".$_Arr['UserName']."',
+          CONUSUARIO='".$_Arr['Pass']."'
+          WHERE 
+          IDPERSONA='".$_Arr['Idpersona']."';";
+      }
+			
+      echo $PersonaUpdate;
+      echo $UsuarioUpdate;
+			mysqli_query($this->Conexion,$PersonaUpdate);
+			mysqli_query($this->Conexion,$UsuarioUpdate);
+
+		}
+
 }
 
 
