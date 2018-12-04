@@ -8,37 +8,29 @@
 
 <div class="contenedor_lista">
 <div class="nota">
-	<i class="fa fa-pencil-square-o" id="com">Proveedores</i>
-	<button onclick="Agregar();" style="float: right;" class="btn btn-primary">Agregar Usuario</button>
-	<form action="proveedor.php" method="POST">
-	<!--div class="input-group">
-    <input type="text" name="buscar" class="form-control" style="float: right; right:10px; width: 30%;  bottom: 28px;">
-    <span class="input-group-btn">
-    <input type="submit" name="enviar" class="btn btn-default" style="bottom: 28px; right:10px;" value="Buscar">
-    </span>
-    </div-->
-    </form>
+	<i class="fa fa-pencil-square-o" id="com">Usuarios</i>
+	<button onclick="AgregarUsuario();" style="float: right;" class="btn btn-primary">Agregar Usuario</button>
 </div>
 	<table class="table table-sm table-striped table-hover table-bordered">
 		<tr>
-			<th>RUC-DNI</th>
-			<th>Proveedor</th>
-			<th class='hidden-sm-down'>N°Ejecutivo</th>
-			<th class="hidden-sm-down">Dirección</th>
-			<th class='hidden-sm-down'>Correo</th>
+			<th>DNI</th>
+			<th>Nombres</th>
+			<th class='hidden-sm-down'>Usuario</th>
+			<th class="hidden-sm-down">Nivel</th>
+			<th class='hidden-sm-down'>Turno</th>
 			<th colspan="4">Acciones</th>
 		</tr>
 		<TBody id='TablaProveedores'> 
 		<?php
-			foreach ($Proveedores as $r)
+			foreach ($Usuarios as $r)
 			{
 				echo "<tr>";
 					echo "<td>".$r['NUMDOC']."</td>";
-					echo "<td >".$r['RAZONSOCIAL']."</td>";
-					echo "<td class='hidden-sm-down'> ".$r['TELEFONO']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['DIRFISCAL']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['CORREO']."</td>";
-					echo "<td><a title='Editar' onclick=(editar('".$r['IDPERSONA']."')) style='cursor:pointer;'>
+					echo "<td >".$r['NOMBRES']."</td>";
+					echo "<td class='hidden-sm-down'> ".$r['NOMUSER']."</td>";
+					echo "<td class='hidden-sm-down'>".$r['IDCATEGORIA']."</td>";
+					echo "<td class='hidden-sm-down'>".$r['NOMTURNO']."</td>";
+					echo "<td><a title='Editar' onclick=(EditarUsuario('".$r['IDPERSONA']."')) style='cursor:pointer;'>
 					<i class='material-icons'>edit</i></a></td>
 					<td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$r['IDPERSONA']."'))><i class='material-icons'>delete</i></a></td>";
 
@@ -65,12 +57,12 @@
   });
 
 
-	function Agregar()
+	function AgregarUsuario()
 	{
-		var peticion='agregar';
-		console.log('Agregar ProveedorC');
+		var peticion='Agregar';
+		console.log('Agregar usuariosC');
 		$.ajax({
-			url:"controlador/ProveedorC.php",
+			url:"controlador/UsuarioC.php",
 			method:"POST",
 			data : {peticion:peticion},
 			success:function(resultado){
@@ -81,14 +73,15 @@
 		});
 	}
 
-	function editar($codigo)
+	function EditarUsuario($codigo)
 	{
-		var peticion='editar';
+
+		var peticion='Editar';
 		console.log('editar '+$codigo);
 		$.ajax({
-			url:'controlador/ProveedorC.php',
+			url:'controlador/UsuarioC.php',
 			method:"POST",
-			data:{peticion:peticion,codigo:$codigo},
+			data:{peticion:peticion,IdPersona:$codigo},
 			success:function(resultado)
 			{
 				$('#ModalProveedor').html(resultado);
