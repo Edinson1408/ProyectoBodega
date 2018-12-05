@@ -93,6 +93,11 @@
     {
         $DataString=$('#AmortizacionId').serialize();
         console.log($DataString);
+        let peticion='InsertarAmortizacion';
+        $.ajax({
+            url:'CuentasXCobrarC.php';
+            data: $DataString+'&peticion='+peticion;
+        })
     }
     
 </script>

@@ -14,6 +14,14 @@ switch ($_POST['peticion']) {
         $tituloModal='Amortizar Cuenta ';
         require '../vista/Cuentas/FromAmortizar.php';
         break;
+
+    case 'InsertarAmortizacion':
+            $ObjCuentas->InsertaAmortizacion($_POST);
+        break;
+    
+    case 'MostarAmortizaciones':
+        $ObjCuentas->ListaAmortizaciones($IdComprobante);
+        break;
     default:
         # code...
         break;
