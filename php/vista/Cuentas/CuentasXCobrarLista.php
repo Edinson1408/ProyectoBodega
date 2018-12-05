@@ -1,7 +1,7 @@
 <?php
 session_start();
 ///validamos solo el adm tiene accesos a esta parte
-echo $_SESSION['categoria'];
+ $_SESSION['categoria'];
 ?>
 <div class="container-fluid">
     <form action="cierre_caja.php" method="POST">
@@ -53,7 +53,10 @@ echo $_SESSION['categoria'];
                     echo "<td style='line-height:5pt;'>S/".$f['TOTAL']."</td>";
                     echo "<td style='line-height:5pt;'>".$f['FECHACOMPROBANTE']."</td>";
                     echo "<td style='line-height:5pt;'></td>";
-                    echo "<td style='line-height:5pt;'>Ver | Amortizar</td>";
+                    echo "<td style='line-height:5pt;'>";?>
+                    <i class="material-icons" style='cursor:pointer;'>visibility</i>
+                    <i class="material-icons" style='cursor:pointer;' onclick="Amortizar('<?=$f['TOTAL']?>','<?=$f['IDCOMPROBANTE']?>');">equalizer</i>
+                    <?php echo "</td>";
                     echo "</tr>";
 
                         
@@ -81,12 +84,12 @@ echo $_SESSION['categoria'];
 
 
 
-Amortizar=()=>
+Amortizar=(Saldo,IdComprobante)=>
 {
     $.ajax({
     		url:'controlador/CuentasXCobrarC.php',
     		method:'POST',
-    		data:{peticion:'FormAmortizar'},
+    		data:{peticion:'FormAmortizar',Saldo:Saldo,IdComprobante:IdComprobante},
     		success:function(respuesta)
     		{
     		  $("#AmortizarContenido").html(respuesta);

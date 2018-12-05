@@ -4,11 +4,11 @@
     <div class='row'>  
         <div class="col l6 s12">
             <label>Saldo</label>
-            <input class="form-control" type='text'  value='' disabled='disabled' id='SaldoAnterior'>
+            <input class="form-control" type='text'  value='<?=$Saldo;?>' readonly='readonly' id='SaldoAnterior' name='SaldoAnterior'>
         </div>
         <div class="col l6 s12">
             <label>Comprobante</label>
-            <input type='text'  value=''>
+            <input class="form-control" type='text'  value='' name='comprobante'>
         </div>
     </div>
     <div class="row">
@@ -21,27 +21,34 @@
 	 	        </div>
 			</div>
  	    </div>
+
+        <div class="col l6 s12">
+ 			<div class="form-group">
+     		 <input class="form-control" type="date"  name='FechaR' id='FechaR' >
+			</div>
+        </div>
     </div>
     <div class='row'>
         <div class="col l6 s12">
  			<div class="form-group">
+             <label>Monto</label>
      		 <input class="form-control" type="text" placeholder="Monto" name='Monto' id='Monto' onchange='CalculaActual(this);'>
 			</div>
         </div>
         <div class="col l6 s12">
  			<div class="form-group">
             <label for="">Saldo Actual</label>
-     		 <input class="form-control" type="text" disabled='disabled' name='SaldoA' id='SaldoA'>
+     		 <input class="form-control" type="text"  name='SaldoA' id='SaldoA'  readonly='readonly'>
 			</div>
         </div>
     </div>
     <div class='row'>
         <div class="col l12 s12">
             <label for="">Observaciones</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea name="observacion" id="" cols="30" rows="10"></textarea>
         </div>
     </div>
-
+    <input type="hidden" value='<?=$IdComprobante;?>' name='IdComprobante'>
  </form>
 
  <a style="float: right;" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
@@ -52,16 +59,26 @@
     //Si cobra todo no permitir llenar el input , y
     CobrarTodo=(e)=>
     {
-        var CheckAutomatico=$(a).prop('checked');
-	    (CheckAutomatico==true)? $('#Monto').prop('diabled',true):$('#Monto').prop('diabled',false);
-        
+        console.log('55');
+        var CheckAutomatico=$(e).prop('checked');
+        if(CheckAutomatico==true){
+        $('#Monto').prop('readonly','readonly');
+        let SaldoAnterior =parseFloat($('#SaldoAnterior').val());
+        let monto= SaldoAnterior;
+        $('#Monto').val(monto);
+        $('#SaldoA').val(SaldoAnterior-monto);
+        }
+        else {
+        $('#Monto').prop('readonly','');
+        $('#Monto').val('0');
+            }
         
     }
 
     CalculaActual=(e)=>
     {
-        let monto= parsefloat($(e).val());
-        let SaldoAnterior =parsefloat($('#SaldoAnterior').val());
+        let monto= parseFloat($(e).val());
+        let SaldoAnterior =parseFloat($('#SaldoAnterior').val());
         if (monto>SaldoAnterior)
         {
             swal('Se a excedido en el monto el saldo es '+SaldoAnterior);
@@ -74,7 +91,8 @@
 
     GuardarAmortizacion=()=>
     {
-        
+        $DataString=$('#AmortizacionId').serialize();
+        console.log($DataString);
     }
     
 </script>

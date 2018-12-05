@@ -16,7 +16,8 @@ class Cuentas extends Conexion
         LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
         LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
         LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
-        LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC";
+        LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC
+        WHERE CV.IDESTADO='2'";
         $res=mysqli_query($this->Conexion,$Sql);
         while ($r=mysqli_fetch_array($res)) {
             $A[]=$r;

@@ -9,6 +9,8 @@ switch ($_POST['peticion']) {
         break;
     
     case 'FormAmortizar':
+        $Saldo=$_POST['Saldo'];
+        $IdComprobante=$_POST['IdComprobante'];
         $tituloModal='Amortizar Cuenta ';
         require '../vista/Cuentas/FromAmortizar.php';
         break;
