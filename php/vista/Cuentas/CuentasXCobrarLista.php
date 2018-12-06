@@ -3,6 +3,8 @@ session_start();
 ///validamos solo el adm tiene accesos a esta parte
  $_SESSION['categoria'];
 ?>
+<div id='Cambiarvista'><!--Cambiando vista-->
+
 <div class="container-fluid">
     <form action="cierre_caja.php" method="POST">
         <div class="row">
@@ -19,13 +21,13 @@ session_start();
 		<a href="excel/movimiento.php" class="btn btn-success btn-sm" target="T_Blank">ExcelMovimiento</a>
     <div class='row'>
         <div class='col s12 l6'>
-            <button class="btn btn-danger btn-lg" >Cuentas Pendientes</button>
+            <button class="btn btn-danger btn-lg" onclick="CambiarVista('CuentasXCobrar')">Cuentas Pendientes</button>
         </div>
         <div class='col s12 l6'>
-            <button class="btn btn-danger btn-lg" >Cuentas Cobradas</button>
+            <button class="btn btn-danger btn-lg " onclick="CambiarVista('CuentasCobradas')" >Cuentas Cobradas</button>
         </div>
     </div>
-    <h4>Cuentas por Cobrar </h4>
+    <h4><?php echo $titulo;?> </h4>
 	<div class="row">
         <div class="col-md-8">
             <table class="table table-bordered">
@@ -35,7 +37,8 @@ session_start();
                     <th style='line-height:6pt;'>Tipo Doc.</th>
                     <th style='line-height:6pt;'>Cliente</th>
                     <th style='line-height:6pt;'>Total</th>
-                    <th style='line-height:6pt;'>Fecha C.</th>
+                    <th style='line-height:6pt;'>Amortizado</th>
+                    <th style='line-height:6pt;'>Saldo</th>
                     <th style='line-height:6pt;'>Fecha V.</th>
                     <th style='line-height:6pt;'>Acciones</th>
                     
@@ -51,11 +54,12 @@ session_start();
                     echo "<td style='line-height:5pt;'>".$f['ABREBIATURA']."</td>";
                     echo "<td style='line-height:5pt;'>".$f['NOMCLIENTE']."</td>";
                     echo "<td style='line-height:5pt;'>S/".$f['TOTAL']."</td>";
-                    echo "<td style='line-height:5pt;'>".$f['FECHACOMPROBANTE']."</td>";
+                    echo "<td style='line-height:5pt;'>".$f['MONAMORTIZACION']."</td>";
+                    echo "<td style='line-height:5pt;'>".$f['SALDO']."</td>";
                     echo "<td style='line-height:5pt;'></td>";
                     echo "<td style='line-height:5pt;'>";?>
-                    <i class="material-icons" style='cursor:pointer;'>visibility</i>
-                    <i class="material-icons" style='cursor:pointer;' onclick="Amortizar('<?=$f['TOTAL']?>','<?=$f['IDCOMPROBANTE']?>');">equalizer</i>
+                    <i class="material-icons" style='cursor:pointer;' onclick="VerAmortizaciones('<?=$f['IDCOMPROBANTE']?>')">visibility</i>
+                    <i class="material-icons" style='cursor:pointer;' onclick="Amortizar('<?=$f['SALDO']?>','<?=$f['IDCOMPROBANTE']?>');">equalizer</i>
                     <?php echo "</td>";
                     echo "</tr>";
 
@@ -83,6 +87,19 @@ session_start();
   });
 
 
+CambiarVista=(valor)=>
+{
+    let  peticion =(valor=='CuentasXCobrar')?'lista':'ListaCobradas';
+    $.ajax({
+    		url:'controlador/CuentasXCobrarC.php',
+    		method:'POST',
+    		data:{peticion:peticion},
+    		success:function(respuesta)
+    		{
+    		  $("#Cambiarvista").html(respuesta);
+    		}
+    		});
+}
 
 Amortizar=(Saldo,IdComprobante)=>
 {
@@ -99,8 +116,19 @@ Amortizar=(Saldo,IdComprobante)=>
     
 }
 
-VerAmortizaciones=()=>
+VerAmortizaciones=(IdComprobante)=>
 {
-
+    $.ajax({
+    		url:'controlador/CuentasXCobrarC.php',
+    		method:'POST',
+    		data:{peticion:'MostarAmortizaciones',IdComprobante:IdComprobante},
+    		success:function(respuesta)
+    		{
+    		  $("#AmortizarContenido").html(respuesta);
+    		}
+    		});
+        $('#ModalAmortizar').modal('open');
 }
 </script>
+
+</div> <!--fin cambiando vista-->

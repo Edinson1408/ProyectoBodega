@@ -56,8 +56,13 @@ switch ($_POST['peticion']) {
       break;
 
     case 'HistorialVentas':
+    //formulario
       require '../vista/Reportes/RepVentasH.php';
-     
+      break;
+    case 'MostrarHistorial':
+      //Reporte
+      $ObjReporteV->HistorialVentasR($mes,$año);
+      require '../vista/Reportes/RepVentasHR.php';
       break;
 
     case 'AnularVenta':

@@ -157,6 +157,10 @@ class VentasM extends Conexion
       mysqli_query($this->Link,$Sql);
     }
 
+    function HistorialVentasR($mes,$año)
+    {
+      $Sql="SELECT * FROM comprobante_venta ";
+    }
 }
 
 

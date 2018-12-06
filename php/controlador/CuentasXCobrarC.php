@@ -4,7 +4,14 @@ require '../modelo/CuentasXCobrarM.php';
 $ObjCuentas=new Cuentas();
 switch ($_POST['peticion']) {
     case 'lista':
-        $ListaCuentas=$ObjCuentas->Listar();
+        $titulo="Cuentas por Cobrar";
+        $ListaCuentas=$ObjCuentas->ListarXCobrar();
+        require '../vista/Cuentas/CuentasXCobrarLista.php';
+        break;
+    
+    case 'ListaCobradas':
+        $titulo="Cuentas Cobradas";
+        $ListaCuentas=$ObjCuentas->ListaCobradas();
         require '../vista/Cuentas/CuentasXCobrarLista.php';
         break;
     
@@ -20,7 +27,9 @@ switch ($_POST['peticion']) {
         break;
     
     case 'MostarAmortizaciones':
-        $ObjCuentas->ListaAmortizaciones($IdComprobante);
+        $IdComprobante=$_POST['IdComprobante'];
+        $ListaAmortizacion=$ObjCuentas->ListaAmortizaciones($IdComprobante);
+        require '../vista/Cuentas/ListaAmortizaciones.php';
         break;
     default:
         # code...

@@ -94,10 +94,21 @@
         $DataString=$('#AmortizacionId').serialize();
         console.log($DataString);
         let peticion='InsertarAmortizacion';
-        $.ajax({
-            url:'CuentasXCobrarC.php';
-            data: $DataString+'&peticion='+peticion;
-        })
+
+
+          $.ajax({
+    		url:'controlador/CuentasXCobrarC.php',
+    		method:'POST',
+    		data:$DataString+'&peticion='+peticion,
+    		success:function(respuesta)
+    		{
+                $('#ModalAmortizar').modal('close');
+                enrutar_menu('CuentasXCobrarC.php','lista');
+    		}
+    		});
+
+
+    
     }
     
 </script>
