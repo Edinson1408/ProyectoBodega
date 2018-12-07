@@ -1,5 +1,5 @@
 
-<div class="container">
+
 		<div class="nota">
 			<i class="fa fa-pencil-square-o" id="com">Seleccionar Mes</i>
 		</div>

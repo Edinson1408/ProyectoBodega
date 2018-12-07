@@ -55,11 +55,11 @@ session_start();
                     echo "<td style='line-height:5pt;'>".$f['NOMCLIENTE']."</td>";
                     echo "<td style='line-height:5pt;'>S/".$f['TOTAL']."</td>";
                     echo "<td style='line-height:5pt;'>".$f['MONAMORTIZACION']."</td>";
-                    echo "<td style='line-height:5pt;'>".$f['SALDO']."</td>";
+                    echo "<td style='line-height:5pt;'>".$f['SALDOX']."</td>";
                     echo "<td style='line-height:5pt;'></td>";
                     echo "<td style='line-height:5pt;'>";?>
                     <i class="material-icons" style='cursor:pointer;' onclick="VerAmortizaciones('<?=$f['IDCOMPROBANTE']?>')">visibility</i>
-                    <i class="material-icons" style='cursor:pointer;' onclick="Amortizar('<?=$f['SALDO']?>','<?=$f['IDCOMPROBANTE']?>');">equalizer</i>
+                    <i class="material-icons" style='cursor:pointer;' onclick="Amortizar('<?=$f['SALDOX']?>','<?=$f['IDCOMPROBANTE']?>');">equalizer</i>
                     <?php echo "</td>";
                     echo "</tr>";
 
