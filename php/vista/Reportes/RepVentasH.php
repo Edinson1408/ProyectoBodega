@@ -1,12 +1,10 @@
-
-
-		<div class="nota">
-			<i class="fa fa-pencil-square-o" id="com">Seleccionar Mes</i>
-		</div>
+<div class="nota">
+<i class="fa fa-pencil-square-o" id="com">Seleccionar Mes</i>
+</div>
 <!--action="lista_ventas.php"-->
-<form  method="POST" id='RepVentasHF'>
-		<div class="form-group">
-		  <div class="col-xs-4">
+<div class="form-group">
+	<form  method="POST" id='RepVentasHF'>
+		<div class="col-xs-4">
 			<select class="form-control" name="mes" id='mes'>
 			    <option>Mes</option>
 			    <?php
@@ -18,24 +16,30 @@
 
 			    ?>
 			</select>
-		  </div>
-		  <div class="col-xs-4">
-		       <select class="form-control" name="ano" id='ano'>
-		           <option>Año</option>
+		</div>
+		<div class="col-xs-4">
+		    <select class="form-control" name="ano" id='ano'>
+		        <option>Año</option>
 		           <?php
 		           $año=2030; 
 		           for ($i=2016; $i <$año ; $i++) { 
 		                	echo "<option value='".$i."'>".$i."</option>";
 		           }
 		           ?>
-		       </select>
-		   </div>
-		   <div class="col-xs-2">
+		    </select>
+		</div>
+		<div class="col-xs-2">
 			<a  class="btn btn-success btn-sm" onclick=MostrarHistorial();>Enviar</a>
 			<input type="submit" name="enviar" class="btn btn-default">
-		   </div>
-</form>
+		</div>
+	</form>
 </div>
+<a  class="btn btn-danger" style="float: left;" data_id='PDF' onclick='RepVentasHPdfExcel(this);'>
+	<i class="glyphicon glyphicon-download-alt">DescargarVentas-PDF</i>
+</a>
+<a  class="btn btn-success" style="float: left;" data_id='EXCEL' onclick='RepVentasHPdfExcel(this);'>
+<i class="glyphicon glyphicon-download-alt">DescargarVentas-EXCEL</i>
+</a>
 <div id='MuestraReporte'>
 </div>
 <script>
@@ -53,4 +57,36 @@ MostrarHistorial=()=>{
     		}
     		});
 }
+
+RepVentasHPdfExcel=(e)=>
+{
+	console.log('hola')
+	
+	var mes=$('#mes').val();
+	var ano=$('#ano').val();
+	if (mes=='Mes')
+	{
+		swal('seleccione un mes');
+	}else if(ano=='Año')
+	{
+		swal('seleccione un año');
+	}
+	else
+	{
+		var formato=$(e).attr('data_id');
+		if (formato=='PDF')
+		{
+			let DataString=$('#RepVentasHF').serialize();
+			window.open('reportes/ReportesPdf/PdfHistorialVentas.php?'+DataString);
+		}else{
+			let DataString=$('#RepVentasHF').serialize();
+			window.open('reportes/ReportesExcel/ExcelHistorialVentas.php?'+DataString);
+		}
+		
+	}
+	
+}
+
+
+
 </script>

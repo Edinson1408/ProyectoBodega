@@ -28,10 +28,7 @@
 			echo '<a href="salidav2.php" class="btn btn-primary" style="float: right;">
 			<i class="glyphicon glyphicon-new-window">NuevoDocumento</i>
 			</a>';
-			echo '<a href="reportes/ReportesPdf/PdfHistorialVentas.php" target="T_BLANK" class="btn btn-danger" style="float: left;">
-			<i class="glyphicon glyphicon-download-alt">DescargarVentas-PDF</i>
-			</a>';
-            echo '<a href="excel/lista_ventas_excel.php" target="T_BLANK" class="btn btn-success" style="float: left;"><i class="glyphicon glyphicon-download-alt">DescargarVentas-EXCEL</i></a>';
+			
             echo '<a href="excel/movimiento_excel.php" target="T_BLANK" class="btn btn-success" style="float: left;"><i class="glyphicon glyphicon-download-alt">MovimientosDeCompras-EXCEL</i></a>';
 		
 		foreach ($ListaHistorial as $f ) {
