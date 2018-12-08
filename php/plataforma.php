@@ -283,6 +283,10 @@ include('seguridad_navegador.php');
                             <li>
                             <a onclick="enrutar_menu('UsuarioC.php')" target="tiframe" class="waves-effect waves-light">Usuario</a>
                             </li>
+                            <li>
+                            <a onclick="enrutar_menu('UsuarioC.php')" target="tiframe" class="waves-effect waves-light">Correlativos Doc.</a>                                 
+                            </li>
+
                         </ul>
                     </li>
                     <li class="NavLateralDivider"></li>

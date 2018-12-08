@@ -29,7 +29,7 @@
 					echo "<td >".$r['NOMBRES']."</td>";
 					echo "<td class='hidden-sm-down'> ".$r['NOMUSER']."</td>";
 					echo "<td class='hidden-sm-down'>".$r['IDCATEGORIA']."</td>";
-					echo "<td class='hidden-sm-down'>".$r['NOMTURNO']."</td>";
+					echo "<td class='hidden-sm-down'>".utf8_encode($r['NOMTURNO'])."</td>";
 					echo "<td><a title='Editar' onclick=(EditarUsuario('".$r['IDPERSONA']."')) style='cursor:pointer;'>
 					<i class='material-icons'>edit</i></a></td>
 					<td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$r['IDPERSONA']."'))><i class='material-icons'>delete</i></a></td>";

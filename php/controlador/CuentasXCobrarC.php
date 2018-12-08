@@ -6,6 +6,8 @@ switch ($_POST['peticion']) {
     case 'lista':
         $titulo="Cuentas por Cobrar";
         $ListaCuentas=$ObjCuentas->ListarXCobrar();
+        $titulo2="Cuentas Cobradas";
+        $ListaCuentasCobradas=$ObjCuentas->ListaCobradas();
         require '../vista/Cuentas/CuentasXCobrarLista.php';
         break;
     
