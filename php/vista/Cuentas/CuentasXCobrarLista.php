@@ -6,22 +6,22 @@ session_start();
 
 
 <div class="container-fluid">
-    <form action="cierre_caja.php" method="POST">
+    <form id='FormCuentas' method="POST">
         <div class="row">
         <div class="col s6">
             <label >F. Inicio</label>
-            <input type="date" name="inicio" class="form-control input-sm">
+            <input type="date" name="Inicio" id="Inicio" class="form-control input-sm">
         </div>
         <div class="col s6">
             <label >F. Fin</label>
-            <input type="date" name="inicio" class="form-control input-sm">
+            <input type="date" name="Fin" id="Fin" class="form-control input-sm">
         </div>
         </div>
     </form>
         <!--<a href="pdf/diario.php" class="btn btn-danger btn_default btn-sm" >HTML</a>-->
         <a class="btn  btn-primary btn-sm" >HTML</a>
-        <a class="btn btn-danger btn-sm" target="T_Blank" data_id="PDF" onclick="">PDF</a>
-		<a class="btn btn-success btn-sm" target="T_Blank" data_id="EXCEL" onclick="">Excel</a>
+        <a class="btn btn-danger btn-sm" target="T_Blank" data_id="PDF" onclick="RepVentasHPdfExcel(this)">PDF</a>
+		<a class="btn btn-success btn-sm" target="T_Blank" data_id="EXCEL" onclick="RepVentasHPdfExcel(this)">Excel</a>
 		<!-- <a class="btn btn-success btn-sm" target="T_Blank">ExcelMovimiento</a> -->
         <!--<a href="excel/movimiento.php" class="btn btn-success btn-sm" target="T_Blank">ExcelMovimiento</a>-->
 </div>
@@ -190,5 +190,41 @@ VerAmortizaciones=(IdComprobante)=>
     		});
         $('#ModalAmortizar').modal('open');
 }
+
+
+RepVentasHPdfExcel=(e)=>
+{
+	console.log('hola')
+	
+	var mes=$('#Inicio').val();
+	var ano=$('#Fin').val();
+	if (mes=='')
+	{
+		swal('seleccione una fecha de inicio');
+	}else if(ano=='')
+	{
+		swal('seleccione una fecha  de termino');
+	}
+	else
+	{
+		var formato=$(e).attr('data_id');
+		if (formato=='PDF')
+		{
+            
+			let DataString=$('#FormCuentas').serialize();
+			window.open('reportes/ReportesPdf/PdfCuentasR.php?'+DataString);
+		}else{
+            swal('Excel');
+			let DataString=$('#FormCuentas').serialize();
+			window.open('reportes/ReportesExcel/ExcelHistorialVentas.php?'+DataString);
+		}
+		
+	}
+	
+}
+
+
+
+
 </script>
 

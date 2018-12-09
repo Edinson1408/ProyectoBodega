@@ -91,6 +91,38 @@ class Cuentas extends Conexion
         
         
     }
+
+    public function ListaCuentasReporte($FI,$FF)
+    {
+        
+        $Sql="SELECT CV.*,concat(PER.NOMBRES,' ',PER.APELLIDOS) as ENCARGADO ,TU.NOMTURNO,DOC.ABREBIATURA ,
+        (SELECT IFNULL(SUM(AMO.MONAMORTIZACION),0) FROM amortizaciones AMO where CV.IDCOMPROBANTE=AMO.IDCOMPROBANTE) as MONAMORTIZACION,
+        (CV.TOTAL - (SELECT  IFNULL(SUM(AMO.MONAMORTIZACION),0) 
+        FROM amortizaciones AMO where CV.IDCOMPROBANTE=AMO.IDCOMPROBANTE)) as SALDOX
+        FROM 
+        comprobante_venta CV
+        LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
+        LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
+        LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
+        LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC
+        WHERE CV.IDESTADO='2'  AND CV.FECHACOMPROBANTE BETWEEN '$FI' AND '$FF' ";
+            $res=mysqli_query($this->Conexion,$Sql);
+            $A=array();
+            while ($r=mysqli_fetch_array($res)) {
+                $A[]=$r;
+            }
+            
+            return $A;
+        
+    }
+    public function DetalleAmortizacionReporte($IdComprobante)
+    {
+        $Sql="SELECT * FROM amortizaciones WHERE IDCOMPROBANTE='$IdComprobante'";
+        $res=mysqli_query($this->Conexion,$Sql);
+        $A=array();
+        while ($r=mysqli_fetch_array($res)) {$A[]=$r;}
+        return $A;
+    }
 }
 
 
