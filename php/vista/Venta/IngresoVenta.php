@@ -8,6 +8,10 @@ document.getElementById(ID).focus();
 }
 </script>
 <style>
+
+form{
+	padding: 20px;
+}
 .sinborde {
     border: 0;
   }
@@ -20,41 +24,41 @@ document.getElementById(ID).focus();
 <form  method='POST' id='GuardarVenta'>
 <input type='hidden' value='001' name='Serie' id='Serie'>
 <div class="form-group">
-	
+<img src="../img/LOGOTIPO.PNG" alt="">
 	<div class="row">
 		<div class="col l4 m4 s12">
-			fecha : <input type="date" class="form-control form-control-sm" name="FecComprobante" id='FecComprobante' value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
+			Fecha : <input type="date" class="form-control form-control-sm" name="FecComprobante" id='FecComprobante' value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
 		</div>
 		<div class="col l4 m4 s12">
-			Tipo Documento:	
-			<select class="form-control form-control-sm" id="TipoDoc" name='TipoDoc' >
+			Documento :	
+			<select class="form-control form-control-sm" id="TipoDoc" name='TipoDoc'>
+			<option value='2'>Boleta</option>
 			<option value='1'>Factura</option>
-			<option value='2'>BOLETA</option>
 			</select>
 		</div>
 
 		<div class="col l4 m4 s12">
 			<!--Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">-->
-			Nro Documento: <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' value="<?php echo $MaxId; ?>">
+			Correlativo : <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' value="<?php echo $MaxId; ?>">
 		</div>
 		
 	</div>
 	
 <div class="row">
 	<div class="col l4 m6 s12">
-		RUC/DNI: <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
+		RUC/DNI : <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
 		<div id="LiCliente"></div>
 	</div>
 	<div class="col l4 m6 s12">
-			Nombre Cliente:	
-			<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
+		Cliente :	
+		<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
 	</div>
 	<div class="col l4 m6 s12">
 	<?php
 	/*$SQL_PAGO=mysqli_query($conexion,"SELECT * FROM ESTADO  ORDER BY ID_ESTADO ASC ");
 	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)*/
 	?>
-	Pago:<select class="form-control input-sm" id="Estado" name='Estado' >
+	Pago :<select class="form-control form-control-sm" id="Estado" name='Estado' >
 			<option value="1">Cancelado</option>
 			<option value="2">Pendiente</option>
 					<!--<option value="<?php echo $ARR_CLI['ID_ESTADO'];?>"><?php echo $ARR_CLI['NOMBRE_ESTADO'];?></option>-->
@@ -73,15 +77,14 @@ document.getElementById(ID).focus();
 	<div class="col l6 m6 s12">
 		<div class="switch">
 		    <label>
-		      Manual
+		      Automatico
 		      <input type="checkbox" id="CheckAutomatico" onchange="Automatico(this)">
 		      <span class="lever"></span>
-		      Automatico
+		      Manual
 		    </label>
 	 	 </div>
 	</div>
 	<div class="col l6 m6 s12">
-
 		<input type="text" name="CodigoBarras" class="form-control form-control-sm" id='CodigoBarras'  style="display: none" autocomplete="off">
 		<div id="suggesstion-box"></div>
 	<div>
@@ -103,11 +106,11 @@ document.getElementById(ID).focus();
 	<table class="table table-bordered ">
 	<thead>
 		<tr>
-			<td>Codigo</td>
-			<td>Nombre</td>
-			<td>Cantidad</td>
-			<td>Precio</td>
-			<td>Importe</td>
+			<td style='line-height:6pt;'>Codigo</td>
+			<td style='line-height:6pt;'>Nombre</td>
+			<td style='line-height:6pt;'>Cantidad</td>
+			<td style='line-height:6pt;'>Precio</td>
+			<td style='line-height:6pt;'>Importe</td>
 		</tr>
 	</thead>
 	<tbody id='ContenidoGrilla'>
@@ -115,33 +118,33 @@ document.getElementById(ID).focus();
 
 	</tbody>
 	<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>Sub Tal</td>
-	<td  style="background-color: black;color: white;" >S./ <input type='text' id='SubTotal' name='SubTotal' class="sinborde" style="background-color: black;" readonly></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'>Sub total</td>
+	<td  style="background-color: #34495E;color: white; line-height:6pt;" >S./ <input type='text' id='SubTotal' name='SubTotal' class="sinborde" style="background-color: #34495E;" readonly></td>
 	</tr>
 	<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>Igv</td>
-	<td  style="background-color: black;color: white;" >S./ <input type='text' id='Igv' name='Igv' class="sinborde" style="background-color: black;" readonly></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'>Igv</td>
+	<td  style="background-color: #34495E;color: white; line-height:6pt;" >S./ <input type='text' id='Igv' name='Igv' class="sinborde" style="background-color: #34495E;" readonly></td>
 	</tr>
 
 	<tr>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>Total</td>
-	<td  style="background-color: black;color: white;" >S./ <input type='text' id='Total' name='Total' class="sinborde" style="background-color: black;" readonly></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'></td>
+	<td style='line-height:6pt;'>Total</td>
+	<td  style="background-color: #34495E ;color: white; line-height:6pt;" >S./ <input type='text' id='Total' name='Total' class="sinborde" style="background-color: #34495E;" readonly></td>
 	</tr>
 	</table>
 	
 	
 </div>
 
-<a class="btn btn-default" onclick='Guardar();'>Guardar</a>
+<a class="btn btn-primary" onclick='Guardar();'>Guardar</a>
 
 </form>
 
@@ -366,18 +369,18 @@ function selectCountry(val,id) {
 				if (valida=='NO')
 				{
 					$('#ContenidoGrilla').append(`
-						<tr style='line-height:6pt;'>
-						<td> 
+						<tr>
+						<td style='line-height:6pt;'> 
 							<input class='sinborde' id='CodProducto${Conta}' name='CodProducto${Conta}' value='${$Ojb.CODPRODUCTO}'> 
 						</td>
-						<td> ${$Ojb.NOMPRODUCTO}</td>
+						<td style='line-height:6pt;'> ${$Ojb.NOMPRODUCTO}</td>
 						<td> 
 							<input  class="form-control form-control-sm " type='text' id='Cantidad${Conta}' data_id='${Conta}'' name='Cantidad${Conta}' value='1' onchange="ValidaStock(this)">
 						</td>
-						<td> 
+						<td style='line-height:6pt;'> 
 						<input  class="sinborde" type='text' id='PrecioVenta${Conta}' name='PrecioVenta${Conta}' value='${$Ojb.PRECIOVENTA}' readonly>
 						</td>
-						<td> 
+						<td style='line-height:6pt;'> 
 							<input  class="sinborde" type='text' id='Importe${Conta}' name='Importe${Conta}' value='${$Ojb.PRECIOVENTA}' readonly>
 						</td>
 						</tr>`);
