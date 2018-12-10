@@ -214,9 +214,9 @@ RepVentasHPdfExcel=(e)=>
 			let DataString=$('#FormCuentas').serialize();
 			window.open('reportes/ReportesPdf/PdfCuentasR.php?'+DataString);
 		}else{
-            swal('Excel');
+            
 			let DataString=$('#FormCuentas').serialize();
-			window.open('reportes/ReportesExcel/ExcelHistorialVentas.php?'+DataString);
+			window.open('reportes/ReportesExcel/ExcelCuentasR.php?'+DataString);
 		}
 		
 	}
