@@ -10,7 +10,7 @@ include('seguridad_navegador.php');
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <link rel="icon" type="image/png" href="../img/logo.ico" />
-<link href = "https://unpkg.com/ionicons@4.2.4/dist/css/ionicons.min.css"  rel = "stylesheet" >
+    <link href = "https://unpkg.com/ionicons@4.2.4/dist/css/ionicons.min.css"  rel = "stylesheet" >
 
 
     <!--boostrap Agregando -->
@@ -29,8 +29,22 @@ include('seguridad_navegador.php');
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>-->
         <!--<script src="../bootstrap/js/bootstrap.js"></script>-->
 
+<!--para reacj compoente utlizado para pagina 404 y el modal de crea nuevo cliente o proveedor-->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js"></script>
+    
+    <!--<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.min.js"></script>
+	
+    <script type="text/babel" src="../js/Compoente404.js"></script>
+
+
     <!--termino  boosatrap-->
 <!--estilos agregados por mi bopstrap de imputs-->
+<!--404-->
+<link rel="stylesheet" type="text/css" href="../php/404/styles/404.css">
         <link rel="stylesheet" type="text/css" href="../css/estilosBotones.css">
 	<!-- inicio materialize-->
     <!--hace que quede con color blanco will-change: opacity, transform; -->
@@ -198,7 +212,7 @@ include('seguridad_navegador.php');
                             <li><a class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','IngresoVenta')"">Nuevo Ingreso</a></li>
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="buscador/buscador.php" target="tiframe" class="waves-effect waves-light">Cancelar boleta</a></li>-->
-                            <li><a  class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','AnularVenta')" >Cancelar boleta</a></li>
+                            <li><a  class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','AnularVenta')" >Cancelar Comprobante</a></li>
                         </ul>
                     </li>
                     <li class="NavLateralDivider"></li>

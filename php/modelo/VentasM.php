@@ -22,10 +22,14 @@ class VentasM extends Conexion
 
   public function SqlVista()
   {
-    $sql="SELECT A.*, B.NOMBRE_C AS NOMBRE, C.DES_TUR AS TURNO
-          FROM BOLETA AS A, CLIENTE_1 AS B, TURNO AS C WHERE A.RUC_CLIENTE=B.RUC_DNI
-          AND A.ID_TURNO=C.ID_TURNO ";
-    return $this->ArmarConsulta($sql);
+    $Sql="SELECT CV.*,concat(PER.NOMBRES,' ',PER.APELLIDOS) as ENCARGADO ,TU.NOMTURNO,DOC.ABREBIATURA 
+          FROM 
+          comprobante_venta CV
+          LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
+          LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
+          LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
+          LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC";
+    return $this->ArmarConsulta($Sql);
   }
 
   public function RangoF($inicio,$final)

@@ -17,14 +17,10 @@ class Conexion{
 		{
 			$link=$this->Conectarse();
 			$res=mysqli_query($link,$sql);
+			$Respuesta=array();
 			while ($ARR=mysqli_fetch_array($res))
 			{$Respuesta[]=$ARR;}
-			if (isset($Respuesta)) { //por sia caso este vacia no genera nungun erro
-				return $Respuesta;
-			}else {
-				return $Respuesta=array();
-			}
-
+			
 		}
 }
 
