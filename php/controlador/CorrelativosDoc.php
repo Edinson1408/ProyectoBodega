@@ -1,11 +1,12 @@
 <?php
 require '../Basedato/conexion.php';
 require '../modelo/CorrelativosM.php';
+$ObjCorrelativo= new Correlativos();
 
 switch ($_POST['peticion']) {
     case 'Lista':
-        
-        require '../vista/CorrelativosDoc/CorrelaticosLista.php';
+        $ListaCorrelativos=$ObjCorrelativo->ListaCorrelativos();
+        require '../vista/CorrelativosDoc/CorrelativosLista.php';
         break;
     
     default:

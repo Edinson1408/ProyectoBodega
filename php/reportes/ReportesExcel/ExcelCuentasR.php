@@ -68,7 +68,7 @@ foreach ($ListaHistorial as $dato ) {
 	$objSheet->setCellValue('F'.$numero, $dato['MONAMORTIZACION']);
 	$objSheet->setCellValue('G'.$numero, $dato['SALDOX']);
     $objSheet->setCellValue('H'.$numero, $dato['FECHACOMPROBANTE']);
-    if ($f['SALDOX']=='0') {$a='Cancelado';}else{$a='Pendiente';};
+    if ($dato['SALDOX']=='0') {$a='Cancelado';}else{$a='Pendiente';};
     $objSheet->setCellValue('I'.$numero, $a);
     if($a=='Cancelado'){
         $objSheet->setCellValue('G'.$numero, 'Amortizado');

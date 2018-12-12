@@ -27,8 +27,8 @@ session_start();
         <tr>
         <td></td>
         <td></td>
-        <td><input type="text" id='SerieCorre' onchange='CambiaSerieNum(this)' readonly='readonly'></td>
-        <td><input type="text" id='NumCorre' onchange='CambiaSerieNum(this)' readonly='readonly'></td>
+        <td><input type="text" id='SerieCorre' onchange='CambiaSerieNum(this)' readonly='readonly' style="background-color: #ddd" ></td>
+        <td><input type="text" id='NumCorre' onchange='CambiaSerieNum(this)' readonly='readonly'  style="background-color: #ddd"></td>
         <td>
         <i class="material-icons" id='EditCorrelativo' onclick='ActualizarCorre();'>edit</i>
         <i class="material-icons" id='SaveCorrelativo' style="display:none" onclick='UpdateCorrelativo();'>save</i>
@@ -36,20 +36,16 @@ session_start();
         </td>
         </tr>
 		<?php
-			// foreach ($Proveedores as $r)
-			// {
-			// 	echo "<tr>";
-			// 		echo "<td>".$r['NUMDOC']."</td>";
-			// 		echo "<td >".$r['RAZONSOCIAL']."</td>";
-			// 		echo "<td class='hidden-sm-down'> ".$r['TELEFONO']."</td>";
-			// 		echo "<td class='hidden-sm-down'>".$r['CELULAR']."</td>";
-			// 		echo "<td class='hidden-sm-down'>".$r['CORREO']."</td>";
-			// 		echo "<td><a title='Editar' onclick=(EditarCliente('".$r['IDPERSONA']."')) style='cursor:pointer;'>
-			// 		<i class='material-icons'>edit</i></a></td>
-			// 		<td><a title='Eliminar' style='cursor:pointer;' onclick=(eliminar('".$r['IDPERSONA']."'))><i class='material-icons'>delete</i></a></td>";
-
-			//   echo "</tr>";
-			// }
+		
+			foreach ($ListaCorrelativos as $r)
+			{
+			echo "<tr>";
+			echo "<td>".$r['IDCORRELATIVO']."</td>";
+			echo "<td >".$r['NOMBRE']."</td>";
+			echo "<td class='hidden-sm-down'> ".$r['SERIE']."</td>";
+			echo "<td class='hidden-sm-down'>".$r['CORRELATIVO']."</td>";
+			echo "</tr>";
+			}
 		?>
 		</TBody>
 	</table>
@@ -70,6 +66,11 @@ ActualizarCorre=()=>
      $("#SerieCorre").attr("readonly", false);
      $("#NumCorre").attr("readonly", false);
      $('#EditCorrelativo').css({'display':'none'})
+
+	$("#SerieCorre").css({'background-color':''});
+	$("#NumCorre").css({'background-color':''});
+     
+	 
 }
 CancelaCorrelativo=()=>
 {
