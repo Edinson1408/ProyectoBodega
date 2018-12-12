@@ -342,7 +342,7 @@ include('seguridad_navegador.php');
             <ul class="full-width">
 
                 <li class="btn-MobileMenu ShowHideMenu"><a href="#" class="tooltipped waves-effect waves-light" data-position="bottom" data-delay="50" data-tooltip="Menu" data-tooltip="Cerrar sessión"><i class="zmdi zmdi-more-vert"></i></a></li>
-                <li><figure><img src="../img/user.png" alt="UserImage"></figure></li>
+                <li onclick='DatosUsuario();'><figure><img src="../img/user.png" alt="UserImage"></figure></li>
                 <li style="padding:0 5px;"><?php echo $_SESSION['user']."  ";?></li>
                 <li><a class="tooltipped waves-effect waves-light" href="../cierre.php" data-position="bottom" data-delay="50" data-tooltip="Cerra sessión"><i class="zmdi zmdi-power"></i></a></li>
                 <li>
@@ -431,7 +431,10 @@ enrutar_menu('HomeC.php');
     }
 
 
-
+DatosUsuario=()=>
+{
+    console.log('aqui actualiza su foto el usuario');
+}
 </script>
 
 

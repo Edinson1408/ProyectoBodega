@@ -122,6 +122,9 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
        $ObjReporteV->InsertaDetalle($UltimoId,$_POST); 
     break;
 
+    case 'AnularComprobante':
+      $ObjReporteV->AnularVenta($_POST['IdComprobante']);
+      break;
 
 
   default:

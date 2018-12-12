@@ -5,15 +5,15 @@
 		</div>
 		<!--********************************************************************************-->
 		<form action="buscador.php" method="POST">
+		<div class='row'>
 			<div class="col-xs-3">
 			  <input type="text" class="form-control input-sm" name="buscar" placeholder="Nro boleta" aria-label="Recipient's username" aria-describedby="basic-addon2">
 			</div>
-			<div class="col-xs-4">
-			  <input type="submit" name="enviar" class="btn btn-primary btn-sm" value="Buscar">
-			</div>
+		</div>
+			
 		</form>
 		<!--********************************************************************************-->
-		<div class="col-xs-12">
+		<div class="col s12 ">
 			<div class="divider">
 			</div>
 			<table class="table table-bordered">
@@ -53,6 +53,16 @@
 	function AnularDoc($a)
 	{
 		console.log($a);
+		$.ajax({
+			url:"controlador/VentasC.php",
+			method:'POST',
+			data : {peticion:'AnularComprobante',IdComprobante:$a},
+			success:function(respuesta)
+			{
+				console.log(respuesta)
+			}
+
+		})
 	}
 
 SeguridadAnular=($id)=>

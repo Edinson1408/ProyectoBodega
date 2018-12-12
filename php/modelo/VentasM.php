@@ -28,8 +28,13 @@ class VentasM extends Conexion
           LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
           LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
           LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
-          LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC";
-    return $this->ArmarConsulta($Sql);
+          LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC WHERE ESTADO != 'Anulado' ";
+          $res=mysqli_query($this->Link,$Sql);
+          $A=array();
+          while ($r=mysqli_fetch_array($res)) {
+                $A[]=$r;
+          }
+          return $A;
   }
 
   public function RangoF($inicio,$final)
@@ -178,6 +183,28 @@ class VentasM extends Conexion
             $A[]=$r;
           }
           return $A;
+    }
+
+    public function AnularVenta($IdComprobante)
+    {
+        $Sql="UPDATE comprobante_venta SET 
+        ESTADO='Anulado' WHERE IDCOMPROBANTE='$IdComprobante';";
+        mysqli_query($this->Link,$Sql);
+
+        $SqlDetalle="SELECT * FROM comprobante_venta_detalle WHERE IDCOMPROBANTE='$IdComprobante';";
+        $res=mysqli_query($this->Link,$SqlDetalle);
+        while ($r=mysqli_fetch_array($res)) {
+            $this->DevolucionAlmacen($r['CODPRODUCTO'],$r['CANTIDAD']);
+        }
+
+
+    }
+    private function DevolucionAlmacen($CodProducto,$Cantidad)
+    {
+        $Sql="UPDATE almacen 
+          SET CANTIDAD =(CANTIDAD +$Cantidad)
+          where CODPRODUCTO ='CodProducto' ";
+          mysqli_query($this->Link,$Sql);
     }
 }
 
