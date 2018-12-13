@@ -260,14 +260,19 @@ include('seguridad_navegador.php');
                     </li>
                     <li class="NavLateralDivider"></li>
                     <li>
-                        <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i> Reporte </a>
+                        <a href="#" class="NavLateral-DropDown  waves-effect waves-light">
+                            <i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> 
+                            <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i> Reportes
+                            </a>
                         <ul class="full-width">
                             <li class="NavLateralDivider"></li>
-
-														<li><a   class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','ReporteVenta')" >Ventas</a></li>
-
+                            <li>
+                                <a class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','ReporteVenta')" >Ventas</a>
+                            </li>
                             <li class="NavLateralDivider"></li>
-														<li><a   class="waves-effect waves-light" onclick="enrutar_menu('ComprasC.php','ReporteCompra')" >Compra</a></li>
+							<li>
+                                <a class="waves-effect waves-light" onclick="enrutar_menu('ComprasC.php','ReporteCompra')" >Compra</a>
+                            </li>
                             <!--<li><a href="reportes/rango_fechas/rang_fec_compras.php" target="tiframe"  class="waves-effect waves-light">Compras</a></li>-->
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="reportes/stock/stock.php" target="tiframe"  class="waves-effect waves-light">Stock</a></li>-->
@@ -278,7 +283,10 @@ include('seguridad_navegador.php');
                     </li>
                     <li class="NavLateralDivider"></li>
                     <li>
-                        <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-view-web zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i> Mantenimiento</a>
+                        <a href="#" class="NavLateral-DropDown  waves-effect waves-light">
+                            <i class="zmdi zmdi-view-web zmdi-hc-fw"></i> 
+                            <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i> Mantenimiento
+                        </a>
                         <ul class="full-width">
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="mantenimiento/producto/index.html" target="tiframe" class="waves-effect waves-light">Productos</a></li>-->
