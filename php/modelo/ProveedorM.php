@@ -4,22 +4,38 @@
 
 		public function ListaProveedor()
 		{
+			$link=$this->Conectarse();
 			$sql="SELECT PER.IDPERSONA,PER.NUMDOC,PER.TELEFONO,PER.CORREO,PRO.RAZONSOCIAL,PRO.DIRFISCAL,PRO.ESTADO FROM 
 					persona  PER , proveedores  PRO
-					WHERE PER.IDPERSONA=PRO.IDPERSONA";
+				WHERE PER.IDPERSONA=PRO.IDPERSONA";
 
-			return $this->ArmarConsulta($sql);
+				$A=array();
+				$res=mysqli_query($link,$sql);
+				while($r=mysqli_fetch_array($res))
+				{
+				$A[]=$r;
+				}
+				return $A;
+			
 
 		}
 
 		public function MostrarProveedor($codP)
 
 		{
+			$link=$this->Conectarse();
 			/*$sql="SELECT * FROM Proveedores where RUC_CLIENTE='$codP'";*/
 			$sql="SELECT PER.IDPERSONA,PER.NUMDOC,PER.TELEFONO,PER.CORREO,PRO.RAZONSOCIAL,PRO.DIRFISCAL,PRO.ESTADO FROM 
 			persona  PER , proveedores  PRO
 			WHERE PER.IDPERSONA=PRO.IDPERSONA and PRO.IDPERSONA='$codP'";
-			return $this->ArmarConsulta($sql);
+			//return $this->ArmarConsulta($sql);
+			$A=array();
+			$res=mysqli_query($link,$sql);
+			while($r=mysqli_fetch_array($res))
+				{
+				$A[]=$r;
+				}
+			return $A;
 		}
 
 		public function InsertaPersona ($link,$_Arr){

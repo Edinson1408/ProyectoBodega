@@ -145,6 +145,46 @@ public $Link;
       mysqli_query($this->Link,$Sql);
     }
 
+    function HistorialComprasR($mes,$año)
+    {
+        $Sql="SELECT CV.*,concat(PER.NOMBRES,' ',PER.APELLIDOS) as ENCARGADO ,TU.NOMTURNO,DOC.ABREBIATURA 
+          FROM 
+          comprobante_compra CV
+          LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
+          LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
+          LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
+          LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC
+          WHERE MONTH(FECHACOMPROBANTE)='$mes' AND YEAR(FECHACOMPROBANTE)='$año'";
+          $res=mysqli_query($this->Link,$Sql);
+          $A=array();
+          while($r=mysqli_fetch_array($res))
+          {
+            $A[]=$r;
+          }
+          return $A;
+    }
+
+
+    function HistorialComprasRango($inicio,$fin)
+    {
+         $Sql="SELECT CV.*,concat(PER.NOMBRES,' ',PER.APELLIDOS) as ENCARGADO ,TU.NOMTURNO,DOC.ABREBIATURA 
+          FROM 
+          comprobante_compra CV
+          LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
+          LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
+          LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
+          LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC
+          WHERE  FECHACOMPROBANTE BETWEEN '$inicio' AND '$fin' ";
+          $res=mysqli_query($this->Link,$Sql);
+          $A=array();
+          while($r=mysqli_fetch_array($res))
+          {
+            $A[]=$r;
+          }
+          return $A;
+    }
+    
+
 }
 
 ?>

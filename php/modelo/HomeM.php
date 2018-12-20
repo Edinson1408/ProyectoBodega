@@ -23,14 +23,22 @@
 
 			public function UltimasVentas()
 			{
+				$link=$this->Conectarse();
 				$sqlUV="SELECT A.*,A.NOMCLIENTE AS NOMBRE
 				FROM comprobante_venta AS A
 				ORDER BY A.FECHACOMPROBANTE  DESC LIMIT 10";
-				return $this->ArmarConsulta($sqlUV);
+				 $A=array();
+				 $res=mysqli_query($link,$sqlUV);
+				 while($r=mysqli_fetch_array($res))
+					 {
+					   $A[]=$r;
+					 }
+				 return $A;
 			}
 
 			public function ProductoMasVendidos($dia)
 			{
+				$link=$this->Conectarse();
 			 	$sql_ventasD="SELECT P.*, SUM(D.CANTIDAD) AS TOTAL, B.FECHACOMPROBANTE
 		                                FROM PRODUCTO AS P, comprobante_venta_detalle AS D, comprobante_venta AS B
 		                                WHERE P.CODPRODUCTO=D.CODPRODUCTO AND D.IDCOMPROBANTE=B.IDCOMPROBANTE AND B.FECHACOMPROBANTE='$dia'
@@ -38,7 +46,13 @@
 
 
 
-							return $this->ArmarConsulta($sql_ventasD);
+							$A=array();
+							$res=mysqli_query($link,$sql_ventasD);
+							while($r=mysqli_fetch_array($res))
+								{
+								$A[]=$r;
+								}
+							return $A;
 			}
 
 			public function PreviewComprobante($CodComprobante)
@@ -55,6 +69,7 @@
 
 			public function PreviewComprobanteDe($CodComprobante)
 			{
+				$link=$this->Conectarse();
 
 						$sql="SELECT SUM(DB.CANTIDAD) AS CANTIDAD,
 									SUM(DB.IMPORTE) AS IMPO, DB.CODPRODUCTO,PR.NOMPRODUCTO,PR.PRECIOVENTA
@@ -62,7 +77,13 @@
 									WHERE DB.IDCOMPROBANTE='$CodComprobante'
 									AND DB.CODPRODUCTO=PR.CODPRODUCTO
 									GROUP BY DB.CODPRODUCTO";
-						return $this->ArmarConsulta($sql);
+						$A=array();
+						$res=mysqli_query($link,$sql);
+						while($r=mysqli_fetch_array($res))
+							{
+							  $A[]=$r;
+							}
+						return $A;
 			}
 
 

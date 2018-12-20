@@ -8,55 +8,39 @@ document.getElementById(ID).focus();
 }
 </script>
 <style>
+form{
+	padding: 20px;
+}
 .sinborde {
     border: 0;
   }
-  
-  </style>
+ </style>
 </head>
 
 </head>
 <body onload="sf('btn');">
 <form  method='POST' id='GuardarVenta'>
-<input type='hidden' value='001' name='Serie' id='Serie'>
 <div class="form-group">
-	
+<img src="../img/LOGOTIPO.PNG" alt="">
 	<div class="row">
 		<div class="col l4 m4 s12">
-			fecha : <input type="date" class="form-control form-control-sm" name="FecComprobante" id='FecComprobante' value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
+			Fecha : <input type="date" class="form-control form-control-sm" name="FecComprobante" id='FecComprobante' value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
 		</div>
 		<div class="col l4 m4 s12">
-			Tipo Documento:	
+			Documento :		
 			<select class="form-control form-control-sm" id="TipoDoc" name='TipoDoc' >
 			<option value='1'>Factura</option>
-			<option value='2'>BOLETA</option>
+			<option value='2'>Boleta</option>
 			</select>
-		</div>
-
-		<div class="col l4 m4 s12">
-			<!--Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">-->
-			Nro Documento: <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' value="<?php echo $MaxId; ?>">
-		</div>
-		
-	</div>
-	
-<div class="row">
-	<div class="col l4 m6 s12">
-		RUC/DNI: <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
-		<div id="LiCliente"></div>
-	</div>
-	<div class="col l4 m6 s12">
-			Nombre Cliente:	
-			<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
-	</div>
-	<div class="col l4 m6 s12">
+		</div>		
+		<div class="col l4 m6 s12">
 	<?php
 	/*$SQL_PAGO=mysqli_query($conexion,"SELECT * FROM ESTADO  ORDER BY ID_ESTADO ASC ");
 	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)*/
 	?>
-	Pago:<select class="form-control input-sm" id="Estado" name='Estado' >
-			<option value="1">Pendiente</option>
+	Pago :<select class="form-control input-sm" id="Estado" name='Estado' >
 			<option value="2">Cancelado</option>
+			<option value="1">Pendiente</option>
 					<!--<option value="<?php echo $ARR_CLI['ID_ESTADO'];?>"><?php echo $ARR_CLI['NOMBRE_ESTADO'];?></option>-->
 					<?php
 					/*$sql_estado=mysqli_query($conexion,"SELECT * FROM estado");
@@ -66,6 +50,28 @@ document.getElementById(ID).focus();
 					?>
 					</select>
 	</div>
+	</div>
+	<div class="row">
+		<div class="col l4 m4 s12">
+		Serie :
+		<input type='text'  name='Serie' id='Serie' class="form-control form-control-sm">
+		</div>
+		<div class="col l4 m4 s12">
+			<!--Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">-->
+			Correlativo: <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' >
+		</div>
+		
+	</div>
+<div class="row">
+	<div class="col l4 m6 s12">
+		RUC : <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
+		<div id="LiCliente"></div>
+	</div>
+	<div class="col l8 m6 s12">
+			Proveedor :	
+			<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
+	</div>
+	
 </div>
 
 
@@ -119,14 +125,14 @@ document.getElementById(ID).focus();
 	<td></td>
 	<td></td>
 	<td>Sub Tal</td>
-	<td  style="background-color: black;color: white;" >S./ <input type='text' id='SubTotal' name='SubTotal' class="sinborde" style="background-color: black;" readonly></td>
+	<td  style="background-color: #34495E;color: white;" >S./ <input type='text' id='SubTotal' name='SubTotal' class="sinborde" style="background-color: #34495E;" readonly></td>
 	</tr>
 	<tr>
 	<td></td>
 	<td></td>
 	<td></td>
 	<td>Igv</td>
-	<td  style="background-color: black;color: white;" >S./ <input type='text' id='Igv' name='Igv' class="sinborde" style="background-color: black;" readonly></td>
+	<td  style="background-color: #34495E;color: white;" >S./ <input type='text' id='Igv' name='Igv' class="sinborde" style="background-color: #34495E;" readonly></td>
 	</tr>
 
 	<tr>
@@ -134,14 +140,14 @@ document.getElementById(ID).focus();
 	<td></td>
 	<td></td>
 	<td>Total</td>
-	<td  style="background-color: black;color: white;" >S./ <input type='text' id='Total' name='Total' class="sinborde" style="background-color: black;" readonly></td>
+	<td  style="background-color: #34495E;color: white;" >S./ <input type='text' id='Total' name='Total' class="sinborde" style="background-color: #34495E;" readonly></td>
 	</tr>
 	</table>
 	
 	
 </div>
 
-<a class="btn btn-default" onclick='Guardar();'>Guardar</a>
+<a class="btn btn-primary" onclick='Guardar();'>Guardar</a>
 
 </form>
 

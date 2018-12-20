@@ -18,15 +18,13 @@ session_start();
        padding: 0;
    }
 
-   html, body{
-       background: rgb(236,240,245);
-   }
    .titulo{
        border-bottom: 0.5px solid #F2F2F2;
        margin-bottom: 5px;
    }
    .container{
        width: 100%;
+       background: #ffffff;
    }
    .bg-purple {
    background-color: #605ca8 !important;
@@ -162,7 +160,7 @@ a{
    </div><!--hi Highcharts-->
    <!--esto es para los almacenes-->
    <div class="col l4 s12">
-       <div class="info-box bg-purple"><!--Inicio del modaro stock de productos-->
+       <!--div class="info-box bg-purple">
          <span class="info-box-icon"><i class="fa fa-tags"></i></span>
          <div class="info-box-content">
            <span class="info-box-text">Inventario</span>
@@ -173,17 +171,18 @@ a{
              <div class="progress-bar" style="width: 100%"></div>
            </div>
            <span class="progress-description">
+
              <?php
-               echo "<a href='../reportes/stock/stock.php'>Productos en stock: ".$ArrTotales['ProductoT']."</a>";
+              /* echo "<a href='../reportes/stock/stock.php'>Productos en stock: ".$ArrTotales['ProductoT']."</a>";*/
              ?>
            </span>
          </div>
-       </div><!--Fin del modaro stock de productos-->
+       </div--><!--Fin del modaro stock de productos-->
 
        <div class="info-box bg-green"> <!--Inicio del verde Ventas -->
          <span class="info-box-icon"><i class="fa fa-money"></i></span>
          <div class="info-box-content">
-           <span class="info-box-text">Ventas 2017</span>
+           <span class="info-box-text">Ventas 2018</span>
            <span class="info-box-number">
              <?php
              echo $ArrTotales['VentasT'];
@@ -193,8 +192,8 @@ a{
              <div class="progress-bar" style="width: 100%"></div>
            </div>
            <span class="progress-description">
-
-               <a href='../reportes/rango_fechas/rang_fec_ventas.php'>Boletas Emitidas : <?php echo $ArrTotales['VentasT'];  ?></a>
+            Cantidad de ventas
+               <!--a href='../reportes/rango_fechas/rang_fec_ventas.php'>Boletas Emitidas : <?php echo $ArrTotales['VentasT'];  ?></a-->
 
          </span>
          </div>
@@ -202,7 +201,7 @@ a{
        <div class="info-box bg-yellow"><!--Inicio del amarillo compras--->
          <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
          <div class="info-box-content">
-           <span class="info-box-text">Compras 2017</span>
+           <span class="info-box-text">Compras 2018</span>
            <span class="info-box-number">
              <?php
 
@@ -214,7 +213,8 @@ a{
              <div class="progress-bar" style="width: 100%"></div>
            </div>
            <span class="progress-description">
-               <a href='../reportes/rango_fechas/rang_fec_compras.php'>Facturas Ingresadas : <?php echo $ArrTotales['ComprasT']; ?></a>
+            Cantidad de compras
+               <!--a href='../reportes/rango_fechas/rang_fec_compras.php'>Facturas Ingresadas : <?php echo $ArrTotales['ComprasT']; ?></a-->
            </span>
          </div>
        </div><!--fin del amarillo compras--->
@@ -231,7 +231,8 @@ a{
              <div class="progress-bar" style="width: 100%"></div>
            </div>
            <span class="progress-description">
-             <a href="../mantenimiento/proveedor/proveedor.php">Detalles</a> </span>
+            Cantidad de proveedores de la empresa.
+             <!--a href="../mantenimiento/proveedor/proveedor.php">Detalles</a> </span-->
            </div>
        </div><!--Inicio prooveedores-->
    </div>
@@ -287,7 +288,7 @@ a{
 <div class="col l5">
 <div class="panel panel-default" id="panel3">
 <div class="titulo" style="margin-left: 10px">
-   <h4>Productos más vendidos del dia</h4>
+   <h4>Productos más vendidos</h4>
    <table class="table table-bordered">
        <tr>
            <th>Producto</th>
@@ -307,7 +308,7 @@ a{
    }
    ?>
    </table>
-   <a href="movimiento_productos/productos_vendidos.php" style="color: #337ab7;">Ver detalle</a>
+   
 </div>
 </div>
 </div>

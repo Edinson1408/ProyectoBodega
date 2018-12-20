@@ -22,38 +22,21 @@ form{
 </head>
 <body onload="sf('btn');">
 <form  method='POST' id='GuardarVenta'>
-<input type='hidden' value='001' name='Serie' id='Serie'>
+
 <div class="form-group">
 <img src="../img/LOGOTIPO.PNG" alt="">
 	<div class="row">
-		<div class="col l4 m4 s12">
+	<div class="col l4 m4 s12">
 			Fecha : <input type="date" class="form-control form-control-sm" name="FecComprobante" id='FecComprobante' value="<?php date_default_timezone_set('America/Bogota'); echo date('Y-m-d')?>" id="fe">
 		</div>
-		<div class="col l4 m4 s12">
+			<div class="col l4 m4 s12">
 			Documento :	
-			<select class="form-control form-control-sm" id="TipoDoc" name='TipoDoc'>
+			<select class="form-control form-control-sm" id="TipoDocCom" name='TipoDoc' onchange="CambiaCorrelativo();">
 			<option value='2'>Boleta</option>
 			<option value='1'>Factura</option>
 			</select>
 		</div>
-
-		<div class="col l4 m4 s12">
-			<!--Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">-->
-			Correlativo : <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' value="<?php echo $MaxId; ?>">
-		</div>
-		
-	</div>
-	
-<div class="row">
-	<div class="col l4 m6 s12">
-		RUC/DNI : <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
-		<div id="LiCliente"></div>
-	</div>
-	<div class="col l4 m6 s12">
-		Cliente :	
-		<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
-	</div>
-	<div class="col l4 m6 s12">
+		<div class="col l4 m6 s12">
 	<?php
 	/*$SQL_PAGO=mysqli_query($conexion,"SELECT * FROM ESTADO  ORDER BY ID_ESTADO ASC ");
 	$ARR_CLI=mysqli_fetch_array($SQL_PAGO)*/
@@ -70,6 +53,29 @@ form{
 					?>
 					</select>
 	</div>
+	</div>
+	<div class="row">
+
+		<div class="col l4 m4 s12">
+			Serie : <input type="text" class="form-control form-control-sm" name="Serie" id='Serie' >
+		</div>
+	
+		<div class="col l4 m4 s12">
+			<!--Nro Documento: <input type="text" name="" data_name='asd' onchange="VerificaDoc(this)" class="form-control form-control-sm" id="nro_bol" value="<?php echo $MaxId; ?>">-->
+			Correlativo : <input type="text"  data_name='asd' onchange="" class="form-control form-control-sm" id="NumCompro" name='NumCompro' value="<?php echo $MaxId; ?>">
+		</div>
+		
+	</div>
+<div class="row">
+	<div class="col l4 m6 s12">
+		RUC/DNI : <input list="cliente" id="CliDoc" class="form-control form-control-sm" name="CliDoc" value="" autocomplete="off" onDblClick=NewCliente();>
+		<div id="LiCliente"></div>
+	</div>
+	<div class="col l8 m6 s12">
+		Cliente :	
+		<input type="text"  id="NombreCLiente" name="NombreCLiente" class="form-control form-control-sm" readonly>
+	</div>
+	
 </div>
 
 
@@ -160,7 +166,9 @@ Guardar=()=>
 		data :$('#GuardarVenta').serialize()+'&peticion=GuardarVenta',
 		success:function(respuesta)
 		{
-			console.log(respuesta)
+			console.log(respuesta);
+			var numcom=$('#NumCompro').val();
+			window.open("reportes/Imprimir/ImpresionBoleta.php?Idcomprobante="+respuesta);
 			enrutar_menu('VentasC.php','IngresoVenta');
 		}
 	})
@@ -397,7 +405,7 @@ function selectCountry(val,id) {
 			}
 			let SubTotal=$("#SubTotal").val(Total);
 			let Igv=0.18;
-			$("#Igv").val(Igv);
+			$("#Igv").val(Total*0.18);
 			// let totalF=SubTotal+(SubTotal*Igv);
 			let totalF=Total+(Total*Igv);
 			$("#Total").val(totalF);
@@ -489,8 +497,38 @@ CalcularTotales=()=>
 	console.log(calculador);
 	$("#SubTotal").val(calculador);
 	let Igv=0.18;
+	$("#Igv").val(calculador*0.18);
 	let totalF=calculador+(calculador*Igv);
 	$("#Total").val(totalF);
 }
 
+CambiaCorrelativo=(Id='')=>
+{
+	$(`#NumCompro`).attr("readonly", true);
+	$(`#Serie`).attr("readonly", true);
+	if(Id=='') 
+	{
+		var TipoDoc=$('#TipoDocCom').val();
+	}
+	else{
+		var TipoDoc=Id;
+	}
+	
+	console.log(TipoDoc);
+	$.ajax({
+		url:'controlador/VentasC.php',
+		type:'POST',
+		data:{'peticion':'CambiaCorrelativo','TipoDoc':TipoDoc},
+		success:function(respuesta)
+		{	
+			$Obj=JSON.parse(respuesta);		
+			
+			$('#NumCompro').val($Obj.Numero);
+			$('#Serie').val($Obj.Serie);
+			
+		}
+
+	});
+}
+CambiaCorrelativo('2');
 </script>

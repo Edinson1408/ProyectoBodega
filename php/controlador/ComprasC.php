@@ -51,6 +51,24 @@ switch ($_POST['peticion']) {
         $ObjCompras->InsertaDetalle($UltimoId,$_POST); 
        break;
 
+       case 'MostrarHistorial':
+          //Reporte
+            $mes=$_POST['mes'];
+            $año=$_POST['ano'];
+            $ListaHistorial=$ObjCompras->HistorialComprasR($mes,$año);
+            require '../vista/Reportes/RepComprasHR.php';
+       break;
+       
+       case 'Mreporte':
+      //armara la tabla
+      
+      //Reporte
+      $Inicio=$_POST['mes'];
+      $Final=$_POST['ano'];
+      $ListaHistorial=$ObjCompras->HistorialComprasRango($Inicio,$Final);
+      require '../vista/Reportes/RepComprasR.php';
+      break;
+
   default:
     // code...
     break;

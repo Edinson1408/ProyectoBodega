@@ -3,9 +3,13 @@ require '../Basedato/conexion.php';
 require '../modelo/VentasM.php';
 /*** Traer el modelo de procudto ***/
 require '../modelo/ProductosM.php';
+//correlativos modelo
+require '../modelo/CorrelativosM.php';
 
 $ObjReporteV=new VentasM();
 $ObjProducto=new Productos();
+
+$ObjCorrelativo= new Correlativos();
 switch ($_POST['peticion']) {
 
   case 'IngresoVenta':
@@ -16,38 +20,12 @@ switch ($_POST['peticion']) {
 
   case 'Mreporte':
     //armara la tabla
-    $Inicio=$_POST['Inicio'];
-    $Final=$_POST['Final'];
-
-
-    $ReRango=$ObjReporteV->RangoF($Inicio,$Final);
     
-    echo "
-    <table class='table table-striped' >
-    <tr>
-    		    <th>Boleta N°</th>
-        		<th>Turno</th>
-        		<th>Encargado</th>
-        		<th>Fecha</th>
-        		<th>Cliente</th>
-        		<th>Sub_Total</th>
-        		<th>Igv</th>
-        		<th>Total</th>
-    	</tr>";
-
-      foreach ($ReRango as $f) {
-    		echo "<tr>";
-    			echo "<td>".$f['NRO_FACTURA']."</td>";
-    			echo "<td>".$f['TURNO']."</td>";
-    			echo "<td>".$f['ENCARGADO']."</td>";
-    			echo "<td>".$f['FECHA_FACTURA']."</td>";
-    			echo "<td>".$f['NOMBRE']."</td>";
-    			echo "<td>".$f['SUB_TOTAL']."</td>";
-    			echo "<td>".$f['IGV']."</td>";
-    			echo "<td>".$f['TOTAL']."</td>";
-    		echo "</tr>";
-    	}
-      echo '</table>';
+    //Reporte
+    $Inicio=$_POST['mes'];
+    $Final=$_POST['ano'];
+    $ListaHistorial=$ObjReporteV->HistorialVentasRango($Inicio,$Final);
+    require '../vista/Reportes/RepVentasR.php';
     break;
 
     case 'ReporteVenta':
@@ -119,14 +97,45 @@ while ($country=mysqli_fetch_array($Consulta)) {  /**    background-color: #e67f
              
        $UltimoId=$ObjReporteV->InsertaComprobantev($_POST);//regresara su id generado
        //insertando el detalle XD
+       echo $UltimoId;
        $ObjReporteV->InsertaDetalle($UltimoId,$_POST); 
+       //actualiza Correlativos
+       $TipoDoc=$_POST['TipoDoc'];
+       $Numero=$_POST['NumCompro'];
+       $ObjCorrelativo->ActualizaUltimoC($TipoDoc,$Numero);
     break;
 
     case 'AnularComprobante':
       $ObjReporteV->AnularVenta($_POST['IdComprobante']);
       break;
+    
+    case 'CambiaCorrelativo':
+      $TipoDoc=$_POST['TipoDoc'];
+       $SerieCorre=$ObjCorrelativo->UltimoCorrelativo($TipoDoc);
+       echo $SerieCorre;
+    break;
+    case 'AnularComprobanteBusqueda':
+    $IdBusqueda=$_POST['IdBusqueda'];
+    $Busqueda=$_POST['Busqueda'];
+    $busquedaF=$_POST['busquedaF'];
+    $reporteVista2=$ObjReporteV->AnularVentaBusqueda($IdBusqueda,$Busqueda,$busquedaF);
 
+    foreach ($reporteVista2 as $f)
+    {
+        echo "<tr>";
+          echo "<td>".$f['IDCOMPROBANTE']."</td>";
+          echo "<td>".$f['ENCARGADO']."</td>";
+          echo "<td>".$f['FECHACOMPROBANTE']."</td>";
+          echo "<td></td>";
+          echo "<td>S/".$f['TOTAL']."</td>";
+          ?>
+      <td style='line-height: 8pt;'><a onclick="AnularDoc('<?php echo $f['IDCOMPROBANTE'] ?>');" style='cursor: pointer;'>Cancelar</a></td>
+      <?php
+        echo "</tr>";
 
+    }
+
+    break;
   default:
     echo 'no se encontradron peticiones';
     break;

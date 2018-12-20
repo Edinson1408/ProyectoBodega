@@ -12,7 +12,7 @@ session_start();
 <div class="contenedor_lista">
 <div class="nota">
 	<i class="fa fa-pencil-square-o" id="com">Correlativos Documentos</i>
-	<!--<button onclick="Agregar();" style="float: right;" class="btn btn-primary">Agregar Cliente</button>-->
+	<button onclick="AgregarCorrelativos();" style="float: right;" class="btn btn-primary">Agregar Correlativos</button>
 	
 </div>
 	<table class="table table-sm table-striped table-hover table-bordered">
@@ -24,29 +24,29 @@ session_start();
 			<th colspan="4">Acciones</th>
 		</tr>
 		<TBody> 
-        <tr>
-        <td></td>
-        <td></td>
-        <td><input type="text" id='SerieCorre' onchange='CambiaSerieNum(this)' readonly='readonly' style="background-color: #ddd" ></td>
-        <td><input type="text" id='NumCorre' onchange='CambiaSerieNum(this)' readonly='readonly'  style="background-color: #ddd"></td>
-        <td>
-        <i class="material-icons" id='EditCorrelativo' onclick='ActualizarCorre();'>edit</i>
-        <i class="material-icons" id='SaveCorrelativo' style="display:none" onclick='UpdateCorrelativo();'>save</i>
-        <i class="material-icons" id='CancelaUpdate' style="display:none"  onclick='CancelaCorrelativo();'>cancel</i>
-        </td>
-        </tr>
-		<?php
+		<?php 
 		
-			foreach ($ListaCorrelativos as $r)
-			{
-			echo "<tr>";
-			echo "<td>".$r['IDCORRELATIVO']."</td>";
-			echo "<td >".$r['NOMBRE']."</td>";
-			echo "<td class='hidden-sm-down'> ".$r['SERIE']."</td>";
-			echo "<td class='hidden-sm-down'>".$r['CORRELATIVO']."</td>";
-			echo "</tr>";
-			}
+			foreach ($ListaCorrelativos as $key ) {
+						$Id=$key['IDCORRELATIVOS'];
+					?>
+				<tr>
+				<td><?=$key['IDCORRELATIVOS']?></td>
+				<td><?=$key['Nombre']?></td>
+				<td>
+				<input type="text" value='<?=$key['SERIE']?>' id='SerieCorre<?=$Id?>' onchange='CambiaSerieNum(this)' readonly='readonly' style="background-color: #ddd" ></td>
+				<td>
+				<input type="text" value='<?=$key['NUM']?>' id='NumCorre<?=$Id?>' onchange='CambiaSerieNum(this)' readonly='readonly'  style="background-color: #ddd"></td>
+				<td>
+				<i class="material-icons" id='EditCorrelativo<?=$Id?>' onclick="ActualizarCorre('<?=$Id?>');">edit</i>
+				<i class="material-icons" id='SaveCorrelativo' style="display:none" onclick="UpdateCorrelativo('<?=$Id?>');">save</i>
+				<i class="material-icons" id='CancelaUpdate' style="display:none"  onclick="CancelaCorrelativo('<?=$Id?>');">cancel</i>
+				</td>
+				</tr>
+
+		<?php	}
 		?>
+
+
 		</TBody>
 	</table>
 </div>
@@ -61,23 +61,27 @@ session_start();
 
 
 <script type="text/javascript">
-ActualizarCorre=()=>
+ActualizarCorre=(Id)=>
 {
-     $("#SerieCorre").attr("readonly", false);
-     $("#NumCorre").attr("readonly", false);
-     $('#EditCorrelativo').css({'display':'none'})
+	console.log(Id);
+     $("#SerieCorre"+Id).attr("readonly", false);
+     $("#NumCorre"+Id).attr("readonly", false);
+     $('#EditCorrelativo'+Id).css({'display':'none'})
 
-	$("#SerieCorre").css({'background-color':''});
-	$("#NumCorre").css({'background-color':''});
+	$("#SerieCorre"+Id).css({'background-color':''});
+	$("#NumCorre"+Id).css({'background-color':''});
      
 	 
 }
-CancelaCorrelativo=()=>
+CancelaCorrelativo=(Id)=>
 {
-    $("#SerieCorre").attr("readonly", true);
-    $("#NumCorre").attr("readonly", true);
+    $(`#SerieCorre${Id}`).attr("readonly", true);
+    $(`#NumCorre${Id}`).attr("readonly", true);
+
+	$(`#SerieCorre${Id}`).css({'background-color':'#ddd'});
+    $(`#NumCorre${Id}`).css({'background-color':'#ddd'});
      
-    $('#EditCorrelativo').css({'display':'block'})
+    $('#EditCorrelativo'+Id).css({'display':'block'})
     $('#SaveCorrelativo').css({'display':'none'})
     $('#CancelaUpdate').css({'display':'none'})
 }
@@ -87,7 +91,7 @@ CambiaSerieNum=()=>{
     $('#CancelaUpdate').css({'display':'block'})
 }
  
-UpdateCorrelativo=()=>{
+UpdateCorrelativo=(Id)=>{
     $("#SerieCorre").val();
     $("#NumCorre").val();
 }
@@ -99,7 +103,7 @@ UpdateCorrelativo=()=>{
   });
 
 
-	function Agregar()
+	function AgregarCorrelativos()
 	{
 		var peticion='agregar';
 		console.log('Agregar ClienteC');

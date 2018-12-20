@@ -105,6 +105,15 @@ $nro=$_POST['codigo'];
 			<?php
 echo '</div>';
 ?>
-				<a href="vista/home/PdfImprimir.php?id=<?php echo $NroCompro;?>" class='btn btn-default' target='T_Blank'><i class="fa fa-print fa-1" aria-hidden="true"> Imprimir</i></a>
+				<a  class='btn btn-default' onclick="ImprimirComprobante('<?=$CodComprobante?>');"><i class="fa fa-print fa-1" aria-hidden="true"> Imprimir</i></a>
 		</div>
 	</div>
+
+<script>
+ImprimirComprobante=(Idcomprobante)=>
+{
+	window.open("reportes/Imprimir/ImpresionBoleta.php?Idcomprobante="+Idcomprobante);
+}
+
+
+</script>

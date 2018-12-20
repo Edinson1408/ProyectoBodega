@@ -18,10 +18,17 @@ class Productos extends Conexion
 		public function MostrarProducto($codP)
 
 		{
+			$link=$this->Conectarse();
 				$sql="SELECT a.*, b.NOMCLASIFICACION as NOMBRE_TIPO,b.CODCLASIFICACION  
 					FROM producto as a, clasificacion_producto as b WHERE 
 					a.CODCLASIFICACION=b.CODCLASIFICACION  and a.CODPRODUCTO='$codP'";
-				return $this->ArmarConsulta($sql);
+				$A=array();
+				$res=mysqli_query($link,$sql);
+				while($r=mysqli_fetch_array($res))
+				{
+				$A[]=$r;
+				}
+				return $A;
 		}
 
 		public function EliminarProducto($codigo)
@@ -69,8 +76,15 @@ class Productos extends Conexion
 
 		public function TipoProducto()
 		{
+			$link=$this->Conectarse();
 			$sql="SELECT * from clasificacion_producto";
-			return $this->ArmarConsulta($sql);
+			$A=array();
+				$res=mysqli_query($link,$sql);
+				while($r=mysqli_fetch_array($res))
+				{
+				$A[]=$r;
+				}
+				return $A;
 		}
 
 		public function AutoCompletadoProducto($buscador)

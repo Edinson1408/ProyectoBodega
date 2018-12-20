@@ -184,10 +184,32 @@ class VentasM extends Conexion
           }
           return $A;
     }
+    function HistorialVentasRango($inicio,$fin)
+    {
+         $Sql="SELECT CV.*,concat(PER.NOMBRES,' ',PER.APELLIDOS) as ENCARGADO ,TU.NOMTURNO,DOC.ABREBIATURA 
+          FROM 
+          comprobante_venta CV
+          LEFT JOIN usuario US ON CV.IDUSUARIO=US.IDUSUARIO
+          LEFT JOIN persona PER ON PER.IDPERSONA=US.IDPERSONA
+          LEFT JOIN turno TU ON US.IDTURNO=TU.IDTURNO
+          LEFT JOIN documentos DOC ON CV.TIPODOC=DOC.IDTIPODOC
+          WHERE  FECHACOMPROBANTE BETWEEN '$inicio' AND '$fin' ";
+          $res=mysqli_query($this->Link,$Sql);
+          $A=array();
+          while($r=mysqli_fetch_array($res))
+          {
+            $A[]=$r;
+          }
+          return $A;
+    }
 
     public function AnularVenta($IdComprobante)
     {
-        $Sql="UPDATE comprobante_venta SET 
+
+      $sqlDel="DELETE FROM movimiento_almacen WHERE IDCOMPROBANTE='$IdComprobante'";
+      mysqli_query($this->Link,$sqlDel);
+
+       $Sql="UPDATE comprobante_venta SET 
         ESTADO='Anulado' WHERE IDCOMPROBANTE='$IdComprobante';";
         mysqli_query($this->Link,$Sql);
 
@@ -201,10 +223,35 @@ class VentasM extends Conexion
     }
     private function DevolucionAlmacen($CodProducto,$Cantidad)
     {
-        $Sql="UPDATE almacen 
+       echo  $Sql="UPDATE almacen 
           SET CANTIDAD =(CANTIDAD +$Cantidad)
-          where CODPRODUCTO ='CodProducto' ";
+          where CODPRODUCTO ='$CodProducto' ";
           mysqli_query($this->Link,$Sql);
+    }
+    public function AnularVentaBusqueda($IdBusqueda,$Busqueda,$busquedaF)
+    {
+      switch ($IdBusqueda) {
+        case '1':
+            $Where="	NUMCOMPROBANTE like '%".$Busqueda."%' ";
+          break;
+        case '2':
+            $Where="	SERIECOMPROBANTE like '%".$Busqueda."%' ";
+          break;
+        case '3':
+              $Where="	SERIECOMPROBANTE like '%".$Busqueda."%' ";
+          break;
+        case '4':
+            $Where="	FECHACOMPROBANTE='$busquedaF' ";
+          break;
+      }
+      $Sql="SELECT * from comprobante_venta where $Where";  
+      $A=array();
+      $res=mysqli_query($this->Link,$Sql);
+      while($r=mysqli_fetch_array($res))
+          {
+            $A[]=$r;
+          }
+      return $A;
     }
 }
 

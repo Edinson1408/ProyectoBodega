@@ -11,7 +11,7 @@
 		<th>Turno</th>
 		<th>Encargado</th>
 		<th>Fecha</th>
-		<th>Cliente</th>
+		<th>Proveedor</th>
 		<th>Sub_total</th>
 		<th>IGV</th>
 		<th>Total</th>
@@ -29,10 +29,10 @@
 			echo "<tr>";
 				echo "<td>".$f['SERIECOMPROBANTE']."</td>";
 				echo "<td>".$f['NUMCOMPROBANTE']."</td>";
-				echo "<td>".$f['NOMTURNO']."</td>";
+				echo "<td>".utf8_encode($f['NOMTURNO'])."</td>";
 				echo "<td>".$f['ENCARGADO']."</td>";
 				echo "<td>".$f['FECHACOMPROBANTE']."</td>";
-				echo "<td>".$f['NOMCLIENTE']."</td>";
+				echo "<td>".utf8_encode($f['NOMPROVEEDOR'])."</td>";
 				echo "<td>".$f['SUBTOTAL']."</td>";
 				echo "<td>".$f['IGV']."</td>";
 				echo "<td>".$f['TOTAL']."</td>";

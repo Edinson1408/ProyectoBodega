@@ -235,7 +235,7 @@ a{
 
 </div>
 
-<div class="row">
+<!--div class="row">
 <div class="col l7 s12">
 <div class="panel panel-default" id="panel2">
 <div class="titulo" style="margin-left: 10px">
@@ -311,10 +311,10 @@ a{
 </div>
 </div>
 </div>
-</div>
+</div-->
 
 <!--Modal opreviw de las tikest-->
-<div id="modal1" class="modal" >
+<!--div id="modal1" class="modal" >
     <div class="modal-content" id="ModalPreviewTikets">
     </div>
 </div>
@@ -323,7 +323,7 @@ a{
 <div id='datosAqui1'>
 
 </div>
-<!--button id="plain">Defecto</button>
+<button id="plain">Defecto</button>
 <button id="inverted">Invertido</button>
 <button id="polar">Pastel</button-->
 <script type="text/javascript">

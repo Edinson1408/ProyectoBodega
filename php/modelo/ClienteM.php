@@ -4,12 +4,20 @@
 
 		public function ListaProveedor()
 		{
+			$link=$this->Conectarse();
 			$sql="SELECT PER.IDPERSONA,PER.NUMDOC,PER.TELEFONO,CONCAT(PER.NOMBRES,' ',PER.APELLIDOS) AS RAZONSOCIAL ,PER.CORREO,
 			CL.CELULAR,CL.FENACIMIENTO,CL.CIUDAD  FROM 
 					persona  PER , cliente  CL
 					WHERE PER.IDPERSONA=CL.IDPERSONA";
 
-			return $this->ArmarConsulta($sql);
+			///return $this->ArmarConsulta($sql);
+			$A=array();
+				$res=mysqli_query($link,$sql);
+				while($r=mysqli_fetch_array($res))
+				{
+				$A[]=$r;
+				}
+				return $A;
 
 		}
 

@@ -209,7 +209,7 @@ include('seguridad_navegador.php');
 
                             <li class="NavLateralDivider"></li>
 <!--                             <li><a href="ingreso_ventas/salidav2.php" target="tiframe" class="waves-effect waves-light">Nuevo Ingreso</a></li> -->
-                            <li><a class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','IngresoVenta')"">Nuevo Ingreso</a></li>
+                            <li><a class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','IngresoVenta')">Nuevo Ingreso</a></li>
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="buscador/buscador.php" target="tiframe" class="waves-effect waves-light">Cancelar boleta</a></li>-->
                             <li><a  class="waves-effect waves-light" onclick="enrutar_menu('VentasC.php','AnularVenta')" >Cancelar Comprobante</a></li>
@@ -229,23 +229,23 @@ include('seguridad_navegador.php');
 
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="ingreso_compras/mantenimiento/index.php" target="tiframe" class="waves-effect waves-light">Mantenimiento</a></li>-->
-                            <li><a  class="waves-effect waves-light" onclick="enrutar_menu('ComprasC.php','Mantenimiento')" >Mantenimiento</a></li>
+                            <!--li><a  class="waves-effect waves-light" onclick="enrutar_menu('ComprasC.php','Mantenimiento')" >Mantenimiento</a></li-->
                         </ul>
                     </li>
-                    <li class="NavLateralDivider"></li>
+                    <!--li class="NavLateralDivider"></li>
                     <li>
                         <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Caja</a>
                         <ul class="full-width">
                             <li class="NavLateralDivider"></li>
-                            <!--<li><a href="caja/cierre_caja.php" target="tiframe" class="waves-effect waves-light">Ventas diarias</a></li>-->
+                            <<li><a href="caja/cierre_caja.php" target="tiframe" class="waves-effect waves-light">Ventas diarias</a></li>>
 
                             <li><a  class="waves-effect waves-light" onclick="enrutar_menu('CajasC.php','VentasDiarias')" >Ventas diarias</a></li>
 
                             <li class="NavLateralDivider"></li>
-                            <!--<li><a href="reportes/caja.php" target="tiframe"  class="waves-effect waves-light">Cierre de caja</a></li>-->
+                            <li><a href="reportes/caja.php" target="tiframe"  class="waves-effect waves-light">Cierre de caja</a></li>
                             <li><a class="waves-effect waves-light"  onclick="enrutar_menu('CajasC.php','CierreDeCaja')">Cierre de caja</a></li>
                         </ul>
-                    </li>
+                    </li-->
                     <li class="NavLateralDivider"></li>
                     <li>
                         <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Cobranza</a>
@@ -276,7 +276,7 @@ include('seguridad_navegador.php');
                             <!--<li><a href="reportes/rango_fechas/rang_fec_compras.php" target="tiframe"  class="waves-effect waves-light">Compras</a></li>-->
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="reportes/stock/stock.php" target="tiframe"  class="waves-effect waves-light">Stock</a></li>-->
-							<li><a   class="waves-effect waves-light" onclick="enrutar_menu('StockC.php','ReporteStock')" >Stock</a></li>
+							<!--li><a   class="waves-effect waves-light" onclick="enrutar_menu('StockC.php','ReporteStock')" >Stock</a></li-->
                             <!--li class="NavLateralDivider"></li>
                             <li><a href="reportes/proveedor/proveedores.php" target="tiframe"  class="waves-effect waves-light">Proveedores</a></li-->
                         </ul>
@@ -299,7 +299,7 @@ include('seguridad_navegador.php');
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="mantenimiento/cliente/cliente.php" target="tiframe" class="waves-effect waves-light">Cliente</a></li>
                             <li class="NavLateralDivider"></li>-->
-														<li><a  class="waves-effect waves-light" onclick="enrutar_menu('ClienteC.php')">Cliente</a></li>
+							<li><a  class="waves-effect waves-light" onclick="enrutar_menu('ClienteC.php')">Cliente</a></li>
                             <li class="NavLateralDivider"></li>
                             <!--<li><a href="mantenimiento/usuario/usuario.php" target="tiframe" class="waves-effect waves-light">Usuario</a></li>-->
                             <li>
@@ -323,13 +323,13 @@ include('seguridad_navegador.php');
                             <li><a class="waves-effect waves-light" onclick="enrutar_menu('AlmacenC.php','STOCK')">STOCK</a></li>
 
 
-                        <li class="NavLateralDivider"></li>
-                            <!-- <li><a href="almacenes/lista_productos.php" target="tiframe"  
-                            class="waves-effect waves-light">Productos</a></li> -->
-                            <li><a  onclick="enrutar_menu('AlmacenC.php','ProductoAlmacen')" class="waves-effect waves-light">Productos</a></li>
+                        <!--li class="NavLateralDivider"></li>
+                            < <li><a href="almacenes/lista_productos.php" target="tiframe"  
+                            class="waves-effect waves-light">Productos</a></li> >
+                            <li><a  onclick="enrutar_menu('AlmacenC.php','ProductoAlmacen')" class="waves-effect waves-light">Productos</a></li-->
                         </ul>
                     </li>
-                    <li class="NavLateralDivider"></li>
+                    <!--li class="NavLateralDivider"></li>
                     <li>
                         <a href="#" class="NavLateral-DropDown  waves-effect waves-light"><i class="zmdi zmdi-language-css3 zmdi-hc-fw"></i> <i class="zmdi zmdi-chevron-down NavLateral-CaretDown"></i>Ajuste de Stock</a>
                         <ul class="full-width">
@@ -338,7 +338,7 @@ include('seguridad_navegador.php');
                             <li class="NavLateralDivider"></li>
                             <li><a href="ajuste_stock/reporte_ajuste.php" target="tiframe" class="waves-effect waves-light">ReporteAjuste</a></li>
                         </ul>
-                    </li>
+                    </li-->
                 </ul>
             </div>
         </div>
