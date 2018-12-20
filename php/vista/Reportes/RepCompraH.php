@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <style type="text/css">
 .container-fluid{
 	padding: 25PX;
@@ -99,6 +101,21 @@ RepVentasHPdfExcel=(e)=>
 	
 }
 
+SeguridadAnular=($id)=>
+{
+	if ($id=='1')
+	{}
+	else
+	{
+		//renderizar con read
+		$('#contenidobody').html('');
+		Rendiza('contenidobody')
+	}
+	
+	
+}
+
+SeguridadAnular('<?=$_SESSION['categoria']?>')
 
 
 </script>

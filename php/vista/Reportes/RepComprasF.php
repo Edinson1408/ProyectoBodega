@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <style>
 .contenedor_lista{
   padding: 15px;
@@ -85,5 +88,22 @@ RepVentasHPdfExcel=(e)=>
 	}
 	
 }
+
+SeguridadAnular=($id)=>
+{
+	if ($id=='1')
+	{}
+	else
+	{
+		//renderizar con read
+		$('#contenidobody').html('');
+		Rendiza('contenidobody')
+	}
+	
+	
+}
+
+SeguridadAnular('<?=$_SESSION['categoria']?>')
+
 
 </script>
